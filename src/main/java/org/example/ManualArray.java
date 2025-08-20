@@ -1,40 +1,48 @@
 package org.example;
 
-public class ManualArray {
+public class ManualArray<T> {
 
-    private int[] array;
+    private Object[] array;
 
     public ManualArray(int length) {
 
-        this.array = new int[length];
+        this.array = new Object[length];
     }
 
-    public ManualArray(int[] array) {
+    public ManualArray(T[] array) {
 
-        this.array = array;
+        this.array = new Object[array.length];
+
+        for (int i = 0; i < array.length; i++) {
+
+            this.array[i] = array[i];
+        }
     }
 
-    public int[] getArray() { return array; }
+    private Object[] getArray() { return array; }
 
-    private void setArray(int[] array) { this.array = array; }
+    private void setArray(Object[] array) { this.array = array; }
 
     // READ
-    public int read(int index) {
+    @SuppressWarnings("unchecked")
+    public T read(int index) {
 
-        // Time complexity: O(1)
+        // Time complexity: 1 step
+        // Big O Notation: O(1)
 
         if (index < 0 || index > array.length - 1) {
 
-            throw new ArrayIndexOutOfBoundsException("Invalid index: " + index);
+            throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        return array[index];
+        return (T) array[index];
     }
 
     // SEARCH
-    public int search(int element) {
+    public int search(T element) {
 
-        // Time complexity: O(N)
+        // Time complexity: N steps
+        // Big O Notation: O(N)
 
         for (int i = 0; i < array.length; i++) {
 
@@ -44,15 +52,16 @@ public class ManualArray {
             }
         }
 
-        throw new IllegalArgumentException("Element not found: " + element);
+        throw new IllegalArgumentException("Illegal argument: " + element);
     }
 
     // INSERT
-    public ManualArray insertAtStart(int element) {
+    public ManualArray<T> insertAtStart(T element) {
 
-        // Time complexity: O(N)
+        // Time complexity: N + 3 steps
+        // Big O Notation: O(N)
 
-        int[] newArray = new int[array.length + 1];
+        Object[] newArray = new Object[array.length + 1];
 
         newArray[0] = element;
 
@@ -66,11 +75,12 @@ public class ManualArray {
         return this;
     }
 
-    public ManualArray insertAtEnd(int element) {
+    public ManualArray<T> insertAtEnd(T element) {
 
-        // Time complexity: O(N)
+        // Time complexity: N + 3 steps
+        // Big O Notation: O(N)
 
-        int[] newArray = new int[array.length + 1];
+        Object[] newArray = new Object[array.length + 1];
 
         for (int i = 0; i < array.length; i++) {
 
@@ -84,16 +94,17 @@ public class ManualArray {
         return this;
     }
 
-    public ManualArray insertAtIndex(int element, int index) {
+    public ManualArray<T> insertAtIndex(T element, int index) {
 
-        // Time complexity: O(2N)
+        // Time complexity: N + 3 steps
+        // Big O Notation: O(2N)
 
         if (index < 0 || index > array.length) {
 
-            throw new ArrayIndexOutOfBoundsException("Invalid index: " + index);
+            throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        int[] newArray = new int[array.length + 1];
+        Object[] newArray = new Object[array.length + 1];
 
         for (int i = 0; i < index; i++) { // Transfer up to index.
 
@@ -113,16 +124,17 @@ public class ManualArray {
     }
 
     // DELETE
-    public ManualArray deleteFromStart() {
+    public ManualArray<T> deleteFromStart() {
 
-        // Time complexity: O(N)
+        // Time complexity: N + 2 steps
+        // Big O Notation: O(N)
 
         if (array.length == 0) {
 
-            throw new IllegalStateException("Cannot delete from an empty array.");
+            throw new IllegalStateException("Illegal state, array length: " + array.length);
         }
 
-        int[] newArray = new int[array.length - 1];
+        Object[] newArray = new Object[array.length - 1];
 
         for (int i = 1; i < array.length; i++) {
 
@@ -134,16 +146,17 @@ public class ManualArray {
         return this;
     }
 
-    public ManualArray deleteFromEnd() {
+    public ManualArray<T> deleteFromEnd() {
 
-        // Time complexity: O(N)
+        // Time complexity: N + 2 steps
+        // Big O Notation: O(N)
 
         if (array.length == 0) {
 
-            throw new IllegalStateException("Cannot delete from an empty array.");
+            throw new IllegalStateException("Illegal state, array length: " + array.length);
         }
 
-        int[] newArray = new int[array.length - 1];
+        Object[] newArray = new Object[array.length - 1];
 
         for (int i = 0; i < newArray.length; i++) {
 
@@ -155,21 +168,22 @@ public class ManualArray {
         return this;
     }
 
-    public ManualArray deleteFromIndex(int index) {
+    public ManualArray<T> deleteFromIndex(int index) {
 
-        // Time complexity: O(N)
+        // Time complexity: N + 3 steps
+        // Big O Notation: O(N)
 
         if (array.length == 0) {
 
-            throw new IllegalStateException("Cannot delete from an empty array.");
+            throw new IllegalStateException("Illegal state, array length: " + array.length);
         }
 
         if (index < 0 || index > array.length - 1) {
 
-            throw new ArrayIndexOutOfBoundsException("Invalid index: " + index);
+            throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        int[] newArray = new int[array.length - 1];
+        Object[] newArray = new Object[array.length - 1];
 
         for (int i = 0; i < index; i++) {
 
