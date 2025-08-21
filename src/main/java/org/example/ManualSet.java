@@ -14,16 +14,26 @@ public class ManualSet {
         this.size = 0;
     }
 
-    public ManualSet(int capacity) {
+    public ManualSet(int length) {
 
-        if (capacity < 0) {
-            throw new IllegalArgumentException("Set capacity cannot be negative.");
+        if (length < 0) {
+            throw new IllegalArgumentException("Set length cannot be negative.");
         }
 
-        int forceCapacity = capacity < MIN_CAPACITY ? MIN_CAPACITY : capacity;
-
-        this.set = new int[forceCapacity];
+        this.set = new int[getCapacity(length)];
         this.size = 0;
+    }
+
+    private int getCapacity(int length) {
+
+        int capacity = MIN_CAPACITY;
+
+        while (capacity < length) {
+
+            capacity = capacity * 2;
+        }
+
+        return capacity;
     }
 
     public int[] getSet() { return set; }
@@ -126,9 +136,9 @@ public class ManualSet {
 
         manageCapacity();
 
-        for (int i = size; i > 0; i--) { // Starts at the end, shifts elements ->
+        for (int i = size; i > 0; i--) { // Iterates from the end to the start.
 
-            set[i] = set[i - 1];
+            set[i] = set[i - 1]; // Shifts elements -->
         }
 
         set[0] = element; // Inserts element at the start.
@@ -169,9 +179,9 @@ public class ManualSet {
 
         manageCapacity();
 
-        for (int i = size; i > index; i--) { // Starts at the end, shifts elements ->
+        for (int i = size; i > index; i--) { // Iterates from the end to the index.
 
-            set[i] = set[i - 1];
+            set[i] = set[i - 1]; // Shifts elements -->
         }
 
         set[index] = element; // Inserts element at index.
@@ -192,10 +202,12 @@ public class ManualSet {
 
         manageCapacity();
 
-        for (int i = 0; i < size - 1; i++) { // Starts at the start, shifts elements <-
+        for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
 
-            set[i] = set[i + 1];
+            set[i] = set[i + 1]; // Shifts elements <--
         }
+
+        set[size - 1] = 0; // Clears the last element which has already been shifted.
 
         decrementSize();
 
@@ -204,7 +216,7 @@ public class ManualSet {
 
     public ManualSet deleteFromEnd() {
 
-        // Time complexity: O(N)
+        // Time complexity: O(1)
 
         if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty set.");
@@ -233,10 +245,12 @@ public class ManualSet {
 
         manageCapacity();
 
-        for (int i = index; i < size - 1; i++) { // Starts at the index, shifts elements <-
+        for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
 
-            set[i] = set[i + 1];
+            set[i] = set[i + 1]; // Shifts elements <--
         }
+
+        set[size - 1] = 0; // Clears the last element which has already been shifted.
 
         decrementSize();
 

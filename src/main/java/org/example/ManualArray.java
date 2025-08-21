@@ -5,6 +5,14 @@ import java.util.Arrays;
 public class ManualArray {
 
     private int[] array;
+    private int size;
+    private static final int MIN_CAPACITY = 10;
+
+    public ManualArray() {
+
+        this.array = new int[MIN_CAPACITY];
+        this.size = 0;
+    }
 
     public ManualArray(int length) {
 
@@ -12,7 +20,8 @@ public class ManualArray {
             throw new IllegalArgumentException("Array length cannot be negative.");
         }
 
-        this.array = new int[length];
+        this.array = new int[getCapacity(length)];
+        this.size = 0;
     }
 
     public ManualArray(int[] array) {
@@ -21,7 +30,8 @@ public class ManualArray {
             throw new NullPointerException("Array cannot be null.");
         }
 
-        this.array = new int[array.length];
+        this.array = new int[getCapacity(array.length)];
+        this.size = array.length;
 
         for (int i = 0; i < array.length; i++) {
 
@@ -29,16 +39,67 @@ public class ManualArray {
         }
     }
 
-    private int[] getArray() { return array; }
+    private int getCapacity(int length) {
+
+        int capacity = MIN_CAPACITY;
+
+        while (capacity < length) {
+
+            capacity = capacity * 2;
+        }
+
+        return capacity;
+    }
+
+    public int[] getArray() { return array; }
 
     private void setArray(int[] array) { this.array = array; }
+
+    public int getSize() { return size; }
+
+    private void setSize(int size) { this.size = size; }
+
+    private void incrementSize() { this.size++; }
+
+    private void decrementSize() { this.size--; }
+
+    private void manageCapacity() {
+
+        if (size == array.length) { // Expand
+
+            int newCapacity = (array.length < MIN_CAPACITY) ? MIN_CAPACITY : array.length * 2;
+
+            int[] newArray = new int[newCapacity];
+
+            for (int i = 0; i < size; i++) {
+
+                newArray[i] = array[i];
+            }
+
+            setArray(newArray);
+        }
+
+        if (array.length > MIN_CAPACITY && size <= array.length / 4) { // Contract
+
+            int newCapacity = (array.length / 2 < MIN_CAPACITY) ? MIN_CAPACITY : array.length / 2;
+
+            int[] newArray = new int[newCapacity];
+
+            for (int i = 0; i < size; i++) {
+
+                newArray[i] = array[i];
+            }
+
+            setArray(newArray);
+        }
+    }
 
     // READ
     public int read(int index) {
 
         // Time complexity: O(1)
 
-        if (index < 0 || index > array.length - 1) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
@@ -50,7 +111,7 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < size; i++) {
 
             if (element == array[i]) {
 
@@ -66,34 +127,29 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        int[] newArray = new int[array.length + 1];
+        manageCapacity();
 
-        newArray[0] = element;
+        for (int i = size; i > 0; i--) { // Iterates from the end to the start.
 
-        for (int i = 0; i < array.length; i++) {
-
-            newArray[i + 1] = array[i];
+            array[i] = array[i - 1]; // Shifts elements -->
         }
 
-        setArray(newArray);
+        array[0] = element; // Inserts element at the start.
+
+        incrementSize();
 
         return this;
     }
 
     public ManualArray insertAtEnd(int element) {
 
-        // Time complexity: O(N)
+        // Time complexity: O(1)
 
-        int[] newArray = new int[array.length + 1];
+        manageCapacity();
 
-        for (int i = 0; i < array.length; i++) {
+        array[size] = element; // Inserts element at the end.
 
-            newArray[i] = array[i];
-        }
-
-        newArray[newArray.length - 1] = element;
-
-        setArray(newArray);
+        incrementSize();
 
         return this;
     }
@@ -102,25 +158,20 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (index < 0 || index > array.length) {
+        if (index < 0 || index > size) {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        int[] newArray = new int[array.length + 1];
+        manageCapacity();
 
-        for (int i = 0; i < index; i++) { // Transfer up to index.
+        for (int i = size; i > index; i--) { // Iterates from the end to the index.
 
-            newArray[i] = array[i];
+            array[i] = array[i - 1]; // Shifts elements -->
         }
 
-        newArray[index] = element; // Add at index.
+        array[index] = element; // Inserts element at index.
 
-        for (int i = index + 1; i < newArray.length; i++) { // Transfer beyond index.
-
-            newArray[i] = array[i - 1];
-        }
-
-        setArray(newArray);
+        incrementSize();
 
         return this;
     }
@@ -130,38 +181,37 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (array.length == 0) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
-        int[] newArray = new int[array.length - 1];
+        manageCapacity();
 
-        for (int i = 1; i < array.length; i++) {
+        for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
 
-            newArray[i - 1] = array[i];
+            array[i] = array[i + 1]; // Shifts elements <--
         }
 
-        setArray(newArray);
+        array[size - 1] = 0; // Clears the last element which has already been shifted.
+
+        decrementSize();
 
         return this;
     }
 
     public ManualArray deleteFromEnd() {
 
-        // Time complexity: O(N)
+        // Time complexity: O(1)
 
-        if (array.length == 0) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
-        int[] newArray = new int[array.length - 1];
+        manageCapacity();
 
-        for (int i = 0; i < newArray.length; i++) {
+        array[size - 1] = 0; // Deletes element at the end.
 
-            newArray[i] = array[i];
-        }
-
-        setArray(newArray);
+        decrementSize();
 
         return this;
     }
@@ -170,27 +220,24 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (array.length == 0) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
-        if (index < 0 || index > array.length - 1) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        int[] newArray = new int[array.length - 1];
+        manageCapacity();
 
-        for (int i = 0; i < index; i++) {
+        for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
 
-            newArray[i] = array[i];
+            array[i] = array[i + 1]; // Shifts elements <--
         }
 
-        for (int i = index + 1; i < array.length; i++) {
+        array[size - 1] = 0; // Clears the last element which has already been shifted.
 
-            newArray[i - 1] = array[i];
-        }
-
-        setArray(newArray);
+        decrementSize();
 
         return this;
     }
@@ -198,7 +245,7 @@ public class ManualArray {
     @Override
     public String toString() {
         return "ManualArray{" +
-                "array=" + Arrays.toString(array) +
+                "array=" + Arrays.toString(Arrays.copyOf(array, size)) +
                 '}';
     }
 }
