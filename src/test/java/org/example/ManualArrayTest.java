@@ -3,130 +3,212 @@ package org.example;
 import org.junit.jupiter.api.Test;
 
 import static org.example.Config.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ManualArrayTest {
 
-    int[] array = new int[]{3, 17, 75, 80, 202};
+    public final int[] array = new int[]{3, 17, 75, 80, 202};
 
+    // INSTANTIATION
     @Test
-    void testManualArrayDefault() {
+    void testManualArrayWithDefaultConstructor() {
 
         ManualArray manualArray = new ManualArray();
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY));
-        assertEquals(0, manualArray.getSize(), String.format("Array should have size: %d", 0));
+        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(0, manualArray.getSize(), String.format("Array size should be %d", 0));
 
         for (int i = 0; i < manualArray.getArray().length; i++) {
 
-            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be: %d", i, 0));
+            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be %d.", i, 0));
         }
     }
 
     @Test
-    void testManualArrayLengthParameterLessThanZero() {
+    void testManualArrayWithLengthLessThanZero() {
 
         int lengthLessThanZero = -5;
 
         IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, // Type of exception.
-                () -> new ManualArray(lengthLessThanZero),  // Operation that throws exception.
-                "Array with negative length should throw IllegalArgumentException.");
+                IllegalArgumentException.class,
+                () -> new ManualArray(lengthLessThanZero),
+                "Array length should not be negative.");
     }
 
     @Test
-    void testManualArrayLengthParameterZero() {
+    void testManualArrayWithLengthZero() {
 
         int lengthZero = 0;
 
         ManualArray manualArray = new ManualArray(lengthZero);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY));
-        assertEquals(0, manualArray.getSize(), String.format("Array should have size: %d", 0));
+        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
         for (int i = 0; i < manualArray.getArray().length; i++) {
 
-            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be: %d", i, 0));
+            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be %d.", i, 0));
         }
     }
 
     @Test
-    void testManualArrayLengthParameterLessThanDefault() {
+    void testManualArrayWithLengthLessThanDefault() {
 
         int lengthLessThanDefault = 5;
 
         ManualArray manualArray = new ManualArray(lengthLessThanDefault);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY));
-        assertEquals(0, manualArray.getSize(), String.format("Array should have size: %d", 0));
+        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
         for (int i = 0; i < manualArray.getArray().length; i++) {
 
-            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be: %d", i, 0));
+            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be %d.", i, 0));
         }
     }
 
     @Test
-    void testManualArrayLengthParameterGreaterThanDefault() {
+    void testManualArrayWithLengthGreaterThanDefault() {
 
         int lengthGreaterThanDefault = 15;
 
         ManualArray manualArray = new ManualArray(lengthGreaterThanDefault);
 
-        assertEquals(MIN_CAPACITY * 2, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY * 2));
-        assertEquals(0, manualArray.getSize(), String.format("Array should have size: %d", 0));
+        assertEquals(MIN_CAPACITY * 2, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY * 2));
+        assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
         for (int i = 0; i < manualArray.getArray().length; i++) {
 
-            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be: %d", i, 0));
+            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be %d.", i, 0));
         }
     }
 
     @Test
-    void testManualArrayNullArrayParameter() {
+    void testManualArrayWithNullArray() {
 
         NullPointerException exception = assertThrows(
-                NullPointerException.class, // Type of exception.
-                () -> new ManualArray(null),  // Operation that throws exception.
-                "Null should throw NullPointerException.");
+                NullPointerException.class,
+                () -> new ManualArray(null),
+                "Array should not be null.");
     }
 
     @Test
-    void testManualArrayEmptyArrayParameter() {
+    void testManualArrayWithEmptyArray() {
 
         int[] emptyArray = new int[]{};
 
         ManualArray manualArray = new ManualArray(emptyArray);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY));
-        assertEquals(0, manualArray.getSize(), String.format("Array should have size: %d", 0));
+        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
         for (int i = 0; i < manualArray.getArray().length; i++) {
 
-            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be: %d", i, 0));
+            assertEquals(0, manualArray.getArray()[i], String.format("Element at array[%d] should be %d.", i, 0));
         }
     }
 
     @Test
-    void testManualArrayArrayParameterLengthLessThanDefault() {
+    void testManualArrayWithArrayLengthLessThanDefault() {
 
-        int[] lessThanDefault = new int[]{3, 17, 75, 80, 202};
+        int[] arrayLessThanDefault = new int[5];
 
-        ManualArray manualArray = new ManualArray(lessThanDefault);
+        ManualArray manualArray = new ManualArray(arrayLessThanDefault);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY));
-        assertEquals(lessThanDefault.length, manualArray.getSize(), String.format("Array should have size: %d", lessThanDefault.length));
+        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(arrayLessThanDefault.length, manualArray.getSize(), String.format("Array size should be %d.", arrayLessThanDefault.length));
     }
 
     @Test
-    void testManualArrayArrayParameterLengthGreaterThanDefault() {
+    void testManualArrayWithArrayLengthGreaterThanDefault() {
 
-        int[] greaterThanDefault = new int[]{3, 17, 75, 80, 202, 2, 16, 74, 79, 201, 1, 15, 73, 78, 200};
+        int[] arrayGreaterThanDefault = new int[15];
 
-        ManualArray manualArray = new ManualArray(greaterThanDefault);
+        ManualArray manualArray = new ManualArray(arrayGreaterThanDefault);
 
-        assertEquals(MIN_CAPACITY * 2, manualArray.getArray().length, String.format("Array should have length: %d", MIN_CAPACITY * 2));
-        assertEquals(greaterThanDefault.length, manualArray.getSize(), String.format("Array should have size: %d", greaterThanDefault.length));
+        assertEquals(MIN_CAPACITY * 2, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY * 2));
+        assertEquals(arrayGreaterThanDefault.length, manualArray.getSize(), String.format("Array size should be %d.", arrayGreaterThanDefault.length));
+    }
+
+    // READ
+    @Test
+    void testManualArrayReadWithIndexLessThanZero() {
+
+        int indexLessThanZero = -5;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.read(indexLessThanZero),
+                "Array index should not be negative.");
+    }
+
+    @Test
+    void testManualArrayReadWithIndexGreaterThanSize() {
+
+        int indexGreaterThanSize = 15;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.read(indexGreaterThanSize),
+                "Array index should not be greater than size.");
+    }
+
+    @Test
+    void testManualArrayReadWithValidIndex() {
+
+        ManualArray manualArray = new ManualArray(array);
+
+        for (int i = 0; i < array.length; i++) {
+
+            assertEquals(array[i], manualArray.read(i), String.format("Element at array[%d] should be %d.", i, array[i]));
+        }
+    }
+
+    // SEARCH
+    @Test
+    void testManualArraySearchWithInvalidElement() {
+
+        int elementNotPresentInArray = 10;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> manualArray.search(elementNotPresentInArray),
+                "Element should not be present in array.");
+    }
+
+    @Test
+    void testManualArraySearchWithValidElement() {
+
+        ManualArray manualArray = new ManualArray(array);
+
+        for (int i = 0; i < array.length; i++) {
+
+            assertEquals(i, manualArray.search(array[i]), String.format("Element at array[%d] should have index %d.", i, i));
+        }
+    }
+
+    // INSERT
+    @Test
+    void testManualArrayInsertAtStart() {
+
+        int elementToInsert = 10;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        assertEquals(array.length, manualArray.getSize());
+
+        assertNotEquals(elementToInsert, manualArray.getArray()[0], String.format("Element at array[0] should not be equal to %d.", elementToInsert));
+
+        manualArray.insertAtStart(elementToInsert);
+
+        assertNotEquals(array.length, manualArray.getSize());
+
+        assertEquals(elementToInsert, manualArray.getArray()[0], String.format("Element at array[0] should be equal to %d.", elementToInsert));
     }
 }
