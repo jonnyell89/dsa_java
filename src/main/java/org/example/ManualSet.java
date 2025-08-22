@@ -166,7 +166,7 @@ public class ManualSet {
         return this;
     }
 
-    public ManualSet insertAtIndex(int element, int index) {
+    public ManualSet insertAtIndex(int index, int element) {
 
         // Time complexity: O(N)
 

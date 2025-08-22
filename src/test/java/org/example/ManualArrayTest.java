@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.example.Config.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +34,8 @@ public class ManualArrayTest {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> new ManualArray(lengthLessThanZero),
-                "Array length should not be negative.");
+                "Array length should not be negative."
+        );
     }
 
     @Test
@@ -89,7 +92,8 @@ public class ManualArrayTest {
         NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> new ManualArray(null),
-                "Array should not be null.");
+                "Array should not be null."
+        );
     }
 
     @Test
@@ -141,7 +145,8 @@ public class ManualArrayTest {
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.read(indexLessThanZero),
-                "Array index should not be negative.");
+                "Array index should not be negative."
+        );
     }
 
     @Test
@@ -154,7 +159,8 @@ public class ManualArrayTest {
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.read(indexGreaterThanSize),
-                "Array index should not be greater than size.");
+                "Array index should not be greater than size."
+        );
     }
 
     @Test
@@ -162,7 +168,7 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < manualArray.getSize(); i++) {
 
             assertEquals(array[i], manualArray.read(i), String.format("Element at array[%d] should be %d.", i, array[i]));
         }
@@ -179,7 +185,8 @@ public class ManualArrayTest {
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> manualArray.search(elementNotPresentInArray),
-                "Element should not be present in array.");
+                "Element should not be present in array."
+        );
     }
 
     @Test
@@ -187,7 +194,7 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < manualArray.getSize(); i++) {
 
             assertEquals(i, manualArray.search(array[i]), String.format("Element at array[%d] should have index %d.", i, i));
         }
@@ -201,14 +208,143 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        assertEquals(array.length, manualArray.getSize());
-
-        assertNotEquals(elementToInsert, manualArray.getArray()[0], String.format("Element at array[0] should not be equal to %d.", elementToInsert));
-
         manualArray.insertAtStart(elementToInsert);
 
-        assertNotEquals(array.length, manualArray.getSize());
+        int[] arrayWithElementInserted = new int[]{10, 3, 17, 75, 80, 202};
 
-        assertEquals(elementToInsert, manualArray.getArray()[0], String.format("Element at array[0] should be equal to %d.", elementToInsert));
+        for (int i = 0; i < manualArray.getSize(); i++) {
+
+            assertEquals(arrayWithElementInserted[i], manualArray.getArray()[i], String.format("Element at array[%d] should be equal to arrayWithElementInserted[%d].", i, i));
+        }
+
+        assertArrayEquals(arrayWithElementInserted, manualArray.toArray(), "Array should be equal to arrayWithElementInserted.");
+    }
+
+    @Test
+    void testManualArrayInsertAtEnd() {
+
+        int elementToInsert = 10;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        manualArray.insertAtEnd(elementToInsert);
+
+        int[] arrayWithElementInserted = new int[]{3, 17, 75, 80, 202, 10};
+
+        for (int i = 0; i < manualArray.getSize(); i++) {
+
+            assertEquals(arrayWithElementInserted[i], manualArray.getArray()[i], String.format("Element at array[%d] should be equal to arrayWithElementInserted[%d].", i, i));
+        }
+
+        assertArrayEquals(arrayWithElementInserted, manualArray.toArray(), "Array should be equal to arrayWithElementInserted.");
+    }
+
+    @Test
+    void testManualArrayInsertAtIndexWithIndexLessThanZero() {
+
+        int indexLessThanZero = -5;
+        int elementToInsert = 10;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.insertAtIndex(indexLessThanZero, elementToInsert),
+                "Array index should not be negative."
+        );
+    }
+
+    @Test
+    void testManualArrayInsertAtIndexWithIndexGreaterThanSize() {
+
+        int indexGreaterThanZero = 15;
+        int elementToInsert = 10;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.insertAtIndex(indexGreaterThanZero, elementToInsert),
+                "Array index should not be greater than size."
+        );
+    }
+
+    @Test
+    void testManualArrayInsertAtIndex() {
+
+        int index = 2;
+        int elementToInsert = 10;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        manualArray.insertAtIndex(index, elementToInsert);
+
+        int[] arrayWithElementInserted = new int[]{3, 17, 10, 75, 80, 202};
+
+        for (int i = 0; i < manualArray.getSize(); i++) {
+
+            assertEquals(arrayWithElementInserted[i], manualArray.getArray()[i], String.format("Element at array[%d] should be equal to arrayWithElementInserted[%d].", i, i));
+        }
+
+        assertArrayEquals(arrayWithElementInserted, manualArray.toArray(), "Array should be equal to arrayWithElementInserted.");
+    }
+
+    // DELETE
+    @Test
+    void testManualArrayDeleteFromStartOfEmptyArray() {
+
+        ManualArray manualArray = new ManualArray();
+
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> manualArray.deleteFromStart(),
+                "Array should not be empty."
+        );
+    }
+
+    @Test
+    void testManualArrayDeleteFromStart() {
+
+        ManualArray manualArray = new ManualArray(array);
+
+        manualArray.deleteFromStart();
+
+        int[] arrayWithElementDeleted = new int[]{17, 75, 80, 202};
+
+        for (int i = 0; i < manualArray.getSize(); i++) {
+
+            assertEquals(arrayWithElementDeleted[i], manualArray.getArray()[i], String.format("Element at array[%d] should be equal to arrayWithElementDeleted[%d].", i, i));
+        }
+
+        assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "Array should be equal to arrayWithElementDeleted.");
+    }
+
+    @Test
+    void testManualArrayDeleteFromEndOfEmptyArray() {
+
+        ManualArray manualArray = new ManualArray();
+
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> manualArray.deleteFromEnd(),
+                "Array should not be empty."
+        );
+    }
+
+    @Test
+    void testManualArrayDeleteFromEnd() {
+
+        ManualArray manualArray = new ManualArray(array);
+
+        manualArray.deleteFromEnd();
+
+        int[] arrayWithElementDeleted = new int[]{3, 17, 75, 80};
+
+        for (int i = 0; i < manualArray.getSize(); i++) {
+
+            assertEquals(arrayWithElementDeleted[i], manualArray.getArray()[i], String.format("Element at array[%d] should be equal to arrayWithElementDeleted[%d].", i, i));
+        }
+
+        assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "Array should be equal to arrayWithElementDeleted.");
     }
 }

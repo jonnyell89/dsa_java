@@ -52,6 +52,18 @@ public class ManualArray {
 
     protected void decrementSize() { this.size--; }
 
+    public int[] toArray() {
+
+        int[] toArray = new int[size];
+
+        for (int i = 0; i < size; i++) {
+
+            toArray[i] = array[i];
+        }
+
+        return toArray;
+    }
+
     protected int getCapacity(int length) {
 
         int capacity = MIN_CAPACITY;
@@ -155,7 +167,7 @@ public class ManualArray {
         return this;
     }
 
-    public ManualArray insertAtIndex(int element, int index) {
+    public ManualArray insertAtIndex(int index, int element) {
 
         // Time complexity: O(N)
 
