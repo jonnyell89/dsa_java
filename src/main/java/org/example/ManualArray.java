@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.Arrays;
 
-import static org.example.Config.DEFAULT_SIZE;
 import static org.example.Config.MIN_CAPACITY;
 
 public class ManualArray {
@@ -13,17 +12,17 @@ public class ManualArray {
     public ManualArray() {
 
         this.array = new int[MIN_CAPACITY];
-        this.size = DEFAULT_SIZE;
+        this.size = 0;
     }
 
     public ManualArray(int length) {
 
-        if (length < DEFAULT_SIZE) {
+        if (length < 0) {
             throw new IllegalArgumentException("Array length cannot be negative.");
         }
 
         this.array = new int[getCapacity(length)];
-        this.size = DEFAULT_SIZE;
+        this.size = 0;
     }
 
     public ManualArray(int[] array) {
@@ -183,7 +182,7 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (size == DEFAULT_SIZE) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
@@ -205,7 +204,7 @@ public class ManualArray {
 
         // Time complexity: O(1)
 
-        if (size == DEFAULT_SIZE) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
@@ -222,7 +221,7 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (size == DEFAULT_SIZE) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 

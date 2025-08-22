@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.Arrays;
 
-import static org.example.Config.DEFAULT_SIZE;
 import static org.example.Config.MIN_CAPACITY;
 
 public class ManualSet {
@@ -13,17 +12,17 @@ public class ManualSet {
     public ManualSet() {
 
         this.set = new int[MIN_CAPACITY];
-        this.size = DEFAULT_SIZE;
+        this.size = 0;
     }
 
     public ManualSet(int length) {
 
-        if (length < DEFAULT_SIZE) {
+        if (length < 0) {
             throw new IllegalArgumentException("Set length cannot be negative.");
         }
 
         this.set = new int[getCapacity(length)];
-        this.size = DEFAULT_SIZE;
+        this.size = 0;
     }
 
     public int[] getSet() { return set; }
@@ -198,7 +197,7 @@ public class ManualSet {
 
         // Time complexity: O(N)
 
-        if (size == DEFAULT_SIZE) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
@@ -220,7 +219,7 @@ public class ManualSet {
 
         // Time complexity: O(1)
 
-        if (size == DEFAULT_SIZE) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
@@ -237,7 +236,7 @@ public class ManualSet {
 
         // Time complexity: O(N)
 
-        if (size == DEFAULT_SIZE) {
+        if (size == 0) {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
