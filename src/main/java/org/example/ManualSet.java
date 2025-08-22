@@ -2,53 +2,43 @@ package org.example;
 
 import java.util.Arrays;
 
+import static org.example.Config.DEFAULT_SIZE;
+import static org.example.Config.MIN_CAPACITY;
+
 public class ManualSet {
 
-    private int[] set;
-    private int size;
-    private static final int MIN_CAPACITY = 10;
+    protected int[] set;
+    protected int size;
 
     public ManualSet() {
 
         this.set = new int[MIN_CAPACITY];
-        this.size = 0;
+        this.size = DEFAULT_SIZE;
     }
 
     public ManualSet(int length) {
 
-        if (length < 0) {
+        if (length < DEFAULT_SIZE) {
             throw new IllegalArgumentException("Set length cannot be negative.");
         }
 
         this.set = new int[getCapacity(length)];
-        this.size = 0;
-    }
-
-    private int getCapacity(int length) {
-
-        int capacity = MIN_CAPACITY;
-
-        while (capacity < length) {
-
-            capacity = capacity * 2;
-        }
-
-        return capacity;
+        this.size = DEFAULT_SIZE;
     }
 
     public int[] getSet() { return set; }
 
-    private void setSet(int[] set) { this.set = set; }
+    protected void setSet(int[] set) { this.set = set; }
 
     public int getSize() { return size; }
 
-    private void setSize(int size) { this.size = size; }
+    protected void setSize(int size) { this.size = size; }
 
-    private void incrementSize() { this.size++; }
+    protected void incrementSize() { this.size++; }
 
-    private void decrementSize() { this.size--; }
+    protected void decrementSize() { this.size--; }
 
-    private boolean isDuplicate(int element) {
+    protected boolean isDuplicate(int element) {
 
         for (int i = 0; i < size; i++) {
 
@@ -61,7 +51,19 @@ public class ManualSet {
         return false;
     }
 
-    private void manageCapacity() {
+    protected int getCapacity(int length) {
+
+        int capacity = MIN_CAPACITY;
+
+        while (capacity < length) {
+
+            capacity = capacity * 2;
+        }
+
+        return capacity;
+    }
+
+    protected void manageCapacity() {
 
         if (size == set.length) { // Expand
 
@@ -196,7 +198,7 @@ public class ManualSet {
 
         // Time complexity: O(N)
 
-        if (size == 0) {
+        if (size == DEFAULT_SIZE) {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
@@ -218,7 +220,7 @@ public class ManualSet {
 
         // Time complexity: O(1)
 
-        if (size == 0) {
+        if (size == DEFAULT_SIZE) {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
@@ -235,7 +237,7 @@ public class ManualSet {
 
         // Time complexity: O(N)
 
-        if (size == 0) {
+        if (size == DEFAULT_SIZE) {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 

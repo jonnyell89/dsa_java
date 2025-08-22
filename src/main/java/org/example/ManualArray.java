@@ -2,26 +2,28 @@ package org.example;
 
 import java.util.Arrays;
 
+import static org.example.Config.DEFAULT_SIZE;
+import static org.example.Config.MIN_CAPACITY;
+
 public class ManualArray {
 
-    private int[] array;
-    private int size;
-    private static final int MIN_CAPACITY = 10;
+    protected int[] array;
+    protected int size;
 
     public ManualArray() {
 
         this.array = new int[MIN_CAPACITY];
-        this.size = 0;
+        this.size = DEFAULT_SIZE;
     }
 
     public ManualArray(int length) {
 
-        if (length < 0) {
+        if (length < DEFAULT_SIZE) {
             throw new IllegalArgumentException("Array length cannot be negative.");
         }
 
         this.array = new int[getCapacity(length)];
-        this.size = 0;
+        this.size = DEFAULT_SIZE;
     }
 
     public ManualArray(int[] array) {
@@ -39,7 +41,19 @@ public class ManualArray {
         }
     }
 
-    private int getCapacity(int length) {
+    public int[] getArray() { return array; }
+
+    protected void setArray(int[] array) { this.array = array; }
+
+    public int getSize() { return size; }
+
+    protected void setSize(int size) { this.size = size; }
+
+    protected void incrementSize() { this.size++; }
+
+    protected void decrementSize() { this.size--; }
+
+    protected int getCapacity(int length) {
 
         int capacity = MIN_CAPACITY;
 
@@ -51,19 +65,7 @@ public class ManualArray {
         return capacity;
     }
 
-    public int[] getArray() { return array; }
-
-    private void setArray(int[] array) { this.array = array; }
-
-    public int getSize() { return size; }
-
-    private void setSize(int size) { this.size = size; }
-
-    private void incrementSize() { this.size++; }
-
-    private void decrementSize() { this.size--; }
-
-    private void manageCapacity() {
+    protected void manageCapacity() {
 
         if (size == array.length) { // Expand
 
@@ -181,7 +183,7 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (size == 0) {
+        if (size == DEFAULT_SIZE) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
@@ -203,7 +205,7 @@ public class ManualArray {
 
         // Time complexity: O(1)
 
-        if (size == 0) {
+        if (size == DEFAULT_SIZE) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
@@ -220,7 +222,7 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        if (size == 0) {
+        if (size == DEFAULT_SIZE) {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
