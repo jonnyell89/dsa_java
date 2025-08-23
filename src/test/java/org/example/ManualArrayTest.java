@@ -347,4 +347,65 @@ public class ManualArrayTest {
 
         assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "Array should be equal to arrayWithElementDeleted.");
     }
+
+    @Test
+    void testManualArrayDeleteFromIndexOfEmptyArray() {
+
+        int index = 0;
+
+        ManualArray manualArray = new ManualArray();
+
+        IllegalStateException exception = assertThrows(
+                IllegalStateException.class,
+                () -> manualArray.deleteFromIndex(index),
+                "Array should not be empty."
+        );
+    }
+
+    @Test
+    void testManualArrayDeleteFromIndexWithIndexLessThanZero() {
+
+        int indexLessThanZero = -5;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.deleteFromIndex(indexLessThanZero),
+                "Array index should not be negative."
+        );
+    }
+
+    @Test
+    void testManualArrayDeleteAtIndexWithIndexGreaterThanSize() {
+
+        int indexGreaterThanZero = 15;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.deleteFromIndex(indexGreaterThanZero),
+                "Array index should not be greater than size."
+        );
+    }
+
+    @Test
+    void testManualArrayDeleteAtIndex() {
+
+        int index = 2;
+
+        ManualArray manualArray = new ManualArray(array);
+
+        manualArray.deleteFromIndex(index);
+
+        int[] arrayWithElementDeleted = new int[]{3, 17, 80, 202};
+
+        for (int i = 0; i < manualArray.getSize(); i++) {
+
+            assertEquals(arrayWithElementDeleted[i], manualArray.getArray()[i], String.format("Element at array[%d] should be equal to arrayWithElementDeleted[%d].", i, i));
+        }
+
+        assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "Array should be equal to arrayWithElementDeleted.");
+    }
 }
