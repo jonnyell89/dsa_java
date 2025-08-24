@@ -29,11 +29,21 @@ public class ManualSet {
 
     protected void setSet(int[] set) { this.set = set; }
 
+    protected void resetSet() { this.set = new int[MIN_CAPACITY]; }
+
     public int getSize() { return size; }
+
+    protected void resetSize() { this.size = 0; }
 
     protected void incrementSize() { this.size++; }
 
     protected void decrementSize() { this.size--; }
+
+    public void clearSet() {
+
+        resetSet();
+        resetSize();
+    }
 
     public int[] toSet() {
 

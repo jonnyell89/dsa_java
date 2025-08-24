@@ -44,11 +44,21 @@ public class ManualArray {
 
     protected void setArray(int[] array) { this.array = array; }
 
+    protected void resetArray() { this.array = new int[MIN_CAPACITY]; }
+
     public int getSize() { return size; }
+
+    protected void resetSize() { this.size = 0; }
 
     protected void incrementSize() { this.size++; }
 
     protected void decrementSize() { this.size--; }
+
+    public void clearArray() {
+
+        resetArray();
+        resetSize();
+    }
 
     public int[] toArray() {
 
