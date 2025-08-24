@@ -18,10 +18,10 @@ public class ManualSet {
     public ManualSet(int length) {
 
         if (length < 0) {
-            throw new IllegalArgumentException("Set length cannot be negative.");
+            throw new IllegalArgumentException("Set length cannot be less than zero.");
         }
 
-        this.set = new int[getCapacity(length)];
+        this.set = new int[Utils.getCapacity(length, MIN_CAPACITY)];
         this.size = 0;
     }
 
@@ -31,11 +31,21 @@ public class ManualSet {
 
     public int getSize() { return size; }
 
-    protected void setSize(int size) { this.size = size; }
-
     protected void incrementSize() { this.size++; }
 
     protected void decrementSize() { this.size--; }
+
+    public int[] toSet() {
+
+        int[] toSet = new int[size];
+
+        for (int i = 0; i < size; i++) {
+
+            toSet[i] = set[i];
+        }
+
+        return toSet;
+    }
 
     protected boolean isDuplicate(int element) {
 
@@ -48,49 +58,6 @@ public class ManualSet {
         }
 
         return false;
-    }
-
-    protected int getCapacity(int length) {
-
-        int capacity = MIN_CAPACITY;
-
-        while (capacity < length) {
-
-            capacity = capacity * 2;
-        }
-
-        return capacity;
-    }
-
-    protected void manageCapacity() {
-
-        if (size == set.length) { // Expand
-
-            int newCapacity = (set.length < MIN_CAPACITY) ? MIN_CAPACITY : set.length * 2;
-
-            int[] newSet = new int[newCapacity];
-
-            for (int i = 0; i < size; i++) {
-
-                newSet[i] = set[i];
-            }
-
-            setSet(newSet);
-        }
-
-        if (set.length > MIN_CAPACITY && size <= set.length / 4) { // Contract
-
-            int newCapacity = (set.length / 2 < MIN_CAPACITY) ? MIN_CAPACITY : set.length / 2;
-
-            int[] newSet = new int[newCapacity];
-
-            for (int i = 0; i < size; i++) {
-
-                newSet[i] = set[i];
-            }
-
-            setSet(newSet);
-        }
     }
 
     public boolean contains(int element) {
@@ -135,7 +102,7 @@ public class ManualSet {
             throw new IllegalArgumentException("Element already present in set: " + element);
         }
 
-        manageCapacity();
+        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
 
         for (int i = size; i > 0; i--) { // Iterates from the end to the start.
 
@@ -157,7 +124,7 @@ public class ManualSet {
             throw new IllegalArgumentException("Element already present in set: " + element);
         }
 
-        manageCapacity();
+        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
 
         set[size] = element; // Inserts element at the end.
 
@@ -178,7 +145,7 @@ public class ManualSet {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        manageCapacity();
+        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
 
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
 
@@ -201,7 +168,7 @@ public class ManualSet {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
-        manageCapacity();
+        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
 
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
 
@@ -223,7 +190,7 @@ public class ManualSet {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
-        manageCapacity();
+        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
 
         set[size - 1] = 0; // Deletes element at the end.
 
@@ -244,7 +211,7 @@ public class ManualSet {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        manageCapacity();
+        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
 
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
 
