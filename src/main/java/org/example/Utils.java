@@ -46,4 +46,19 @@ public class Utils {
 
         return iterable;
     }
+
+    public static boolean isSorted(int[] iterable, int size) {
+
+        if (size < 2) return true;
+
+        boolean isAscending = iterable[0] < iterable[1];
+
+        for (int i = 0; i < size - 1; i++) {
+
+            if (isAscending && iterable[i] > iterable[i + 1]) return false;
+            if (!isAscending && iterable[i] < iterable[i + 1]) return false;
+        }
+
+        return true;
+    }
 }
