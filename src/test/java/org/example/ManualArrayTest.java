@@ -2,11 +2,11 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import static org.example.Config.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ManualArrayTest {
 
+    private static final int DEFAULT_CAPACITY = 10;
     public final int[] array = new int[]{3, 17, 75, 80, 202};
 
     // INSTANTIATION
@@ -15,12 +15,12 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray();
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("Array size should be %d", 0));
 
-        int[] defaultArray = new int[MIN_CAPACITY];
+        int[] defaultArray = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", MIN_CAPACITY));
+        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -42,12 +42,12 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(lengthZero);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
-        int[] defaultArray = new int[MIN_CAPACITY];
+        int[] defaultArray = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", MIN_CAPACITY));
+        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -57,12 +57,12 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(lengthLessThanDefault);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
-        int[] defaultArray = new int[MIN_CAPACITY];
+        int[] defaultArray = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", MIN_CAPACITY));
+        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -72,12 +72,12 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(lengthGreaterThanDefault);
 
-        assertEquals(MIN_CAPACITY * 2, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY * 2));
+        assertEquals(DEFAULT_CAPACITY * 2, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
-        int[] defaultArray = new int[MIN_CAPACITY * 2];
+        int[] defaultArray = new int[DEFAULT_CAPACITY * 2];
 
-        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", MIN_CAPACITY * 2));
+        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", DEFAULT_CAPACITY * 2));
     }
 
     @Test
@@ -97,12 +97,12 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(emptyArray);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("Array size should be %d.", 0));
 
-        int[] defaultArray = new int[MIN_CAPACITY];
+        int[] defaultArray = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", MIN_CAPACITY));
+        assertArrayEquals(defaultArray, manualArray.getArray(), String.format("Array should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -114,7 +114,7 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(inputArray);
 
-        assertEquals(MIN_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY));
         assertEquals(inputArray.length, manualArray.getSize(), String.format("Array size should be %d.", inputArray.length));
 
         assertArrayEquals(inputArray, manualArray.toArray(), String.format("Array should contain %d zeros.", lengthLessThanDefault));
@@ -129,7 +129,7 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(inputArray);
 
-        assertEquals(MIN_CAPACITY * 2, manualArray.getArray().length, String.format("Array length should be %d.", MIN_CAPACITY * 2));
+        assertEquals(DEFAULT_CAPACITY * 2, manualArray.getArray().length, String.format("Array length should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(inputArray.length, manualArray.getSize(), String.format("Array size should be %d.", inputArray.length));
 
         assertArrayEquals(inputArray, manualArray.toArray(), String.format("Array should contain %d zeros.", lengthGreaterThanDefault));

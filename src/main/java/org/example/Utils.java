@@ -2,9 +2,9 @@ package org.example;
 
 public class Utils {
 
-    public static int getCapacity(int length, int minCapacity) {
+    public static int getCapacity(int length, int defaultCapacity) {
 
-        int capacity = minCapacity;
+        int capacity = defaultCapacity;
 
         while (capacity < length) {
 
@@ -14,11 +14,11 @@ public class Utils {
         return capacity;
     }
 
-    public static int[] manageCapacity(int[] iterable, int size, int minCapacity) {
+    public static int[] manageCapacity(int[] iterable, int size, int defaultCapacity) {
 
         if (iterable.length == size) {
 
-            int newCapacity = (iterable.length < minCapacity) ? minCapacity : iterable.length * 2;
+            int newCapacity = (iterable.length < defaultCapacity) ? defaultCapacity : iterable.length * 2;
 
             int[] newIterable = new int[newCapacity];
 
@@ -30,9 +30,9 @@ public class Utils {
             return newIterable;
         }
 
-        if (iterable.length > minCapacity && size <= iterable.length / 4) {
+        if (iterable.length > defaultCapacity && size <= iterable.length / 4) {
 
-            int newCapacity = (iterable.length / 2 < minCapacity) ? minCapacity : iterable.length / 2;
+            int newCapacity = (iterable.length / 2 < defaultCapacity) ? defaultCapacity : iterable.length / 2;
 
             int[] newIterable = new int[newCapacity];
 

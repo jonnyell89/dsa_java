@@ -2,6 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BubbleSortTest {
@@ -9,10 +10,14 @@ public class BubbleSortTest {
     @Test
     void testBubbleSort() {
 
-        int[] array = {15, 1, 14, 2, 13, 3, 12, 4, 11, 5, 10, 6, 9, 7, 8};
+        int[] unsortedArray = {4, 2, 7, 1, 3};
 
-        BubbleSort.bubbleSort(array, array.length);
+        BubbleSort.bubbleSort(unsortedArray, unsortedArray.length);
 
-        assertTrue(Utils.isSorted(array, array.length));
+        assertTrue(Utils.isSorted(unsortedArray, unsortedArray.length));
+
+        int[] sortedArray = {1, 2, 3, 4, 7};
+
+        assertArrayEquals(sortedArray, unsortedArray);
     }
 }

@@ -2,26 +2,29 @@ package org.example;
 
 import java.util.Arrays;
 
-import static org.example.Config.MIN_CAPACITY;
-
 public class ManualArray {
 
+    private static final int DEFAULT_CAPACITY = 10;
+
+    protected int capacity;
     protected int[] array;
     protected int size;
 
     public ManualArray() {
 
-        this.array = new int[MIN_CAPACITY];
+        this.capacity = DEFAULT_CAPACITY;
+        this.array = new int[capacity];
         this.size = 0;
     }
 
-    public ManualArray(int length) {
+    public ManualArray(int initialCapacity) {
 
-        if (length < 0) {
-            throw new IllegalArgumentException("Array length cannot be less than zero.");
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("Array initial capacity cannot be less than zero.");
         }
 
-        this.array = new int[Utils.getCapacity(length, MIN_CAPACITY)];
+        this.capacity = Utils.getCapacity(initialCapacity, DEFAULT_CAPACITY);
+        this.array = new int[capacity];
         this.size = 0;
     }
 
@@ -31,7 +34,8 @@ public class ManualArray {
             throw new NullPointerException("Array cannot be null.");
         }
 
-        this.array = new int[Utils.getCapacity(array.length, MIN_CAPACITY)];
+        this.capacity = Utils.getCapacity(array.length, DEFAULT_CAPACITY);
+        this.array = new int[capacity];
         this.size = array.length;
 
         for (int i = 0; i < array.length; i++) {
@@ -44,21 +48,11 @@ public class ManualArray {
 
     protected void setArray(int[] array) { this.array = array; }
 
-    protected void resetArray() { this.array = new int[MIN_CAPACITY]; }
-
     public int getSize() { return size; }
-
-    protected void resetSize() { this.size = 0; }
 
     protected void incrementSize() { this.size++; }
 
     protected void decrementSize() { this.size--; }
-
-    public void clearArray() {
-
-        resetArray();
-        resetSize();
-    }
 
     public int[] toArray() {
 
@@ -105,7 +99,7 @@ public class ManualArray {
 
         // Time complexity: O(N)
 
-        setArray(Utils.manageCapacity(array, size, MIN_CAPACITY));
+        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
 
         for (int i = size; i > 0; i--) { // Iterates from the end to the start.
 
@@ -123,7 +117,7 @@ public class ManualArray {
 
         // Time complexity: O(1)
 
-        setArray(Utils.manageCapacity(array, size, MIN_CAPACITY));
+        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
 
         array[size] = element; // Inserts element at the end.
 
@@ -140,7 +134,7 @@ public class ManualArray {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        setArray(Utils.manageCapacity(array, size, MIN_CAPACITY));
+        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
 
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
 
@@ -163,7 +157,7 @@ public class ManualArray {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
-        setArray(Utils.manageCapacity(array, size, MIN_CAPACITY));
+        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
 
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
 
@@ -185,7 +179,7 @@ public class ManualArray {
             throw new IllegalStateException("Cannot delete from an empty array.");
         }
 
-        setArray(Utils.manageCapacity(array, size, MIN_CAPACITY));
+        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
 
         array[size - 1] = 0; // Deletes element at the end.
 
@@ -206,7 +200,7 @@ public class ManualArray {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        setArray(Utils.manageCapacity(array, size, MIN_CAPACITY));
+        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
 
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
 

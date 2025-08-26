@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UtilsTest {
 
-    int[] sortedArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-    int[] unsortedArray = {15, 1, 14, 2, 13, 3, 12, 4, 11, 5, 10, 6, 9, 7, 8};
+    int[] sortedArray = {1, 2, 3, 4, 7};
+    int[] unsortedArray = {4, 2, 7, 1, 3};
 
     @Test
     void testIsSorted() {

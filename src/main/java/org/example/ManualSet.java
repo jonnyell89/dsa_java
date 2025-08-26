@@ -2,26 +2,29 @@ package org.example;
 
 import java.util.Arrays;
 
-import static org.example.Config.MIN_CAPACITY;
-
 public class ManualSet {
 
+    private static final int DEFAULT_CAPACITY = 10;
+
+    protected int capacity;
     protected int[] set;
     protected int size;
 
     public ManualSet() {
 
-        this.set = new int[MIN_CAPACITY];
+        this.capacity = DEFAULT_CAPACITY;
+        this.set = new int[capacity];
         this.size = 0;
     }
 
-    public ManualSet(int length) {
+    public ManualSet(int initialCapacity) {
 
-        if (length < 0) {
-            throw new IllegalArgumentException("Set length cannot be less than zero.");
+        if (initialCapacity < 0) {
+            throw new IllegalArgumentException("Set initial capacity cannot be less than zero.");
         }
 
-        this.set = new int[Utils.getCapacity(length, MIN_CAPACITY)];
+        this.capacity = Utils.getCapacity(initialCapacity, DEFAULT_CAPACITY);
+        this.set = new int[capacity];
         this.size = 0;
     }
 
@@ -29,21 +32,11 @@ public class ManualSet {
 
     protected void setSet(int[] set) { this.set = set; }
 
-    protected void resetSet() { this.set = new int[MIN_CAPACITY]; }
-
     public int getSize() { return size; }
-
-    protected void resetSize() { this.size = 0; }
 
     protected void incrementSize() { this.size++; }
 
     protected void decrementSize() { this.size--; }
-
-    public void clearSet() {
-
-        resetSet();
-        resetSize();
-    }
 
     public int[] toSet() {
 
@@ -59,6 +52,8 @@ public class ManualSet {
 
     protected boolean isDuplicate(int element) {
 
+        // Time complexity: O(N)
+
         for (int i = 0; i < size; i++) {
 
             if (element == set[i]) {
@@ -69,6 +64,26 @@ public class ManualSet {
 
         return false;
     }
+
+    protected boolean hasDuplicate() {
+
+        // Time complexity: O(N^2)
+
+        for (int i = 0; i < size; i++) {
+
+            if (isDuplicate(set[i])) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+//    protected boolean hasDuplication() {
+//
+//
+//    }
 
     public boolean contains(int element) {
 
@@ -112,7 +127,7 @@ public class ManualSet {
             throw new IllegalArgumentException("Element already present in set: " + element);
         }
 
-        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
+        setSet(Utils.manageCapacity(set, size, DEFAULT_CAPACITY));
 
         for (int i = size; i > 0; i--) { // Iterates from the end to the start.
 
@@ -134,7 +149,7 @@ public class ManualSet {
             throw new IllegalArgumentException("Element already present in set: " + element);
         }
 
-        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
+        setSet(Utils.manageCapacity(set, size, DEFAULT_CAPACITY));
 
         set[size] = element; // Inserts element at the end.
 
@@ -155,7 +170,7 @@ public class ManualSet {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
+        setSet(Utils.manageCapacity(set, size, DEFAULT_CAPACITY));
 
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
 
@@ -178,7 +193,7 @@ public class ManualSet {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
-        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
+        setSet(Utils.manageCapacity(set, size, DEFAULT_CAPACITY));
 
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
 
@@ -200,7 +215,7 @@ public class ManualSet {
             throw new IllegalStateException("Cannot delete from an empty set.");
         }
 
-        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
+        setSet(Utils.manageCapacity(set, size, DEFAULT_CAPACITY));
 
         set[size - 1] = 0; // Deletes element at the end.
 
@@ -221,7 +236,7 @@ public class ManualSet {
             throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         }
 
-        setSet(Utils.manageCapacity(set, size, MIN_CAPACITY));
+        setSet(Utils.manageCapacity(set, size, DEFAULT_CAPACITY));
 
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
 
