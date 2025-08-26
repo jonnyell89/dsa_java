@@ -4,6 +4,8 @@ public class BubbleSort {
 
     public static int[] bubbleSort(int[] iterable, int size) {
 
+        // Time complexity: O(N^2)
+
         int unsortedEndIndex = size - 1;
         boolean sorted = false;
 

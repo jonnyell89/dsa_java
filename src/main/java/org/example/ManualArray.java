@@ -2,97 +2,44 @@ package org.example;
 
 import java.util.Arrays;
 
-public class ManualArray {
-
-    private static final int DEFAULT_CAPACITY = 10;
-
-    protected int capacity;
-    protected int[] array;
-    protected int size;
+public class ManualArray extends ManualCollection {
 
     public ManualArray() {
-
-        this.capacity = DEFAULT_CAPACITY;
-        this.array = new int[capacity];
-        this.size = 0;
+        super();
     }
 
     public ManualArray(int initialCapacity) {
-
-        if (initialCapacity < 0) {
-            throw new IllegalArgumentException("Array initial capacity cannot be less than zero.");
-        }
-
-        this.capacity = Utils.getCapacity(initialCapacity, DEFAULT_CAPACITY);
-        this.array = new int[capacity];
-        this.size = 0;
+        super(initialCapacity);
     }
 
     public ManualArray(int[] array) {
-
-        if (array == null) {
-            throw new NullPointerException("Array cannot be null.");
-        }
-
-        this.capacity = Utils.getCapacity(array.length, DEFAULT_CAPACITY);
-        this.array = new int[capacity];
+        if (array == null) throw new NullPointerException("Array cannot be null.");
+        this.capacity = DEFAULT_CAPACITY;
         this.size = array.length;
-
-        for (int i = 0; i < array.length; i++) {
-
-            this.array[i] = array[i];
+        this.data = new int[capacity];
+        for (int i = 0; i < data.length; i++) {
+            this.data[i] = array[i];
         }
-    }
-
-    public int[] getArray() { return array; }
-
-    protected void setArray(int[] array) { this.array = array; }
-
-    public int getSize() { return size; }
-
-    protected void incrementSize() { this.size++; }
-
-    protected void decrementSize() { this.size--; }
-
-    public int[] toArray() {
-
-        int[] toArray = new int[size];
-
-        for (int i = 0; i < size; i++) {
-
-            toArray[i] = array[i];
-        }
-
-        return toArray;
+        setCapacity(array.length);
     }
 
     // READ
-    public int read(int index) {
-
-        // Time complexity: O(1)
-
-        if (index < 0 || index >= size) {
-            throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
-        }
-
-        return array[index];
-    }
+//    public int read(int index) {
+//        // Time complexity: O(1)
+//        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+//        return data[index];
+//    }
 
     // SEARCH
-    public int search(int element) {
-
-        // Time complexity: O(N)
-
-        for (int i = 0; i < size; i++) {
-
-            if (element == array[i]) {
-
-                return i;
-            }
-        }
-
-        throw new IllegalArgumentException("Element not present in array: " + element);
-    }
+//    public int search(int element) {
+//        // Time complexity: O(N)
+//        for (int i = 0; i < size; i++) {
+//            if (data[i] == element) {
+//                return i;
+//            }
+//        }
+//        throw new IllegalArgumentException("Element not present in array: " + element);
+//    }
 
     // INSERT
     public ManualArray insertAtStart(int element) {

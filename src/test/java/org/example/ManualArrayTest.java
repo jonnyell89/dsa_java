@@ -369,7 +369,7 @@ public class ManualArrayTest {
     @Test
     void testManualArrayDeleteAtIndex() {
 
-        int index = 2;
+        int index = 1;
 
         ManualArray manualArray = new ManualArray(array);
 

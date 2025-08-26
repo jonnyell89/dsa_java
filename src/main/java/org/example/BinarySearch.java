@@ -4,6 +4,8 @@ public class BinarySearch {
 
     public static int binarySearch(int[] iterable, int size, int element) {
 
+        // Time complexity: O(log N)
+
         int startIndex = 0;
         int endIndex = size - 1;
 
@@ -19,7 +21,7 @@ public class BinarySearch {
             else if (element < midpointElement) {
                 endIndex = midpoint - 1;
             }
-            else {
+            else if (element > midpointElement) {
                 startIndex = midpoint + 1;
             }
         }

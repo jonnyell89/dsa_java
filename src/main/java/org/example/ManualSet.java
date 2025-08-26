@@ -56,7 +56,7 @@ public class ManualSet {
 
         for (int i = 0; i < size; i++) {
 
-            if (element == set[i]) {
+            if (set[i] == element) {
 
                 return true;
             }
@@ -89,7 +89,7 @@ public class ManualSet {
 
         for (int i = 0; i < size; i++) {
 
-            if (element == set[i]) {
+            if (set[i] == element) {
 
                 return i;
             }
