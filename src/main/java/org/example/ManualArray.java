@@ -4,29 +4,43 @@ import java.util.Arrays;
 
 public class ManualArray extends ManualCollection {
 
+//    protected static final int DEFAULT_CAPACITY = 10;
+
+//    protected int capacity;
+//    protected int size;
+//    protected int[] data;
+
     public ManualArray() {
+//        this.capacity = DEFAULT_CAPACITY;
+//        this.size = 0;
+//        this.data = new int[capacity];
         super();
     }
 
     public ManualArray(int initialCapacity) {
+//        if (initialCapacity < 0) throw new IllegalArgumentException("Collection initial capacity cannot be less than zero.");
+//        this.capacity = DEFAULT_CAPACITY;
+//        this.size = 0;
+//        this.data = new int[capacity];
+//        setCapacity(initialCapacity);
         super(initialCapacity);
     }
 
     public ManualArray(int[] array) {
-        if (array == null) throw new NullPointerException("Array cannot be null.");
+        if (array == null) throw new NullPointerException("Collection cannot be null.");
         this.capacity = DEFAULT_CAPACITY;
+        setCapacity(array.length);
         this.size = array.length;
         this.data = new int[capacity];
-        for (int i = 0; i < data.length; i++) {
+        for (int i = 0; i < array.length; i++) {
             this.data[i] = array[i];
         }
-        setCapacity(array.length);
     }
 
     // READ
 //    public int read(int index) {
 //        // Time complexity: O(1)
-//        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+//        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
 //        return data[index];
 //    }
 
@@ -38,133 +52,83 @@ public class ManualArray extends ManualCollection {
 //                return i;
 //            }
 //        }
-//        throw new IllegalArgumentException("Element not present in array: " + element);
+//        throw new IllegalArgumentException("Element not present in collection: " + element);
 //    }
 
     // INSERT
+    @Override
     public ManualArray insertAtStart(int element) {
-
         // Time complexity: O(N)
-
-        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
-
+        manageCapacity();
         for (int i = size; i > 0; i--) { // Iterates from the end to the start.
-
-            array[i] = array[i - 1]; // Shifts elements -->
+            data[i] = data[i - 1]; // Shifts elements -->
         }
-
-        array[0] = element; // Inserts element at the start.
-
+        data[0] = element; // Inserts element at the start.
         incrementSize();
-
-        return this;
-    }
-
-    public ManualArray insertAtEnd(int element) {
-
-        // Time complexity: O(1)
-
-        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
-
-        array[size] = element; // Inserts element at the end.
-
-        incrementSize();
-
-        return this;
-    }
-
-    public ManualArray insertAtIndex(int index, int element) {
-
-        // Time complexity: O(N)
-
-        if (index < 0 || index > size) {
-            throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
-        }
-
-        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
-
-        for (int i = size; i > index; i--) { // Iterates from the end to the index.
-
-            array[i] = array[i - 1]; // Shifts elements -->
-        }
-
-        array[index] = element; // Inserts element at index.
-
-        incrementSize();
-
-        return this;
-    }
-
-    // DELETE
-    public ManualArray deleteFromStart() {
-
-        // Time complexity: O(N)
-
-        if (size == 0) {
-            throw new IllegalStateException("Cannot delete from an empty array.");
-        }
-
-        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
-
-        for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
-
-            array[i] = array[i + 1]; // Shifts elements <--
-        }
-
-        array[size - 1] = 0; // Clears the last element which has already been shifted.
-
-        decrementSize();
-
-        return this;
-    }
-
-    public ManualArray deleteFromEnd() {
-
-        // Time complexity: O(1)
-
-        if (size == 0) {
-            throw new IllegalStateException("Cannot delete from an empty array.");
-        }
-
-        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
-
-        array[size - 1] = 0; // Deletes element at the end.
-
-        decrementSize();
-
-        return this;
-    }
-
-    public ManualArray deleteFromIndex(int index) {
-
-        // Time complexity: O(N)
-
-        if (size == 0) {
-            throw new IllegalStateException("Cannot delete from an empty array.");
-        }
-
-        if (index < 0 || index >= size) {
-            throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
-        }
-
-        setArray(Utils.manageCapacity(array, size, DEFAULT_CAPACITY));
-
-        for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
-
-            array[i] = array[i + 1]; // Shifts elements <--
-        }
-
-        array[size - 1] = 0; // Clears the last element which has already been shifted.
-
-        decrementSize();
-
         return this;
     }
 
     @Override
+    public ManualArray insertAtEnd(int element) {
+        // Time complexity: O(1)
+        manageCapacity();
+        data[size] = element; // Inserts element at the end.
+        incrementSize();
+        return this;
+    }
+
+    @Override
+    public ManualArray insertAtIndex(int index, int element) {
+        // Time complexity: O(N)
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        manageCapacity();
+        for (int i = size; i > index; i--) { // Iterates from the end to the index.
+            data[i] = data[i - 1]; // Shifts elements -->
+        }
+        data[index] = element; // Inserts element at index.
+        incrementSize();
+        return this;
+    }
+
+    // DELETE
+//    public ManualArray deleteFromStart() {
+//        // Time complexity: O(N)
+//        if (size == 0) throw new IllegalStateException("Cannot delete from an empty collection.");
+//        manageCapacity();
+//        for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
+//            data[i] = data[i + 1]; // Shifts elements <--
+//        }
+//        data[size - 1] = 0; // Clears the last element which has already been shifted.
+//        decrementSize();
+//        return this;
+//    }
+
+//    public ManualArray deleteFromEnd() {
+//        // Time complexity: O(1)
+//        if (size == 0) throw new IllegalStateException("Cannot delete from an empty collection.");
+//        manageCapacity();
+//        data[size - 1] = 0; // Deletes element at the end.
+//        decrementSize();
+//        return this;
+//    }
+
+//    public ManualArray deleteFromIndex(int index) {
+//        // Time complexity: O(N)
+//        if (size == 0) throw new IllegalStateException("Cannot delete from an empty collection.");
+//        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+//        manageCapacity();
+//        for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
+//            data[i] = data[i + 1]; // Shifts elements <--
+//        }
+//        data[size - 1] = 0; // Clears the last element which has already been shifted.
+//        decrementSize();
+//        return this;
+//    }
+
+    @Override
     public String toString() {
         return "ManualArray{" +
-                "array=" + Arrays.toString(Arrays.copyOf(array, size)) +
+                "data=" + Arrays.toString(Arrays.copyOf(data, size)) +
                 '}';
     }
 }

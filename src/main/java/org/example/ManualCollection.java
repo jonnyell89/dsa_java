@@ -19,9 +19,9 @@ public abstract class ManualCollection {
     public ManualCollection(int initialCapacity) {
         if (initialCapacity < 0) throw new IllegalArgumentException("Collection initial capacity cannot be less than zero.");
         this.capacity = DEFAULT_CAPACITY;
+        setCapacity(initialCapacity);
         this.size = 0;
         this.data = new int[capacity];
-        setCapacity(initialCapacity);
     }
 
     protected void manageCapacity() {
@@ -89,36 +89,36 @@ public abstract class ManualCollection {
     }
 
     // INSERT
-    public ManualCollection insertAtStart(int element) {
-        // Time complexity: O(N)
-        manageCapacity();
-        for (int i = size; i > 0; i--) { // Iterates from the end to the start.
-            data[i] = data[i - 1]; // Shifts elements -->
-        }
-        data[0] = element; // Inserts element at the start.
-        incrementSize();
-        return this;
-    }
+    public abstract ManualCollection insertAtStart(int element);
+//        // Time complexity: O(N)
+//        manageCapacity();
+//        for (int i = size; i > 0; i--) { // Iterates from the end to the start.
+//            data[i] = data[i - 1]; // Shifts elements -->
+//        }
+//        data[0] = element; // Inserts element at the start.
+//        incrementSize();
+//        return this;
+//    }
 
-    public ManualCollection insertAtEnd(int element) {
-        // Time complexity: O(1)
-        manageCapacity();
-        data[size] = element; // Inserts element at the end.
-        incrementSize();
-        return this;
-    }
+    public abstract ManualCollection insertAtEnd(int element);
+//        // Time complexity: O(1)
+//        manageCapacity();
+//        data[size] = element; // Inserts element at the end.
+//        incrementSize();
+//        return this;
+//    }
 
-    public ManualCollection insertAtIndex(int index, int element) {
-        // Time complexity: O(N)
-        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        manageCapacity();
-        for (int i = size; i > index; i--) { // Iterates from the end to the index.
-            data[i] = data[i - 1]; // Shifts elements -->
-        }
-        data[index] = element; // Inserts element at index.
-        incrementSize();
-        return this;
-    }
+    public abstract ManualCollection insertAtIndex(int index, int element);
+//        // Time complexity: O(N)
+//        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+//        manageCapacity();
+//        for (int i = size; i > index; i--) { // Iterates from the end to the index.
+//            data[i] = data[i - 1]; // Shifts elements -->
+//        }
+//        data[index] = element; // Inserts element at index.
+//        incrementSize();
+//        return this;
+//    }
 
     // DELETE
     public ManualCollection deleteFromStart() {

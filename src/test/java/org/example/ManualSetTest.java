@@ -16,12 +16,12 @@ public class ManualSetTest {
 
         ManualSet manualSet = new ManualSet();
 
-        assertEquals(DEFAULT_CAPACITY, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualSet.getSize(), String.format("Set size should be %d", 0));
 
         int[] defaultSet = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultSet, manualSet.getSet(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -43,12 +43,12 @@ public class ManualSetTest {
 
         ManualSet manualSet = new ManualSet(lengthZero);
 
-        assertEquals(DEFAULT_CAPACITY, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
 
         int[] defaultSet = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultSet, manualSet.getSet(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -58,12 +58,12 @@ public class ManualSetTest {
 
         ManualSet manualSet = new ManualSet(lengthLessThanDefault);
 
-        assertEquals(DEFAULT_CAPACITY, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
 
         int[] defaultSet = new int[DEFAULT_CAPACITY];
 
-        assertArrayEquals(defaultSet, manualSet.getSet(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
@@ -73,12 +73,12 @@ public class ManualSetTest {
 
         ManualSet manualSet = new ManualSet(lengthGreaterThanDefault);
 
-        assertEquals(DEFAULT_CAPACITY * 2, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY * 2));
+        assertEquals(DEFAULT_CAPACITY * 2, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
 
         int[] defaultSet = new int[DEFAULT_CAPACITY * 2];
 
-        assertArrayEquals(defaultSet, manualSet.getSet(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY * 2));
+        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY * 2));
     }
 
 //    @Test
@@ -98,12 +98,12 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(emptySet);
 //
-//        assertEquals(DEFAULT_CAPACITY, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+//        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
 //        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
 //
 //        int[] defaultSet = new int[DEFAULT_CAPACITY];
 //
-//        assertArrayEquals(defaultSet, manualSet.getSet(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+//        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
 //    }
 //
 //    @Test
@@ -115,7 +115,7 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(inputSet);
 //
-//        assertEquals(DEFAULT_CAPACITY, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+//        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
 //        assertEquals(inputSet.length, manualSet.getSize(), String.format("Set size should be %d.", inputSet.length));
 //
 //        assertArrayEquals(inputSet, manualSet.toSet(), String.format("Set should contain %d zeros.", lengthLessThanDefault));
@@ -130,7 +130,7 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(inputSet);
 //
-//        assertEquals(DEFAULT_CAPACITY * 2, manualSet.getSet().length, String.format("Set length should be %d.", DEFAULT_CAPACITY * 2));
+//        assertEquals(DEFAULT_CAPACITY * 2, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY * 2));
 //        assertEquals(inputSet.length, manualSet.getSize(), String.format("Set size should be %d.", inputSet.length));
 //
 //        assertArrayEquals(inputSet, manualSet.toSet(), String.format("Set should contain %d zeros.", lengthGreaterThanDefault));
