@@ -65,26 +65,6 @@ public class ManualSet {
         return false;
     }
 
-    protected boolean hasDuplicate() {
-
-        // Time complexity: O(N^2)
-
-        for (int i = 0; i < size; i++) {
-
-            if (isDuplicate(set[i])) {
-
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-//    protected boolean hasDuplication() {
-//
-//
-//    }
-
     public boolean contains(int element) {
 
         return isDuplicate(element);

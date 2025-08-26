@@ -2,7 +2,7 @@ package org.example;
 
 public class BubbleSort {
 
-    public static void bubbleSort(int[] iterable, int size) {
+    public static int[] bubbleSort(int[] iterable, int size) {
 
         int unsortedEndIndex = size - 1;
         boolean sorted = false;
@@ -25,5 +25,7 @@ public class BubbleSort {
 
             unsortedEndIndex--;
         }
+
+        return iterable;
     }
 }

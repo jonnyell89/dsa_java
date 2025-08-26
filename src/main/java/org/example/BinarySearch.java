@@ -4,12 +4,12 @@ public class BinarySearch {
 
     public static int binarySearch(int[] iterable, int size, int element) {
 
-        int start = 0;
-        int end = size - 1;
+        int startIndex = 0;
+        int endIndex = size - 1;
 
-        while (start <= end) { // Ensures start == end is also checked.
+        while (startIndex <= endIndex) {
 
-            int midpoint = start + (end - start) / 2; // Automatic floor division.
+            int midpoint = startIndex + (endIndex - startIndex) / 2;
 
             int midpointElement = iterable[midpoint];
 
@@ -17,10 +17,10 @@ public class BinarySearch {
                 return midpoint;
             }
             else if (element < midpointElement) {
-                end = midpoint - 1;
+                endIndex = midpoint - 1;
             }
             else {
-                start = midpoint + 1;
+                startIndex = midpoint + 1;
             }
         }
 
