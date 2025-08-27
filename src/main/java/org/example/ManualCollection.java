@@ -155,12 +155,24 @@ public abstract class ManualCollection {
         return this;
     }
 
+    // DSA
     protected void swapByIndex(int i, int j) {
         if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
         if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
         int temp = data[i];
         data[i] = data[j];
         data[j] = temp;
+    }
+
+    protected void replaceByIndex(int i, int j) {
+        if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
+        if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
+        data[i] = data[j];
+    }
+
+    protected void setByIndex(int index, int element) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        data[index] = element;
     }
 
     @Override
