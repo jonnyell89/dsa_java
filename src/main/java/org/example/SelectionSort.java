@@ -19,4 +19,21 @@ public class SelectionSort {
         }
         return iterable;
     }
+
+    public static ManualCollection selectionSort(ManualCollection manualCollection) {
+        // Time complexity: O(N^2)
+        int size = manualCollection.getSize();
+        for (int i = 0; i < size - 1; i++) {
+            int lowestElementIndex = i;
+            for (int j = i + 1; j < size; j++) {
+                if (manualCollection.read(j) < manualCollection.read(lowestElementIndex)) {
+                    lowestElementIndex = j;
+                }
+            }
+            if (lowestElementIndex != i) {
+                manualCollection.swapByIndex(i, lowestElementIndex);
+            }
+        }
+        return manualCollection;
+    }
 }
