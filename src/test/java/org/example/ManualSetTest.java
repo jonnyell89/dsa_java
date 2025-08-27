@@ -144,8 +144,8 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        SetIndexOutOfBoundsException exception = assertThrows(
-//                SetIndexOutOfBoundsException.class,
+//        IndexOutOfBoundsException exception = assertThrows(
+//                IndexOutOfBoundsException.class,
 //                () -> manualSet.read(indexLessThanZero),
 //                "Set index should not be less than zero."
 //        );
@@ -158,8 +158,8 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        SetIndexOutOfBoundsException exception = assertThrows(
-//                SetIndexOutOfBoundsException.class,
+//        IndexOutOfBoundsException exception = assertThrows(
+//                IndexOutOfBoundsException.class,
 //                () -> manualSet.read(indexGreaterThanSize),
 //                "Set index should not be greater than size."
 //        );
@@ -239,8 +239,8 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        SetIndexOutOfBoundsException exception = assertThrows(
-//                SetIndexOutOfBoundsException.class,
+//        IndexOutOfBoundsException exception = assertThrows(
+//                IndexOutOfBoundsException.class,
 //                () -> manualSet.insertAtIndex(indexLessThanZero, elementToInsert),
 //                "Set index should not be less than zero."
 //        );
@@ -254,8 +254,8 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        SetIndexOutOfBoundsException exception = assertThrows(
-//                SetIndexOutOfBoundsException.class,
+//        IndexOutOfBoundsException exception = assertThrows(
+//                IndexOutOfBoundsException.class,
 //                () -> manualSet.insertAtIndex(indexGreaterThanZero, elementToInsert),
 //                "Set index should not be greater than size."
 //        );
@@ -264,12 +264,12 @@ public class ManualSetTest {
 //    @Test
 //    void testManualSetInsertAtIndex() {
 //
-//        int index = 2;
+//        int insertAtIndex = 2;
 //        int elementToInsert = 10;
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        manualSet.insertAtIndex(index, elementToInsert);
+//        manualSet.insertAtIndex(insertAtIndex, elementToInsert);
 //
 //        int[] setWithElementInserted = new int[]{3, 17, 10, 75, 80, 202};
 //
@@ -328,13 +328,13 @@ public class ManualSetTest {
 //    @Test
 //    void testManualSetDeleteFromIndexOfEmptySet() {
 //
-//        int index = 0;
+//        int deleteFromIndex = 0;
 //
 //        ManualSet manualSet = new ManualSet();
 //
 //        IllegalStateException exception = assertThrows(
 //                IllegalStateException.class,
-//                () -> manualSet.deleteFromIndex(index),
+//                () -> manualSet.deleteFromIndex(deleteFromIndex),
 //                "Set should not be empty."
 //        );
 //    }
@@ -346,37 +346,37 @@ public class ManualSetTest {
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        SetIndexOutOfBoundsException exception = assertThrows(
-//                SetIndexOutOfBoundsException.class,
+//        IndexOutOfBoundsException exception = assertThrows(
+//                IndexOutOfBoundsException.class,
 //                () -> manualSet.deleteFromIndex(indexLessThanZero),
 //                "Set index should not be less than zero."
 //        );
 //    }
 //
 //    @Test
-//    void testManualSetDeleteAtIndexWithIndexGreaterThanSize() {
+//    void testManualSetDeleteFromIndexWithIndexGreaterThanSize() {
 //
 //        int indexGreaterThanZero = 15;
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        SetIndexOutOfBoundsException exception = assertThrows(
-//                SetIndexOutOfBoundsException.class,
+//        IndexOutOfBoundsException exception = assertThrows(
+//                IndexOutOfBoundsException.class,
 //                () -> manualSet.deleteFromIndex(indexGreaterThanZero),
 //                "Set index should not be greater than size."
 //        );
 //    }
 //
 //    @Test
-//    void testManualSetDeleteAtIndex() {
+//    void testManualSetDeleteFromIndex() {
 //
-//        int index = 2;
+//        int deleteFromIndex = 3;
 //
 //        ManualSet manualSet = new ManualSet(set);
 //
-//        manualSet.deleteFromIndex(index);
+//        manualSet.deleteFromIndex(deleteFromIndex);
 //
-//        int[] setWithElementDeleted = new int[]{3, 17, 80, 202};
+//        int[] setWithElementDeleted = new int[]{3, 17, 75, 202};
 //
 //        assertArrayEquals(setWithElementDeleted, manualSet.toSet(), "Set should be equal to setWithElementDeleted.");
 //    }

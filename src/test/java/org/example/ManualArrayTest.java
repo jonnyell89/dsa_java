@@ -143,8 +143,8 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        ArrayIndexOutOfBoundsException exception = assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
                 () -> manualArray.read(indexLessThanZero),
                 "Array index should not be less than zero."
         );
@@ -157,8 +157,8 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        ArrayIndexOutOfBoundsException exception = assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
                 () -> manualArray.read(indexGreaterThanSize),
                 "Array index should not be greater than size."
         );
@@ -238,8 +238,8 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        ArrayIndexOutOfBoundsException exception = assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
                 () -> manualArray.insertAtIndex(indexLessThanZero, elementToInsert),
                 "Array index should not be less than zero."
         );
@@ -253,8 +253,8 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        ArrayIndexOutOfBoundsException exception = assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
                 () -> manualArray.insertAtIndex(indexGreaterThanZero, elementToInsert),
                 "Array index should not be greater than size."
         );
@@ -345,37 +345,37 @@ public class ManualArrayTest {
 
         ManualArray manualArray = new ManualArray(array);
 
-        ArrayIndexOutOfBoundsException exception = assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
                 () -> manualArray.deleteFromIndex(indexLessThanZero),
                 "Array index should not be less than zero."
         );
     }
 
     @Test
-    void testManualArrayDeleteAtIndexWithIndexGreaterThanSize() {
+    void testManualArrayDeleteFromIndexWithIndexGreaterThanSize() {
 
         int indexGreaterThanZero = 15;
 
         ManualArray manualArray = new ManualArray(array);
 
-        ArrayIndexOutOfBoundsException exception = assertThrows(
-                ArrayIndexOutOfBoundsException.class,
+        IndexOutOfBoundsException exception = assertThrows(
+                IndexOutOfBoundsException.class,
                 () -> manualArray.deleteFromIndex(indexGreaterThanZero),
                 "Array index should not be greater than size."
         );
     }
 
     @Test
-    void testManualArrayDeleteAtIndex() {
+    void testManualArrayDeleteFromIndex() {
 
-        int index = 1;
+        int deleteFromIndex = 3;
 
         ManualArray manualArray = new ManualArray(array);
 
-        manualArray.deleteFromIndex(index);
+        manualArray.deleteFromIndex(deleteFromIndex);
 
-        int[] arrayWithElementDeleted = new int[]{3, 17, 80, 202};
+        int[] arrayWithElementDeleted = new int[]{3, 17, 75, 202};
 
         assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "Array should be equal to arrayWithElementDeleted.");
     }
