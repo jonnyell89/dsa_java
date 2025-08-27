@@ -155,6 +155,14 @@ public abstract class ManualCollection {
         return this;
     }
 
+    protected void swapByIndex(int i, int j) {
+        if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
+        if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+    }
+
     @Override
     public String toString() {
         return "ManualCollection{" +
