@@ -166,6 +166,26 @@ public class ManualArray extends ManualCollection {
         return accumulator;
     }
 
+    public boolean some(IntPredicate predicate) {
+        for (int i = 0; i < size; i++) {
+            int element = data[i];
+            if (predicate.test(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean every(IntPredicate predicate) {
+        for (int i = 0; i < size; i++) {
+            int element = data[i];
+            if (!predicate.test(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "ManualArray{" +
