@@ -1,7 +1,9 @@
 package org.example.collections;
 
+import org.example.interfaces.IntBinaryOperator;
 import org.example.interfaces.IntConsumer;
 import org.example.interfaces.IntPredicate;
+import org.example.interfaces.IntUnaryOperator;
 
 import java.util.Arrays;
 
@@ -149,14 +151,19 @@ public class ManualSet extends ManualCollection {
         return newManualSet;
     }
 
+    @Override
+    public ManualSet map(IntUnaryOperator unaryOperator) {
+        ManualSet newManualSet = new ManualSet();
+        for (int i = 0; i < size; i++) {
+            int element = data[i];
+            newManualSet.insertAtEnd(unaryOperator.apply(element));
+        }
+        return newManualSet;
+    }
+
 //    @Override
-//    public ManualSet map() {
-//        return;
-//    }
+//    public ManualSet reduce(IntBinaryOperator binaryOperator) {
 //
-//    @Override
-//    public ManualSet reduce() {
-//        return;
 //    }
 
     @Override

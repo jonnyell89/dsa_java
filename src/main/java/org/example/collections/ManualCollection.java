@@ -1,7 +1,9 @@
 package org.example.collections;
 
+import org.example.interfaces.IntBinaryOperator;
 import org.example.interfaces.IntConsumer;
 import org.example.interfaces.IntPredicate;
+import org.example.interfaces.IntUnaryOperator;
 
 import java.util.Arrays;
 
@@ -163,9 +165,9 @@ public abstract class ManualCollection {
 
     public abstract ManualCollection filter(IntPredicate predicate);
 
-//    public abstract ManualCollection map();
-//
-//    public abstract ManualCollection reduce();
+    public abstract ManualCollection map(IntUnaryOperator unaryOperator);
+
+    public abstract ManualCollection reduce(IntBinaryOperator binaryOperator);
 
     // DSA
     public void swapByIndex(int i, int j) {
