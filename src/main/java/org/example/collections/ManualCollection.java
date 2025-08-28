@@ -1,4 +1,4 @@
-package org.example;
+package org.example.collections;
 
 import java.util.Arrays;
 
@@ -155,8 +155,17 @@ public abstract class ManualCollection {
         return this;
     }
 
+    // ITERATORS
+//    public abstract ManualCollection forEach();
+//
+//    public abstract ManualCollection filter();
+//
+//    public abstract ManualCollection map();
+//
+//    public abstract ManualCollection reduce();
+
     // DSA
-    protected void swapByIndex(int i, int j) {
+    public void swapByIndex(int i, int j) {
         if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
         if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
         int temp = data[i];
@@ -164,13 +173,13 @@ public abstract class ManualCollection {
         data[j] = temp;
     }
 
-    protected void replaceByIndex(int i, int j) {
+    public void replaceByIndex(int i, int j) {
         if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
         if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
         data[i] = data[j];
     }
 
-    protected void setByIndex(int index, int element) {
+    public void setByIndex(int index, int element) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         data[index] = element;
     }

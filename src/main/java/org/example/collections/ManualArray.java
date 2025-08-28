@@ -1,4 +1,4 @@
-package org.example;
+package org.example.collections;
 
 import java.util.Arrays;
 
@@ -123,6 +123,26 @@ public class ManualArray extends ManualCollection {
 //        data[size - 1] = 0; // Clears the last element which has already been shifted.
 //        decrementSize();
 //        return this;
+//    }
+
+//    @Override
+//    public ManualArray forEach() {
+//        return;
+//    }
+//
+//    @Override
+//    public ManualArray filter() {
+//        return;
+//    }
+//
+//    @Override
+//    public ManualArray map() {
+//        return;
+//    }
+//
+//    @Override
+//    public ManualArray reduce() {
+//        return;
 //    }
 
     @Override
