@@ -130,14 +130,13 @@ public class ManualArray extends ManualCollection {
 //        return this;
 //    }
 
-    @Override
+    // ITERATORS
     public void forEach(IntConsumer consumer) {
         for (int i = 0; i < size; i++) {
             consumer.accept(data[i]);
         }
     }
 
-    @Override
     public ManualArray filter(IntPredicate predicate) {
         ManualArray newManualArray = new ManualArray();
         for (int i = 0; i < size; i++) {
@@ -149,7 +148,6 @@ public class ManualArray extends ManualCollection {
         return newManualArray;
     }
 
-    @Override
     public ManualArray map(IntUnaryOperator unaryOperator) {
         ManualArray newManualArray = new ManualArray();
         for (int i = 0; i < size; i++) {
@@ -159,7 +157,6 @@ public class ManualArray extends ManualCollection {
         return newManualArray;
     }
 
-    @Override
     public int reduce(IntBinaryOperator binaryOperator, int initialValue) {
         int accumulator = initialValue;
         for (int i = 0; i < size; i++) {

@@ -1,10 +1,5 @@
 package org.example.collections;
 
-import org.example.interfaces.IntBinaryOperator;
-import org.example.interfaces.IntConsumer;
-import org.example.interfaces.IntPredicate;
-import org.example.interfaces.IntUnaryOperator;
-
 import java.util.Arrays;
 
 public abstract class ManualCollection {
@@ -159,15 +154,6 @@ public abstract class ManualCollection {
         decrementSize();
         return this;
     }
-
-    // ITERATORS
-    public abstract void forEach(IntConsumer consumer);
-
-    public abstract ManualCollection filter(IntPredicate predicate);
-
-    public abstract ManualCollection map(IntUnaryOperator unaryOperator);
-
-    public abstract int reduce(IntBinaryOperator binaryOperator, int initialValue);
 
     // DSA
     public void swapByIndex(int i, int j) {

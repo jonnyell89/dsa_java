@@ -1,10 +1,5 @@
 package org.example.collections;
 
-import org.example.interfaces.IntBinaryOperator;
-import org.example.interfaces.IntConsumer;
-import org.example.interfaces.IntPredicate;
-import org.example.interfaces.IntUnaryOperator;
-
 import java.util.Arrays;
 
 public class ManualSet extends ManualCollection {
@@ -131,45 +126,6 @@ public class ManualSet extends ManualCollection {
 //        decrementSize();
 //        return this;
 //    }
-
-    @Override
-    public void forEach(IntConsumer consumer) {
-        for (int i = 0; i < size; i++) {
-            consumer.accept(data[i]);
-        }
-    }
-
-    @Override
-    public ManualSet filter(IntPredicate predicate) {
-        ManualSet newManualSet = new ManualSet();
-        for (int i = 0; i < size; i++) {
-            int element = data[i];
-            if (predicate.test(element)) {
-                newManualSet.insertAtEnd(element);
-            }
-        }
-        return newManualSet;
-    }
-
-    @Override
-    public ManualSet map(IntUnaryOperator unaryOperator) {
-        ManualSet newManualSet = new ManualSet();
-        for (int i = 0; i < size; i++) {
-            int element = data[i];
-            newManualSet.insertAtEnd(unaryOperator.apply(element));
-        }
-        return newManualSet;
-    }
-
-    @Override
-    public int reduce(IntBinaryOperator binaryOperator, int initialValue) {
-        int accumulator = initialValue;
-        for (int i = 0; i < size; i++) {
-            int element = data[i];
-            accumulator = binaryOperator.apply(accumulator, element);
-        }
-        return accumulator;
-    }
 
     @Override
     public String toString() {
