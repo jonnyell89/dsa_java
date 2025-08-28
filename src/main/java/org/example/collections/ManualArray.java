@@ -159,10 +159,15 @@ public class ManualArray extends ManualCollection {
         return newManualArray;
     }
 
-//    @Override
-//    public ManualArray reduce(IntBinaryOperator binaryOperator) {
-//
-//    }
+    @Override
+    public int reduce(IntBinaryOperator binaryOperator, int initialValue) {
+        int accumulator = initialValue;
+        for (int i = 0; i < size; i++) {
+            int element = data[i];
+            accumulator = binaryOperator.apply(accumulator, element);
+        }
+        return accumulator;
+    }
 
     @Override
     public String toString() {

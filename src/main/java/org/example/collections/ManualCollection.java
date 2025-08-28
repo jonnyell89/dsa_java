@@ -167,7 +167,7 @@ public abstract class ManualCollection {
 
     public abstract ManualCollection map(IntUnaryOperator unaryOperator);
 
-    public abstract ManualCollection reduce(IntBinaryOperator binaryOperator);
+    public abstract int reduce(IntBinaryOperator binaryOperator, int initialValue);
 
     // DSA
     public void swapByIndex(int i, int j) {
