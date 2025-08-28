@@ -2,5 +2,5 @@ package org.example.interfaces;
 
 // FILTER
 public interface IntPredicate {
-    boolean test(int value);
+    boolean test(int element);
 }

@@ -2,5 +2,5 @@ package org.example.interfaces;
 
 // FOREACH
 public interface IntConsumer {
-    void accept(int value);
+    void accept(int element);
 }

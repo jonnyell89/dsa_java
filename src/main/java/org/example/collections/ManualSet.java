@@ -1,6 +1,7 @@
 package org.example.collections;
 
 import org.example.interfaces.IntConsumer;
+import org.example.interfaces.IntPredicate;
 
 import java.util.Arrays;
 
@@ -136,11 +137,18 @@ public class ManualSet extends ManualCollection {
         }
     }
 
-//    @Override
-//    public ManualSet filter() {
-//        return;
-//    }
-//
+    @Override
+    public ManualSet filter(IntPredicate predicate) {
+        ManualSet newManualSet = new ManualSet();
+        for (int i = 0; i < size; i++) {
+            int element = data[i];
+            if (predicate.test(element)) {
+                newManualSet.insertAtEnd(element);
+            }
+        }
+        return newManualSet;
+    }
+
 //    @Override
 //    public ManualSet map() {
 //        return;

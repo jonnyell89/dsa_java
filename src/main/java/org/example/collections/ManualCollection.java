@@ -1,6 +1,7 @@
 package org.example.collections;
 
 import org.example.interfaces.IntConsumer;
+import org.example.interfaces.IntPredicate;
 
 import java.util.Arrays;
 
@@ -160,8 +161,8 @@ public abstract class ManualCollection {
     // ITERATORS
     public abstract void forEach(IntConsumer consumer);
 
-//    public abstract ManualCollection filter();
-//
+    public abstract ManualCollection filter(IntPredicate predicate);
+
 //    public abstract ManualCollection map();
 //
 //    public abstract ManualCollection reduce();
