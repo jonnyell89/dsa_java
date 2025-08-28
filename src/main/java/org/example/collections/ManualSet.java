@@ -1,5 +1,7 @@
 package org.example.collections;
 
+import org.example.interfaces.IntConsumer;
+
 import java.util.Arrays;
 
 public class ManualSet extends ManualCollection {
@@ -127,11 +129,13 @@ public class ManualSet extends ManualCollection {
 //        return this;
 //    }
 
-//    @Override
-//    public ManualSet forEach() {
-//        return;
-//    }
-//
+    @Override
+    public void forEach(IntConsumer consumer) {
+        for (int i = 0; i < size; i++) {
+            consumer.accept(data[i]);
+        }
+    }
+
 //    @Override
 //    public ManualSet filter() {
 //        return;

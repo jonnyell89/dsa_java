@@ -1,5 +1,7 @@
 package org.example.collections;
 
+import org.example.interfaces.IntConsumer;
+
 import java.util.Arrays;
 
 public abstract class ManualCollection {
@@ -156,8 +158,8 @@ public abstract class ManualCollection {
     }
 
     // ITERATORS
-//    public abstract ManualCollection forEach();
-//
+    public abstract void forEach(IntConsumer consumer);
+
 //    public abstract ManualCollection filter();
 //
 //    public abstract ManualCollection map();
