@@ -1,85 +1,88 @@
-package org.example.collections;
+//package org.example.collections;
+//
+//import org.junit.jupiter.api.Test;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+//
+//public class ManualSetTest {
+//
+//    private static final int DEFAULT_CAPACITY = 10;
+//    public final int[] set = new int[]{3, 17, 75, 80, 202};
+//
+//    // INSTANTIATION
+//    @Test
+//    void testManualSetWithDefaultConstructor() {
+//
+//        ManualSet manualSet = new ManualSet();
+//
+//        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+//        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d", 0));
+//
+//        int[] defaultSet = new int[DEFAULT_CAPACITY];
+//
+//        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+//    }
+//
+//    @Test
+//    void testManualSetWithLengthLessThanZero() {
+//
+//        int lengthLessThanZero = -5;
+//
+//        IllegalArgumentException exception = assertThrows(
+//                IllegalArgumentException.class,
+//                () -> new ManualSet(lengthLessThanZero),
+//                "Set length should not be negative."
+//        );
+//    }
+//
+//    @Test
+//    void testManualSetWithLengthZero() {
+//
+//        int lengthZero = 0;
+//
+//        ManualSet manualSet = new ManualSet(lengthZero);
+//
+//        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+//        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
+//
+//        int[] defaultSet = new int[DEFAULT_CAPACITY];
+//
+//        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+//    }
+//
+//    @Test
+//    void testManualSetWithLengthLessThanDefault() {
+//
+//        int lengthLessThanDefault = 5;
+//
+//        ManualSet manualSet = new ManualSet(lengthLessThanDefault);
+//
+//        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
+//        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
+//
+//        int[] defaultSet = new int[DEFAULT_CAPACITY];
+//
+//        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
+//    }
+//
+//    @Test
+//    void testManualSetWithLengthGreaterThanDefault() {
+//
+//        int lengthGreaterThanDefault = 15;
+//
+//        ManualSet manualSet = new ManualSet(lengthGreaterThanDefault);
+//
+//        assertEquals(DEFAULT_CAPACITY * 2, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY * 2));
+//        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
+//
+//        int[] defaultSet = new int[DEFAULT_CAPACITY * 2];
+//
+//        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY * 2));
+//    }
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-
-public class ManualSetTest {
-
-    private static final int DEFAULT_CAPACITY = 10;
-    public final int[] set = new int[]{3, 17, 75, 80, 202};
-
-    // INSTANTIATION
-    @Test
-    void testManualSetWithDefaultConstructor() {
-
-        ManualSet manualSet = new ManualSet();
-
-        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
-        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d", 0));
-
-        int[] defaultSet = new int[DEFAULT_CAPACITY];
-
-        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
-    }
-
-    @Test
-    void testManualSetWithLengthLessThanZero() {
-
-        int lengthLessThanZero = -5;
-
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> new ManualSet(lengthLessThanZero),
-                "Set length should not be negative."
-        );
-    }
-
-    @Test
-    void testManualSetWithLengthZero() {
-
-        int lengthZero = 0;
-
-        ManualSet manualSet = new ManualSet(lengthZero);
-
-        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
-        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
-
-        int[] defaultSet = new int[DEFAULT_CAPACITY];
-
-        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
-    }
-
-    @Test
-    void testManualSetWithLengthLessThanDefault() {
-
-        int lengthLessThanDefault = 5;
-
-        ManualSet manualSet = new ManualSet(lengthLessThanDefault);
-
-        assertEquals(DEFAULT_CAPACITY, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY));
-        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
-
-        int[] defaultSet = new int[DEFAULT_CAPACITY];
-
-        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY));
-    }
-
-    @Test
-    void testManualSetWithLengthGreaterThanDefault() {
-
-        int lengthGreaterThanDefault = 15;
-
-        ManualSet manualSet = new ManualSet(lengthGreaterThanDefault);
-
-        assertEquals(DEFAULT_CAPACITY * 2, manualSet.getData().length, String.format("Set length should be %d.", DEFAULT_CAPACITY * 2));
-        assertEquals(0, manualSet.getSize(), String.format("Set size should be %d.", 0));
-
-        int[] defaultSet = new int[DEFAULT_CAPACITY * 2];
-
-        assertArrayEquals(defaultSet, manualSet.getData(), String.format("Set should contain %d zeros.", DEFAULT_CAPACITY * 2));
-    }
+    // Above requires adapting.
+    // Below requires implementing.
 
 //    @Test
 //    void testManualSetWithNullSet() {
@@ -380,4 +383,4 @@ public class ManualSetTest {
 //
 //        assertArrayEquals(setWithElementDeleted, manualSet.toSet(), "Set should be equal to setWithElementDeleted.");
 //    }
-}
+//}

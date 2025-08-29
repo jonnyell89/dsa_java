@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualCollection;
+import org.example.collections.ManualArray;
 
 public class InsertionSort {
 
@@ -19,19 +19,19 @@ public class InsertionSort {
         return iterable;
     }
 
-    public static ManualCollection insertionSort(ManualCollection manualCollection) {
-        int size = manualCollection.getSize();
+    public static ManualArray insertionSort(ManualArray manualArray) {
+        int size = manualArray.getSize();
         for (int i = 1; i < size; i++) {
-            int temp = manualCollection.read(i);
+            int temp = manualArray.read(i);
             int position = i - 1;
             while (position >= 0) {
-                if (manualCollection.read(position) > temp) {
-                    manualCollection.replaceByIndex(position + 1, position);
+                if (manualArray.read(position) > temp) {
+                    manualArray.replaceByIndex(position + 1, position);
                     position--;
                 } else break;
             }
-            manualCollection.setByIndex(position + 1, temp);
+            manualArray.setByIndex(position + 1, temp);
         }
-        return manualCollection;
+        return manualArray;
     }
 }

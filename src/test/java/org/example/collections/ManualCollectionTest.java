@@ -1,4 +1,4 @@
-package org.example.collections;
-
-public class ManualCollectionTest {
-}
+//package org.example.collections;
+//
+//public class ManualCollectionTest {
+//}

@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualCollection;
+import org.example.collections.ManualArray;
 
 public class SelectionSort {
 
@@ -22,20 +22,20 @@ public class SelectionSort {
         return iterable;
     }
 
-    public static ManualCollection selectionSort(ManualCollection manualCollection) {
+    public static ManualArray selectionSort(ManualArray manualArray) {
         // Time complexity: O(N^2)
-        int size = manualCollection.getSize();
+        int size = manualArray.getSize();
         for (int i = 0; i < size - 1; i++) {
             int lowestElementIndex = i;
             for (int j = i + 1; j < size; j++) {
-                if (manualCollection.read(j) < manualCollection.read(lowestElementIndex)) {
+                if (manualArray.read(j) < manualArray.read(lowestElementIndex)) {
                     lowestElementIndex = j;
                 }
             }
             if (lowestElementIndex != i) {
-                manualCollection.swapByIndex(i, lowestElementIndex);
+                manualArray.swapByIndex(i, lowestElementIndex);
             }
         }
-        return manualCollection;
+        return manualArray;
     }
 }

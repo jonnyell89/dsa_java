@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualCollection;
+import org.example.collections.ManualArray;
 
 public class BubbleSort {
 
@@ -23,20 +23,20 @@ public class BubbleSort {
         return iterable;
     }
 
-    public static ManualCollection bubbleSort(ManualCollection manualCollection) {
+    public static ManualArray bubbleSort(ManualArray manualArray) {
         // Time complexity: O(N^2)
-        int unsortedEndIndex = manualCollection.getSize() - 1;
+        int unsortedEndIndex = manualArray.getSize() - 1;
         boolean isSorted = false;
         while(!isSorted) {
             isSorted = true;
             for (int i = 0; i < unsortedEndIndex; i++) {
-                if (manualCollection.read(i) > manualCollection.read(i + 1)) {
-                    manualCollection.swapByIndex(i, i + 1);
+                if (manualArray.read(i) > manualArray.read(i + 1)) {
+                    manualArray.swapByIndex(i, i + 1);
                     isSorted = false;
                 }
             }
             unsortedEndIndex--;
         }
-        return manualCollection;
+        return manualArray;
     }
 }
