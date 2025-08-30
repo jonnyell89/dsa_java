@@ -17,16 +17,16 @@ public class ManualStack {
         return data.read(data.getSize() - 1);
     }
 
+    public int push(int element) {
+        data.insertAtEnd(element);
+        return element;
+    }
+
     public int pop() {
         if (isEmpty()) throw new EmptyStackException();
         int topElement = data.read(data.getSize() - 1);
         data.deleteFromEnd();
         return topElement;
-    }
-
-    public int push(int element) {
-        data.insertAtEnd(element);
-        return element;
     }
 
     public int search(int element) {
