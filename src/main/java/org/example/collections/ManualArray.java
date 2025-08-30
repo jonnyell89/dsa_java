@@ -22,7 +22,7 @@ public class ManualArray {
     }
 
     public ManualArray(int initialCapacity) {
-        if (initialCapacity < 0) throw new IllegalArgumentException("Collection initial capacity cannot be less than zero.");
+        if (initialCapacity < 0) throw new IllegalArgumentException("ManualArray initial capacity cannot be less than zero.");
         this.capacity = DEFAULT_CAPACITY;
         setCapacity(initialCapacity);
         this.size = 0;
@@ -30,7 +30,7 @@ public class ManualArray {
     }
 
     public ManualArray(int[] array) {
-        if (array == null) throw new NullPointerException("Collection cannot be null.");
+        if (array == null) throw new NullPointerException("ManualArray cannot be null.");
         this.capacity = DEFAULT_CAPACITY;
         setCapacity(array.length);
         this.size = array.length;
@@ -43,26 +43,26 @@ public class ManualArray {
     protected void manageCapacity() {
         if (size == capacity) {
             int newCapacity = (size < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity * 2;
-            int[] newCollection = new int[newCapacity];
+            int[] newArray = new int[newCapacity];
             for (int i = 0; i < size; i++) {
-                newCollection[i] = data[i];
+                newArray[i] = data[i];
             }
-            setData(newCollection);
+            setData(newArray);
         }
 
         if (size > DEFAULT_CAPACITY && size <= capacity / 4) {
             int newCapacity = (size / 2 < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity / 2;
-            int[] newCollection = new int[newCapacity];
+            int[] newArray = new int[newCapacity];
             for (int i = 0; i < size; i++) {
-                newCollection[i] = data[i];
+                newArray[i] = data[i];
             }
-            setData(newCollection);
+            setData(newArray);
         }
     }
 
     protected void setCapacity(int initialCapacity) {
         int newCapacity = DEFAULT_CAPACITY;
-        while (newCapacity < initialCapacity) {
+        while (initialCapacity > newCapacity) {
             newCapacity = newCapacity * 2;
         }
         this.capacity = newCapacity;
@@ -89,7 +89,7 @@ public class ManualArray {
     // READ
     public int read(int index) {
         // Time complexity: O(1)
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         return data[index];
     }
 
@@ -101,7 +101,7 @@ public class ManualArray {
                 return i;
             }
         }
-        throw new IllegalArgumentException("Element not present in collection: " + element);
+        throw new IllegalArgumentException("Element not present in ManualArray: " + element);
     }
 
     // INSERT
@@ -126,7 +126,7 @@ public class ManualArray {
 
     public ManualArray insertAtIndex(int index, int element) {
         // Time complexity: O(N)
-        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index < 0 || index > size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         manageCapacity();
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
             data[i] = data[i - 1]; // Shifts elements -->
@@ -139,7 +139,7 @@ public class ManualArray {
     // DELETE
     public ManualArray deleteFromStart() {
         // Time complexity: O(N)
-        if (size == 0) throw new IllegalStateException("Cannot delete from an empty collection.");
+        if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
         manageCapacity();
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
@@ -151,7 +151,7 @@ public class ManualArray {
 
     public ManualArray deleteFromEnd() {
         // Time complexity: O(1)
-        if (size == 0) throw new IllegalStateException("Cannot delete from an empty collection.");
+        if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
         manageCapacity();
         data[size - 1] = 0; // Deletes element at the end.
         decrementSize();
@@ -160,8 +160,8 @@ public class ManualArray {
 
     public ManualArray deleteFromIndex(int index) {
         // Time complexity: O(N)
-        if (size == 0) throw new IllegalStateException("Cannot delete from an empty collection.");
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
+        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         manageCapacity();
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
@@ -229,21 +229,21 @@ public class ManualArray {
 
     // DSA
     public void swapByIndex(int i, int j) {
-        if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
-        if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
+        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
+        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
         int temp = data[i];
         data[i] = data[j];
         data[j] = temp;
     }
 
     public void replaceByIndex(int i, int j) {
-        if (i < 0 || i >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + i);
-        if (j < 0 || j >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + j);
+        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
+        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
         data[i] = data[j];
     }
 
     public void setByIndex(int index, int element) {
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         data[index] = element;
     }
 
