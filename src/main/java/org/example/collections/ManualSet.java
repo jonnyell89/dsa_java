@@ -41,16 +41,15 @@ public class ManualSet {
     }
 
     public boolean addAll(int[] array) {
-        boolean added = true;
+        boolean modified = false;
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (!contains(element)) {
                 data.insertAtEnd(element);
-            } else {
-                added = false;
+                modified = true;
             }
         }
-        return added;
+        return modified;
     }
 
     public boolean remove(int element) {
@@ -63,17 +62,16 @@ public class ManualSet {
     }
 
     public boolean removeAll(int[] array) {
-        boolean removed = true;
+        boolean modified = false;
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (contains(element)) {
                 int index = data.search(element);
                 data.deleteFromIndex(index);
-            } else {
-                removed = false;
+                modified = true;
             }
         }
-        return removed;
+        return modified;
     }
 
     public void clear() {
