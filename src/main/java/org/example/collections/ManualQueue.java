@@ -1,5 +1,7 @@
 package org.example.collections;
 
+import java.util.Arrays;
+
 public class ManualQueue {
 
     protected final ManualArray data;
@@ -25,5 +27,12 @@ public class ManualQueue {
         int frontElement = data.read(0);
         data.deleteFromStart();
         return frontElement;
+    }
+
+    @Override
+    public String toString() {
+        return "ManualQueue{" +
+                "data=" + Arrays.toString(Arrays.copyOf(data.toArray(), data.getSize())) +
+                '}';
     }
 }

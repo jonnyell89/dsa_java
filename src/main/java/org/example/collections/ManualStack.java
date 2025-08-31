@@ -1,6 +1,6 @@
 package org.example.collections;
 
-import java.util.EmptyStackException;
+import java.util.Arrays;
 
 public class ManualStack {
 
@@ -13,7 +13,7 @@ public class ManualStack {
     public boolean isEmpty() { return data.getSize() == 0; }
 
     public int peek() {
-        if (isEmpty()) throw new EmptyStackException();
+        if (isEmpty()) throw new RuntimeException("ManualStack is empty.");
         return data.read(data.getSize() - 1);
     }
 
@@ -23,7 +23,7 @@ public class ManualStack {
     }
 
     public int pop() {
-        if (isEmpty()) throw new EmptyStackException();
+        if (isEmpty()) throw new RuntimeException("ManualStack is empty.");
         int topElement = data.read(data.getSize() - 1);
         data.deleteFromEnd();
         return topElement;
@@ -37,5 +37,12 @@ public class ManualStack {
             positionFromTop++;
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return "ManualStack{" +
+                "data=" + Arrays.toString(Arrays.copyOf(data.toArray(), data.getSize())) +
+                '}';
     }
 }
