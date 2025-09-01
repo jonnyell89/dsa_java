@@ -1,6 +1,13 @@
 package org.example.collections;
 
+import org.example.interfaces.IntBinaryOperator;
+import org.example.interfaces.IntConsumer;
+import org.example.interfaces.IntPredicate;
+import org.example.interfaces.IntUnaryOperator;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+
+import java.util.jar.Manifest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -194,7 +201,7 @@ public class ManualArrayTest {
 
     @Test
     void testManualArrayInsertAtIndex() {
-        int index = 2;
+        int index = array.length / 2;
         int elementToInsert = 10;
         ManualArray manualArray = new ManualArray(array);
         manualArray.insertAtIndex(index, elementToInsert);
@@ -274,10 +281,188 @@ public class ManualArrayTest {
 
     @Test
     void testManualArrayDeleteFromIndex() {
-        int deleteFromIndex = 3;
+        int deleteFromIndex = array.length / 2;
         ManualArray manualArray = new ManualArray(array);
         manualArray.deleteFromIndex(deleteFromIndex);
-        int[] arrayWithElementDeleted = new int[]{3, 17, 75, 202};
+        int[] arrayWithElementDeleted = new int[]{3, 17, 80, 202};
         assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementDeleted.");
+    }
+
+    @Test
+    void testManualArraySwapByIndexWithIndexLessThanZero() {
+        int indexLessThanZero = -5;
+        int index = 0;
+        ManualArray manualArray = new ManualArray(array);
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.swapByIndex(indexLessThanZero, index),
+                "ManualArray index should not be less than zero."
+        );
+    }
+
+    @Test
+    void testManualArraySwapByIndexWithIndexGreaterThanSize() {
+        int index = 0;
+        int indexGreaterThanSize = 15;
+        ManualArray manualArray = new ManualArray(array);
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.swapByIndex(index, indexGreaterThanSize),
+                "ManualArray index should not be greater than size."
+        );
+    }
+
+    @Test
+    void testManualArraySwapByIndex() {
+        int i = 0;
+        int j = array.length / 2;
+        ManualArray manualArray = new ManualArray(array);
+        manualArray.swapByIndex(i, j);
+        int[] arrayWithElementsSwapped = new int[]{75, 17, 3, 80, 202};
+        assertArrayEquals(arrayWithElementsSwapped, manualArray.toArray(), "ManualArray should be equal to arrayWithElementsSwapped.");
+    }
+
+    @Test
+    void testManualArrayReplaceByIndexWithIndexLessThanZero() {
+        int indexLessThanZero = -5;
+        int index = 0;
+        ManualArray manualArray = new ManualArray(array);
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.replaceByIndex(indexLessThanZero, index),
+                "ManualArray index should not be less than zero."
+        );
+    }
+
+    @Test
+    void testManualArrayReplaceByIndexWithIndexGreaterThanSize() {
+        int index = 0;
+        int indexGreaterThanSize = 15;
+        ManualArray manualArray = new ManualArray(array);
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.replaceByIndex(index, indexGreaterThanSize),
+                "ManualArray index should not be greater than size."
+        );
+    }
+
+    @Test
+    void testManualArrayReplaceByIndex() {
+        int i = 0;
+        int j = array.length / 2;
+        ManualArray manualArray = new ManualArray(array);
+        manualArray.replaceByIndex(i, j);
+        int[] arrayWithElementReplaced = new int[]{75, 17, 75, 80, 202};
+        assertArrayEquals(arrayWithElementReplaced, manualArray.toArray(), "ManualArray should be equal to arrayWithElementReplaced.");
+    }
+
+    @Test
+    void testManualArraySetByIndexWithIndexLessThanZero() {
+        int indexLessThanZero = -5;
+        int element = 0;
+        ManualArray manualArray = new ManualArray(array);
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.setByIndex(indexLessThanZero, element),
+                "ManualArray index should not be less than zero."
+        );
+    }
+
+    @Test
+    void testManualArraySetByIndexWithIndexGreaterThanSize() {
+        int indexGreaterThanSize = 15;
+        int element = 0;
+        ManualArray manualArray = new ManualArray(array);
+        ArrayIndexOutOfBoundsException exception = assertThrows(
+                ArrayIndexOutOfBoundsException.class,
+                () -> manualArray.setByIndex(indexGreaterThanSize, element),
+                "ManualArray index should not be greater than size."
+        );
+    }
+
+    @Test
+    void testManualArraySetByIndex() {
+        int index = array.length / 2;
+        int element = 0;
+        ManualArray manualArray = new ManualArray(array);
+        manualArray.setByIndex(index, element);
+        int[] arrayWithElementSet = new int[]{3, 17, 0, 80, 202};
+        assertArrayEquals(arrayWithElementSet, manualArray.toArray(), "ManualArray should be equal to arrayWithElementSet.");
+    }
+
+    @Test
+    void testManualArrayForEachIterator() {
+        ManualArray manualArrayForInsertion = new ManualArray();
+        ManualArray manualArrayForTraversal = new ManualArray(array);
+        manualArrayForTraversal.forEach(new IntConsumer() {
+            @Override
+            public void accept(int element) {
+                manualArrayForInsertion.insertAtEnd(element);
+            }
+        });
+        assertArrayEquals(manualArrayForTraversal.toArray(), manualArrayForInsertion.toArray(), "ManualArrayForInsertion should be equal to ManualArrayForTraversal.");
+    }
+
+    @Test
+    void testManualArrayFilterIterator() {
+        ManualArray manualArray = new ManualArray(array);
+        ManualArray result = manualArray.filter(new IntPredicate() {
+            @Override
+            public boolean test(int element) {
+                return element % 2 == 0;
+            }
+        });
+        int[] arrayWithEvenElements = new int[]{80, 202};
+        assertArrayEquals(arrayWithEvenElements, result.toArray(), "ManualArray result should be equal to arrayWithEvenElements.");
+    }
+
+    @Test
+    void testManualArrayMapIterator() {
+        ManualArray manualArray = new ManualArray(array);
+        ManualArray result = manualArray.map(new IntUnaryOperator() {
+            @Override
+            public int apply(int element) {
+                return element * 2;
+            }
+        });
+        int[] arrayWithDoubledElements = new int[]{6, 34, 150, 160, 404};
+        assertArrayEquals(arrayWithDoubledElements, result.toArray(), "ManualArray result should be equal to arrayWithDoubledElements.");
+    }
+
+    @Test
+    void testManualArrayReduceIterator() {
+        ManualArray manualArray = new ManualArray(array);
+        int result = manualArray.reduce(new IntBinaryOperator() {
+            @Override
+            public int apply(int left, int right) {
+                return left + right;
+            }
+        }, 0);
+        int sumOfArrayElements = 377;
+        assertEquals(sumOfArrayElements, result, "ManualArray result should be equal to sumOfArrayElements.");
+    }
+
+    @Test
+    void testManualArraySomeIterator() {
+        ManualArray manualArray = new ManualArray(array);
+        boolean result = manualArray.some(new IntPredicate() {
+            @Override
+            public boolean test(int element) {
+                return element % 2 != 0;
+            }
+        });
+        assertTrue(result, "ManualArray should contain one or more odd numbers.");
+    }
+
+    @Test
+    void testManualArrayEveryIterator() {
+        ManualArray manualArray = new ManualArray(array);
+        boolean result = manualArray.every(new IntPredicate() {
+            @Override
+            public boolean test(int element) {
+                return element >= 0;
+            }
+        });
+        assertTrue(result, "ManualArray should contain all positive numbers.");
     }
 }

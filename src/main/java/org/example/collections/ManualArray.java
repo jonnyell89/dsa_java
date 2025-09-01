@@ -171,6 +171,26 @@ public class ManualArray {
         return this;
     }
 
+    // DSA
+    public void swapByIndex(int i, int j) {
+        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
+        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
+        int temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+    }
+
+    public void replaceByIndex(int i, int j) {
+        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
+        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
+        data[i] = data[j];
+    }
+
+    public void setByIndex(int index, int element) {
+        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+        data[index] = element;
+    }
+
     // ITERATORS
     public void forEach(IntConsumer consumer) {
         for (int i = 0; i < size; i++) {
@@ -225,26 +245,6 @@ public class ManualArray {
             }
         }
         return true;
-    }
-
-    // DSA
-    public void swapByIndex(int i, int j) {
-        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
-        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
-        int temp = data[i];
-        data[i] = data[j];
-        data[j] = temp;
-    }
-
-    public void replaceByIndex(int i, int j) {
-        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
-        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
-        data[i] = data[j];
-    }
-
-    public void setByIndex(int index, int element) {
-        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
-        data[index] = element;
     }
 
     @Override
