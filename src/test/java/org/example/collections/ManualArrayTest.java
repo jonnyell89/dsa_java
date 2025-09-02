@@ -4,10 +4,7 @@ import org.example.interfaces.IntBinaryOperator;
 import org.example.interfaces.IntConsumer;
 import org.example.interfaces.IntPredicate;
 import org.example.interfaces.IntUnaryOperator;
-import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-
-import java.util.jar.Manifest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,47 +17,47 @@ public class ManualArrayTest {
     @Test
     void testManualArrayWithDefaultConstructor() {
         ManualArray manualArray = new ManualArray();
-        assertEquals(DEFAULT_CAPACITY, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, manualArray.getData(), String.format("ManualArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
-    void testManualArrayWithLengthLessThanZero() {
-        int lengthLessThanZero = -5;
+    void testManualArrayWithCapacityLessThanZero() {
+        int capacityLessThanZero = -5;
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ManualArray(lengthLessThanZero),
-                "Array length should not be negative."
+                () -> new ManualArray(capacityLessThanZero),
+                "ManualArray capacity should not be negative."
         );
     }
 
     @Test
-    void testManualArrayWithLengthZero() {
-        int lengthZero = 0;
-        ManualArray manualArray = new ManualArray(lengthZero);
-        assertEquals(DEFAULT_CAPACITY, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY));
+    void testManualArrayWithCapacityZero() {
+        int capacityZero = 0;
+        ManualArray manualArray = new ManualArray(capacityZero);
+        assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, manualArray.getData(), String.format("ManualArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
-    void testManualArrayWithLengthLessThanDefault() {
-        int lengthLessThanDefault = 5;
-        ManualArray manualArray = new ManualArray(lengthLessThanDefault);
-        assertEquals(DEFAULT_CAPACITY, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY));
+    void testManualArrayWithCapacityLessThanDefault() {
+        int capacityLessThanDefault = 5;
+        ManualArray manualArray = new ManualArray(capacityLessThanDefault);
+        assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, manualArray.getData(), String.format("ManualArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
-    void testManualArrayWithLengthGreaterThanDefault() {
-        int lengthGreaterThanDefault = 15;
-        ManualArray manualArray = new ManualArray(lengthGreaterThanDefault);
-        assertEquals(DEFAULT_CAPACITY * 2, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY * 2));
+    void testManualArrayWithCapacityGreaterThanDefault() {
+        int capacityGreaterThanDefault = 15;
+        ManualArray manualArray = new ManualArray(capacityGreaterThanDefault);
+        assertEquals(DEFAULT_CAPACITY * 2, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY * 2];
         assertArrayEquals(defaultArray, manualArray.getData(), String.format("ManualArray should contain %d zeros.", DEFAULT_CAPACITY * 2));
@@ -71,7 +68,7 @@ public class ManualArrayTest {
         NullPointerException exception = assertThrows(
                 NullPointerException.class,
                 () -> new ManualArray(null),
-                "Array should not be null."
+                "ManualArray should not be null."
         );
     }
 
@@ -79,30 +76,30 @@ public class ManualArrayTest {
     void testManualArrayWithEmptyArray() {
         int[] emptyArray = new int[]{};
         ManualArray manualArray = new ManualArray(emptyArray);
-        assertEquals(DEFAULT_CAPACITY, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, manualArray.getData(), String.format("ManualArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
-    void testManualArrayWithArrayLengthLessThanDefault() {
-        int lengthLessThanDefault = 5;
-        int[] inputArray = new int[lengthLessThanDefault];
+    void testManualArrayWithArrayCapacityLessThanDefault() {
+        int capacityLessThanDefault = 5;
+        int[] inputArray = new int[capacityLessThanDefault];
         ManualArray manualArray = new ManualArray(inputArray);
-        assertEquals(DEFAULT_CAPACITY, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY));
+        assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(inputArray.length, manualArray.getSize(), String.format("ManualArray size should be %d.", inputArray.length));
-        assertArrayEquals(inputArray, manualArray.toArray(), String.format("ManualArray should contain %d zeros.", lengthLessThanDefault));
+        assertArrayEquals(inputArray, manualArray.toArray(), String.format("ManualArray should contain %d zeros.", capacityLessThanDefault));
     }
 
     @Test
-    void testManualArrayWithArrayLengthGreaterThanDefault() {
-        int lengthGreaterThanDefault = 15;
-        int[] inputArray = new int[lengthGreaterThanDefault];
+    void testManualArrayWithArrayCapacityGreaterThanDefault() {
+        int capacityGreaterThanDefault = 15;
+        int[] inputArray = new int[capacityGreaterThanDefault];
         ManualArray manualArray = new ManualArray(inputArray);
-        assertEquals(DEFAULT_CAPACITY * 2, manualArray.getData().length, String.format("ManualArray length should be %d.", DEFAULT_CAPACITY * 2));
+        assertEquals(DEFAULT_CAPACITY * 2, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(inputArray.length, manualArray.getSize(), String.format("ManualArray size should be %d.", inputArray.length));
-        assertArrayEquals(inputArray, manualArray.toArray(), String.format("ManualArray should contain %d zeros.", lengthGreaterThanDefault));
+        assertArrayEquals(inputArray, manualArray.toArray(), String.format("ManualArray should contain %d zeros.", capacityGreaterThanDefault));
     }
 
     // READ
@@ -502,13 +499,13 @@ public class ManualArrayTest {
                 return element >= 0;
             }
         });
-        assertTrue(result, "ManualArray should contain all positive numbers.");
+        assertTrue(result, "ManualArray should contain all non-negative numbers.");
     }
 
     @Test
     void testManualArrayEveryIteratorLambda() {
         ManualArray manualArray = new ManualArray(array);
-        boolean result = manualArray.every(element -> element > 0);
-        assertTrue(result, "ManualArray should contain all positive numbers.");
+        boolean result = manualArray.every(element -> element >= 0);
+        assertTrue(result, "ManualArray should contain all non-negative numbers.");
     }
 }

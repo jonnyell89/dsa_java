@@ -24,13 +24,16 @@ public class ManualSet {
         }
     }
 
-    public int size() { return data.getSize(); }
+    public ManualArray getData() { return data; }
+
+    public int getSize() { return data.getSize(); }
 
     public boolean isEmpty() { return data.getSize() == 0; }
 
     public boolean contains(int element) {
         // Time complexity: O(N)
-        for (int i = 0; i < size(); i++) {
+        int size = getSize();
+        for (int i = 0; i < size; i++) {
             if (data.read(i) == element) return true;
         }
         return false;
@@ -79,7 +82,7 @@ public class ManualSet {
     }
 
     public void clear() {
-        int size = size();
+        int size = getSize();
         while (size > 0) {
             data.deleteFromEnd();
             size--;

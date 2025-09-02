@@ -24,7 +24,7 @@ public class ManualArray {
     public ManualArray(int initialCapacity) {
         if (initialCapacity < 0) throw new IllegalArgumentException("ManualArray initial capacity cannot be less than zero.");
         this.capacity = DEFAULT_CAPACITY;
-        setCapacity(initialCapacity);
+        ensureCapacity(initialCapacity);
         this.size = 0;
         this.data = new int[capacity];
     }
@@ -32,21 +32,27 @@ public class ManualArray {
     public ManualArray(int[] array) {
         if (array == null) throw new NullPointerException("ManualArray cannot be null.");
         this.capacity = DEFAULT_CAPACITY;
-        setCapacity(array.length);
-        this.size = array.length;
+        ensureCapacity(array.length);
+        this.size = 0;
         this.data = new int[capacity];
         for (int i = 0; i < array.length; i++) {
             this.data[i] = array[i];
+            incrementSize();
         }
     }
 
-    protected void manageCapacity() {
+    public int getCapacity() { return capacity; }
+
+    protected void setCapacity(int capacity) { this.capacity = capacity; }
+
+    protected void ensureCapacity() {
         if (size == capacity) {
             int newCapacity = (size < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity * 2;
             int[] newArray = new int[newCapacity];
             for (int i = 0; i < size; i++) {
                 newArray[i] = data[i];
             }
+            setCapacity(newCapacity);
             setData(newArray);
         }
 
@@ -56,23 +62,24 @@ public class ManualArray {
             for (int i = 0; i < size; i++) {
                 newArray[i] = data[i];
             }
+            setCapacity(newCapacity);
             setData(newArray);
         }
     }
 
-    protected void setCapacity(int initialCapacity) {
+    protected void ensureCapacity(int initialCapacity) {
         int newCapacity = DEFAULT_CAPACITY;
-        while (initialCapacity > newCapacity) {
+        while (newCapacity < initialCapacity) {
             newCapacity = newCapacity * 2;
         }
-        this.capacity = newCapacity;
+        setCapacity(newCapacity);
     }
 
     public int getSize() { return size; }
 
-    protected void incrementSize() { this.size++; }
+    protected void incrementSize() { size++; }
 
-    protected void decrementSize() { this.size--; }
+    protected void decrementSize() { size--; }
 
     public int[] getData() { return data; }
 
@@ -107,7 +114,7 @@ public class ManualArray {
     // INSERT
     public ManualArray insertAtStart(int element) {
         // Time complexity: O(N)
-        manageCapacity();
+        ensureCapacity();
         for (int i = size; i > 0; i--) { // Iterates from the end to the start.
             data[i] = data[i - 1]; // Shifts elements -->
         }
@@ -118,7 +125,7 @@ public class ManualArray {
 
     public ManualArray insertAtEnd(int element) {
         // Time complexity: O(1)
-        manageCapacity();
+        ensureCapacity();
         data[size] = element; // Inserts element at the end.
         incrementSize();
         return this;
@@ -127,7 +134,7 @@ public class ManualArray {
     public ManualArray insertAtIndex(int index, int element) {
         // Time complexity: O(N)
         if (index < 0 || index > size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
-        manageCapacity();
+        ensureCapacity();
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
             data[i] = data[i - 1]; // Shifts elements -->
         }
@@ -140,7 +147,7 @@ public class ManualArray {
     public ManualArray deleteFromStart() {
         // Time complexity: O(N)
         if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
-        manageCapacity();
+        ensureCapacity();
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
         }
@@ -152,7 +159,7 @@ public class ManualArray {
     public ManualArray deleteFromEnd() {
         // Time complexity: O(1)
         if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
-        manageCapacity();
+        ensureCapacity();
         data[size - 1] = 0; // Deletes element at the end.
         decrementSize();
         return this;
@@ -162,7 +169,7 @@ public class ManualArray {
         // Time complexity: O(N)
         if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
         if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
-        manageCapacity();
+        ensureCapacity();
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
         }
