@@ -24,11 +24,15 @@ public class ManualSet {
         }
     }
 
-    public ManualArray getData() { return data; }
+    public  int getCapacity() { return data.getCapacity(); } // Only public for testing purposes.
 
     public int getSize() { return data.getSize(); }
 
+    public int[] getData() { return data.getData(); } // Only public for testing purposes.
+
     public boolean isEmpty() { return data.getSize() == 0; }
+
+    public int[] toArray() { return data.toArray(); }
 
     public boolean contains(int element) {
         // Time complexity: O(N)

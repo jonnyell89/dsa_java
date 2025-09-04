@@ -41,7 +41,7 @@ public class ManualArray {
         }
     }
 
-    public int getCapacity() { return capacity; }
+    public int getCapacity() { return capacity; } // Only public for testing purposes.
 
     protected void setCapacity(int capacity) { this.capacity = capacity; }
 
@@ -81,9 +81,11 @@ public class ManualArray {
 
     protected void decrementSize() { size--; }
 
-    public int[] getData() { return data; }
+    public int[] getData() { return data; } // Only public for testing purposes.
 
     protected void setData(int[] data) { this.data = data; }
+
+    public boolean isEmpty() { return size == 0; }
 
     public int[] toArray() {
         int[] array = new int[size];
