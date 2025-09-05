@@ -2,6 +2,7 @@ package org.example.concepts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Recursion {
@@ -134,5 +135,49 @@ public class Recursion {
 
     // Chapter 12: Dynamic Programming.
 
+    // Unnecessary Recursive Calls:
+    public static int maxSlow(int[] array) {
+        if (array.length == 1) return array[0];
+        int[] subarray = Arrays.copyOfRange(array, 1, array.length);
+        if (array[0] > maxSlow(subarray)) return array[0];
+        else return maxSlow(subarray);
+    }
 
+    // The Little Fix for Big O.
+    public static int maxFast(int[] array) {
+        if (array.length == 1) return array[0];
+        int[] subarray = Arrays.copyOfRange(array, 1, array.length);
+        int maxOfRemainder = maxFast(subarray);
+        if (array[0] > maxOfRemainder) return array[0];
+        else return maxOfRemainder;
+    }
+
+    // Overlapping Sub-problems.
+    public static int fibonacciSlow(int number) {
+        if (number == 0 || number == 1) return number;
+        return fibonacciSlow(number - 2) + fibonacciSlow(number - 1);
+    }
+
+    // Dynamic Programming through Memoization.
+    public static int fibonacciFast(int number, HashMap<Integer, Integer> memo) {
+        if (number == 0 || number == 1) return number;
+        if (!memo.containsKey(number)) {
+            memo.put(number, fibonacciFast(number - 2, memo) + fibonacciFast(number - 1, memo));
+        }
+        return memo.get(number);
+    }
+
+    //Dynamic Programming through Going Bottom-up.
+    public static int fibonacciLoop(int number) {
+        if (number == 0) return number;
+        if (number == 1) return number;
+        int a = 0;
+        int b = 1;
+        for (int i = 2; i <= number; i++) {
+            int temp = a;
+            a = b;
+            b = temp + a;
+        }
+        return b;
+    }
 }

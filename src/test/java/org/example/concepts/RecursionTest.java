@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -108,5 +109,46 @@ public class RecursionTest {
         int uniquePaths = Recursion.uniquePaths(rows, columns);
         int result = 6;
         assertEquals(result, uniquePaths, "UniquePaths should be equal to result.");
+    }
+
+    @Test
+    void recursionMaxSlow() {
+        int[] array = new int[]{1, 2, 3, 4};
+        int maxSlow = Recursion.maxSlow(array);
+        int result = 4;
+        assertEquals(result, maxSlow, "MaxSlow should be equal to result.");
+    }
+
+    @Test
+    void recursionMaxFast() {
+        int[] array = new int[]{1, 2, 3, 4};
+        int maxFast = Recursion.maxFast(array);
+        int result = 4;
+        assertEquals(result, maxFast, "MaxFast should be equal to result.");
+    }
+
+    @Test
+    void recursionFibonacciSlow() {
+        int number = 10;
+        int fibonacciSlow = Recursion.fibonacciSlow(number);
+        int result = 55;
+        assertEquals(result, fibonacciSlow, "FibonacciSlow should be equal to result.");
+    }
+
+    @Test
+    void recursionFibonacciFast() {
+        int number = 10;
+        HashMap<Integer, Integer> memo = new HashMap<>();
+        int fibonacciFast = Recursion.fibonacciFast(number, memo);
+        int result = 55;
+        assertEquals(result, fibonacciFast, "FibonacciFast should be equal to result.");
+    }
+
+    @Test
+    void recursionFibonacciLoop() {
+        int number = 10;
+        int fibonacciLoop = Recursion.fibonacciLoop(number);
+        int result = 55;
+        assertEquals(result, fibonacciLoop, "FibonacciLoop should be equal to result.");
     }
 }
