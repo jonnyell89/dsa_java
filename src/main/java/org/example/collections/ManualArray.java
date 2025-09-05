@@ -180,7 +180,7 @@ public class ManualArray {
         return this;
     }
 
-    // DSA
+    // TRANSFORM
     public void swapByIndex(int i, int j) {
         if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
         if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);

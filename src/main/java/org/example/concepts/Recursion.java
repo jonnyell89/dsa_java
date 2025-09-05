@@ -8,7 +8,7 @@ public class Recursion {
 
     // Chapter 10: Recursively Recurse with Recursion.
 
-    // Exercise 4.
+    // Exercise 4:
     public static void printAllItems(Object[] array) {
         for (Object element : array) {
             if (element instanceof Object[]) {
@@ -57,13 +57,24 @@ public class Recursion {
         return reverse(string.substring(1)) + string.charAt(0); // Recursive step.
     }
 
+    // Top-down Recursion: A New Way of Thinking.
+    public static int countX(String string) {
+        if (string.isEmpty()) return 0; // Base case.
+        char firstChar = string.charAt(0);
+        if (firstChar == 'x') {
+            return 1 + countX(string.substring(1)); // Recursive step.
+        } else {
+            return countX(string.substring(1)); // Recursive step.
+        }
+    }
+
     // The Staircase Problem.
-    public static int numberOfPaths(int n) {
-        if (n <= 0) return 0; // Base case.
-        if (n == 1) return 1; // Accounts for numberOfPaths(1) -> numberOfPaths(0) + numberOfPaths(-1) + numberOfPaths(-2) == 1;
-        if (n == 2) return 2; // Accounts for numberOfPaths(2) -> numberOfPaths(1) + numberOfPaths(0) + numberOfPaths(-1) == 2;
-        if (n == 3) return 4; // Accounts for numberOfPaths(3) -> numberOfPaths(2) + numberOfPaths(1) + numberOfPaths(0) == 4;
-        return numberOfPaths(n - 1) + numberOfPaths(n - 2) + numberOfPaths(n - 3); // Recursive step.
+    public static int numberOfPaths(int steps) {
+        if (steps <= 0) return 0; // Base case.
+        if (steps == 1) return 1; // Accounts for numberOfPaths(1) -> numberOfPaths(0) + numberOfPaths(-1) + numberOfPaths(-2) == 1;
+        if (steps == 2) return 2; // Accounts for numberOfPaths(2) -> numberOfPaths(1) + numberOfPaths(0) + numberOfPaths(-1) == 2;
+        if (steps == 3) return 4; // Accounts for numberOfPaths(3) -> numberOfPaths(2) + numberOfPaths(1) + numberOfPaths(0) == 4;
+        return numberOfPaths(steps - 1) + numberOfPaths(steps - 2) + numberOfPaths(steps - 3); // Recursive step.
     }
 
     // Anagram Generation.
@@ -85,4 +96,43 @@ public class Recursion {
         }
         return collection;
     }
+
+    // Exercise 1:
+    public static int numberOfCharacters(List<String> array) {
+        if (array.isEmpty()) return 0; // Base case.
+        return array.get(0).length() + numberOfCharacters(array.subList(1, array.size())); // Recursive step.
+    }
+
+    // Exercise 2:
+    public static List<Integer> selectEven(int[] numbers) {
+        if (numbers.length == 0) return new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+        int number = numbers[0];
+        if (number % 2 == 0) result.add(number);
+        int[] subarray = Arrays.copyOfRange(numbers, 1, numbers.length);
+        result.addAll(selectEven(subarray));
+        return result;
+    }
+
+    // Exercise 3:
+    public static int triangle(int number) {
+        if (number == 0) return 0;
+        return number + triangle(number - 1);
+    }
+
+    // Exercise 4:
+    public static int indexOfX(String string) {
+        if (string.charAt(0) == 'x') return 0;
+        return indexOfX(string.substring(1)) + 1;
+    }
+
+    // Exercise 5:
+    public static int uniquePaths(int rows, int columns) {
+        if (rows == 1 || columns == 1) return 1;
+        return uniquePaths(rows - 1, columns) + uniquePaths(rows, columns - 1);
+    }
+
+    // Chapter 12: Dynamic Programming.
+
+
 }
