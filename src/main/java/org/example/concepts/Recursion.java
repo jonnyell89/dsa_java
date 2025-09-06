@@ -180,4 +180,22 @@ public class Recursion {
         }
         return b;
     }
+
+    // Exercise 1:
+    public static int addUntil100(int[] array) {
+        if (array.length == 0) return 0;
+        int[] subarray = Arrays.copyOfRange(array, 1, array.length);
+        int sumOfRemainingNumbers = addUntil100(subarray);
+        if (array[0] + sumOfRemainingNumbers > 100) return sumOfRemainingNumbers;
+        else return array[0] + sumOfRemainingNumbers;
+    }
+
+    // Exercise 2:
+    public static int golomb(int number, HashMap<Integer, Integer> memo) {
+        if (number == 1) return number;
+        if (!memo.containsKey(number)) {
+            memo.put(number, 1 + golomb(number - golomb(golomb(number - 1, memo), memo), memo));
+        }
+        return memo.get(number);
+    }
 }

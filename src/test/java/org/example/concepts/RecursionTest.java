@@ -151,4 +151,21 @@ public class RecursionTest {
         int result = 55;
         assertEquals(result, fibonacciLoop, "FibonacciLoop should be equal to result.");
     }
+
+    @Test
+    void recursionAddUntil100() {
+        int[] array = {10, 20, 30, 40, 50};
+        int addUntil100 = Recursion.addUntil100(array);
+        int result = 100;
+        assertEquals(result, addUntil100, "AddUntil100 should be equal to result.");
+    }
+
+    @Test
+    void recursionGolomb() {
+        int number = 10;
+        HashMap<Integer, Integer> memo = new HashMap<>();
+        int golomb = Recursion.golomb(number, memo);
+        int result = 5;
+        assertEquals(result, golomb, "Golomb should be equal to result.");
+    }
 }
