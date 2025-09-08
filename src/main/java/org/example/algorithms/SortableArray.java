@@ -4,6 +4,8 @@ import org.example.collections.ManualArray;
 
 public class SortableArray {
 
+    // Chapter 13: Recursive Algorithms for Speed.
+
     protected ManualArray manualArray;
 
     public SortableArray(ManualArray manualArray) {
@@ -53,11 +55,64 @@ public class SortableArray {
     }
 
     public boolean hasDuplicate() {
+        // Time complexity: O(N log N)
         quicksort(0, manualArray.getSize() - 1);
         int size = manualArray.getSize();
         for (int i = 0; i < size - 1; i++) {
             if (manualArray.read(i) == manualArray.read(i + 1)) return true;
         }
         return false;
+    }
+
+    //Exercise 1:
+    public int greatestProduct() {
+        int lastIndex = manualArray.getSize() - 1;
+        quicksort(0, lastIndex);
+        return manualArray.read(lastIndex) * manualArray.read(lastIndex - 1) * manualArray.read(lastIndex - 2);
+    }
+
+    // Exercise 2:
+    public int findMissingNumber() {
+        int size = manualArray.getSize();
+        quicksort(0, size - 1);
+        for (int i = 0; i < size; i++) {
+            if (manualArray.read(i) != i) return i;
+        }
+        return -1;
+    }
+
+    //Exercise 3:
+    public int greatestNumberSlow() {
+        // Time complexity: O(N^2)
+        int size = manualArray.getSize();
+        for (int i = 0; i < size; i++) {
+            boolean isGreatestNumber = true;
+            for (int j = 0; j < size; j++) {
+                if (manualArray.read(j) > manualArray.read(i)) {
+                    isGreatestNumber = false;
+                }
+            }
+            if (isGreatestNumber) return manualArray.read(i);
+        }
+        throw new IllegalStateException("Array is either empty, or all values are the same.");
+    }
+
+    public int greatestNumberMedium() {
+        // Time complexity: O(N log N)
+        int lastIndex = manualArray.getSize() - 1;
+        quicksort(0, lastIndex);
+        return manualArray.read(lastIndex);
+    }
+
+    public int greatestNumberFast() {
+        // Time complexity: O(N)
+        int size = manualArray.getSize();
+        int greatestNumber = manualArray.read(0);
+        for (int i = 1; i < size; i++) {
+            if (manualArray.read(i) > greatestNumber) {
+                greatestNumber = manualArray.read(i);
+            }
+        }
+        return greatestNumber;
     }
 }
