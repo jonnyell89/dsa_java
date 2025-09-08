@@ -71,7 +71,7 @@ public class RecursionTest {
 
     @Test
     void recursionNumberOfCharacters() {
-        String[] strings = {"ab", "c", "def", "ghij"};
+        String[] strings = new String[]{"ab", "c", "def", "ghij"};
         List<String> array = Arrays.asList(strings);
         int characters = Recursion.numberOfCharacters(array);
         int result = 10;
@@ -80,7 +80,7 @@ public class RecursionTest {
 
     @Test
     void recursionSelectEven() {
-        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[] numbers = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         List<Integer> evenNumbers = Recursion.selectEven(numbers);
         List<Integer> result = new ArrayList<>(Arrays.asList(2, 4, 6, 8, 10));
         assertEquals(result, evenNumbers, "EvenNumbers should be equal to result.");
@@ -154,7 +154,7 @@ public class RecursionTest {
 
     @Test
     void recursionAddUntil100() {
-        int[] array = {10, 20, 30, 40, 50};
+        int[] array = new int[]{10, 20, 30, 40, 50};
         int addUntil100 = Recursion.addUntil100(array);
         int result = 100;
         assertEquals(result, addUntil100, "AddUntil100 should be equal to result.");
