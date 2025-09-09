@@ -54,6 +54,50 @@ public class SortableArray {
         }
     }
 
+    public void merge(int leftIndex, int midIndex, int rightIndex) {
+        int leftSize = midIndex - leftIndex + 1;
+        int rightSize = rightIndex - midIndex;
+        int[] leftArray = new int[leftSize];
+        int[] rightArray = new int[rightSize];
+        for (int i = 0; i < leftSize; i++) {
+            leftArray[i] = manualArray.read(leftIndex + i);
+        }
+        for (int j = 0; j < rightSize; j++) {
+            rightArray[j] = manualArray.read(midIndex + 1 + j);
+        }
+        int i = 0, j = 0; // Initial indices of leftArray and rightArray.
+        int k = leftIndex; // Initial index of merged subarray.
+        while (i < leftSize && j < rightSize) {
+            if (leftArray[i] <= rightArray[j]) {
+                manualArray.setByIndex(k, leftArray[i]);
+                i++;
+            } else {
+                manualArray.setByIndex(k, rightArray[j]);
+                j++;
+            }
+            k++;
+        }
+        while (i < leftSize) {
+            manualArray.setByIndex(k, leftArray[i]);
+            i++;
+            k++;
+        }
+        while (j < rightSize) {
+            manualArray.setByIndex(k, rightArray[j]);
+            j++;
+            k++;
+        }
+    }
+
+    public void mergeSort(int leftIndex, int rightIndex) {
+        if (leftIndex < rightIndex) { // Base case is implicit in this condition.
+            int midIndex = leftIndex + (rightIndex - leftIndex) / 2;
+            mergeSort(leftIndex, midIndex); // Sort left half.
+            mergeSort(midIndex + 1, rightIndex); // Sort right half.
+            merge(leftIndex, midIndex, rightIndex); // Merge sorted halves.
+        }
+    }
+
     public boolean hasDuplicate() {
         // Time complexity: O(N log N)
         quicksort(0, manualArray.getSize() - 1);
