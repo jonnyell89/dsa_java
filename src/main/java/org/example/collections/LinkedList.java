@@ -5,9 +5,9 @@ public class LinkedList {
     private Node head;
     private int size;
 
-    public LinkedList(Node head) {
-        this.head = head;
-        this.size = 1;
+    public LinkedList() {
+        this.head = null;
+        this.size = 0;
     }
 
     public Node getHead() {
@@ -44,6 +44,16 @@ public class LinkedList {
     }
 
     // SEARCH
+    public int search(int data) {
+        Node currentNode = getHead();
+        int currentIndex = 0;
+        while (currentNode != null) {
+            if (currentNode.getData() == data) return currentIndex;
+            currentNode = currentNode.getNext();
+            currentIndex++;
+        }
+        throw new IllegalArgumentException("Node not present in LinkedList." + data);
+    }
 
 
     // INSERT
