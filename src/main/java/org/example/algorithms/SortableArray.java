@@ -55,18 +55,19 @@ public class SortableArray {
     }
 
     public void merge(int leftIndex, int midIndex, int rightIndex) {
+        // Create left subarray and right subarray.
         int leftSize = midIndex - leftIndex + 1;
         int rightSize = rightIndex - midIndex;
         int[] leftArray = new int[leftSize];
         int[] rightArray = new int[rightSize];
+        // Insert data into left subarray and right subarray.
         for (int i = 0; i < leftSize; i++) {
             leftArray[i] = manualArray.read(leftIndex + i);
         }
         for (int j = 0; j < rightSize; j++) {
             rightArray[j] = manualArray.read(midIndex + 1 + j);
         }
-        int i = 0, j = 0; // Initial indices of leftArray and rightArray.
-        int k = leftIndex; // Initial index of merged subarray.
+        int i = 0, j = 0, k = leftIndex; // Initial indices of left subarray, right subarray and merged array.
         while (i < leftSize && j < rightSize) {
             if (leftArray[i] <= rightArray[j]) {
                 manualArray.setByIndex(k, leftArray[i]);
@@ -75,7 +76,7 @@ public class SortableArray {
                 manualArray.setByIndex(k, rightArray[j]);
                 j++;
             }
-            k++;
+            k++; // Increment k with each insertion.
         }
         while (i < leftSize) {
             manualArray.setByIndex(k, leftArray[i]);
