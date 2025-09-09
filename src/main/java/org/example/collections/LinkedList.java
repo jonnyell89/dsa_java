@@ -1,8 +1,8 @@
 package org.example.collections;
 
-public class LinkedList {
+public class LinkedList<T> {
 
-    private Node head;
+    private Node<T> head;
     private int size;
 
     public LinkedList() {
@@ -10,30 +10,20 @@ public class LinkedList {
         this.size = 0;
     }
 
-    public Node getHead() {
-        return head;
-    }
+    public Node<T> getHead() { return head; }
 
-    public void setHead(Node head) {
-        this.head = head;
-    }
+    public void setHead(Node<T> head) { this.head = head; }
 
-    public int getSize() {
-        return size;
-    }
+    public int getSize() { return size; }
 
-    public void incrementSize() {
-        size++;
-    }
+    public void incrementSize() { size++; }
 
-    public void decrementSize() {
-        size--;
-    }
+    public void decrementSize() { size--; }
 
     // READ
-    public int read(int index) {
+    public T read(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        Node currentNode = getHead();
+        Node<T> currentNode = getHead();
         int currentIndex = 0;
         while (currentNode != null && currentIndex < index) {
             currentNode = currentNode.getNext();
@@ -44,22 +34,18 @@ public class LinkedList {
     }
 
     // SEARCH
-    public int search(int data) {
-        Node currentNode = getHead();
+    public int search(T data) {
+        Node<T> currentNode = getHead();
         int currentIndex = 0;
         while (currentNode != null) {
-            if (currentNode.getData() == data) return currentIndex;
+            if (currentNode.getData().equals(data)) return currentIndex;
             currentNode = currentNode.getNext();
             currentIndex++;
         }
         throw new IllegalArgumentException("Node not present in LinkedList." + data);
     }
 
-
     // INSERT
 
-
     // DELETE
-
-
 }
