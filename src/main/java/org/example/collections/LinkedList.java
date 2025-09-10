@@ -46,6 +46,62 @@ public class LinkedList<T> {
     }
 
     // INSERT
+    public boolean insertAtStart(T data) {
+        // Time complexity: O(1)
+        Node<T> newHead = new Node<>(data);
+        Node<T> oldHead = getHead();
+        newHead.setNext(oldHead);
+        setHead(newHead);
+        incrementSize();
+        return true;
+    }
+
+    public boolean insertAtEnd(T data) {
+        // Time complexity: O(N)
+        Node<T> newNode = new Node<>(data);
+        Node<T> currentNode = getHead();
+        if (currentNode == null && size == 0) {
+            setHead(newNode);
+            incrementSize();
+            return true;
+        }
+        int currentIndex = 0;
+        while (currentNode != null && currentIndex < (size - 1)) {
+            currentNode = currentNode.getNext();
+            currentIndex++;
+        }
+        if (currentNode != null && currentNode.getNext() == null) {
+            currentNode.setNext(newNode);
+            incrementSize();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean insertAtIndex(int index, T data) {
+        // Time complexity: O(N)
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        Node<T> newNode = new Node<>(data);
+        Node<T> currentNode = getHead();
+        if (index == 0) {
+            setHead(newNode);
+            incrementSize();
+            return true;
+        }
+        int currentIndex = 0;
+        while (currentNode != null && currentIndex < (index - 1)) {
+            currentNode = currentNode.getNext();
+            currentIndex++;
+        }
+        if (currentNode != null) {
+            Node<T> newNext = currentNode.getNext();
+            newNode.setNext(newNext);
+            currentNode.setNext(newNode);
+            incrementSize();
+            return true;
+        }
+        return false;
+    }
 
     // DELETE
 }
