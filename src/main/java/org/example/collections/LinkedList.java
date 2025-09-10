@@ -2,6 +2,22 @@ package org.example.collections;
 
 public class LinkedList<T> {
 
+    private static class Node<T> {
+
+        private T data;
+        private Node<T> next;
+
+        public Node(T data) {
+            this.data = data;
+            this.next = null;
+        }
+
+        public Node(T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+        }
+    }
+
     private Node<T> head;
     private int size;
 
@@ -10,9 +26,9 @@ public class LinkedList<T> {
         this.size = 0;
     }
 
-    public Node<T> getHead() { return head; }
+//    public Node<T> getHead() { return head; }
 
-    public void setHead(Node<T> head) { this.head = head; }
+//    public void setHead(Node<T> head) { this.head = head; }
 
     public int getSize() { return size; }
 
@@ -20,17 +36,41 @@ public class LinkedList<T> {
 
     public void decrementSize() { size--; }
 
+    // Tells if the argument is the index of an existing element.
+    private boolean isElementIndex(int index) { return index >= 0 && index < size; }
+
+    // Tells if the argument is the index of a valid position for an iterator or an add operation.
+    private boolean isPositionIndex(int index) { return index >= 0 && index <= size; }
+
     // READ
     public T read(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        Node<T> currentNode = getHead();
+        Node<T> currentNode = head;
         int currentIndex = 0;
         while (currentNode != null && currentIndex < index) {
-            currentNode = currentNode.getNext();
+            currentNode = currentNode.next;
             currentIndex++;
         }
-        if (currentNode == null) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        return currentNode.getData();
+        assert currentNode != null;
+        return currentNode.data;
+    }
+
+    public T readData(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        Node<T> currentNode = head;
+        for (int i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+        }
+        return currentNode.data;
+    }
+
+    private Node<T> readNode(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        Node<T> currentNode = head;
+        for (int i = 0; i < index; i++) {
+            currentNode = currentNode.next;
+        }
+        return currentNode;
     }
 
     // SEARCH
@@ -46,25 +86,24 @@ public class LinkedList<T> {
     }
 
     // INSERT
-    public boolean insertAtStart(T data) {
+    public void insertAtStart(T data) {
         // Time complexity: O(1)
         Node<T> newHead = new Node<>(data);
         Node<T> oldHead = getHead();
-        newHead.setNext(oldHead);
-        setHead(newHead);
+        newHead.setNext(oldHead); // Point newHead to oldHead.
+        setHead(newHead); // Set newHead as head.
         incrementSize();
-        return true;
     }
 
-    public boolean insertAtEnd(T data) {
+    public void insertAtEnd(T data) {
+        // Time complexity: O(1)
+        if (size == 0) {
+            insertAtStart(data);
+            return;
+        }
         // Time complexity: O(N)
         Node<T> newNode = new Node<>(data);
         Node<T> currentNode = getHead();
-        if (currentNode == null && size == 0) {
-            setHead(newNode);
-            incrementSize();
-            return true;
-        }
         int currentIndex = 0;
         while (currentNode != null && currentIndex < (size - 1)) {
             currentNode = currentNode.getNext();
@@ -73,21 +112,18 @@ public class LinkedList<T> {
         if (currentNode != null && currentNode.getNext() == null) {
             currentNode.setNext(newNode);
             incrementSize();
-            return true;
         }
-        return false;
     }
 
-    public boolean insertAtIndex(int index, T data) {
+    public void insertAtIndex(int index, T data) {
         // Time complexity: O(N)
         if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index == 0) {
+            insertAtStart(data);
+            return;
+        }
         Node<T> newNode = new Node<>(data);
         Node<T> currentNode = getHead();
-        if (index == 0) {
-            setHead(newNode);
-            incrementSize();
-            return true;
-        }
         int currentIndex = 0;
         while (currentNode != null && currentIndex < (index - 1)) {
             currentNode = currentNode.getNext();
@@ -98,9 +134,7 @@ public class LinkedList<T> {
             newNode.setNext(newNext);
             currentNode.setNext(newNode);
             incrementSize();
-            return true;
         }
-        return false;
     }
 
     // DELETE
