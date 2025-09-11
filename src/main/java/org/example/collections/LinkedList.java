@@ -1,5 +1,7 @@
 package org.example.collections;
 
+import java.util.NoSuchElementException;
+
 public class LinkedList<T> {
 
     private static class Node<T> {
@@ -127,4 +129,50 @@ public class LinkedList<T> {
     }
 
     // DELETE
+    public T deleteFromStart() {
+        // Time complexity: O(1)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        T headData = head.data;
+        Node<T> headNext = head.next;
+        head.data = null;
+        head.next = null;
+        head = headNext;
+        size--;
+        return headData;
+    }
+
+    public T deleteFromEnd() {
+        // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (size == 1) return deleteFromStart();
+        Node<T> node = head;
+        for (int i = 0; i < size - 2; i++) {
+            node = node.next;
+        }
+        Node<T> nodeNext = node.next;
+        T nodeNextData = nodeNext.data;
+        node.next = null;
+        nodeNext.data = null;
+        nodeNext.next = null;
+        size--;
+        return nodeNextData;
+    }
+
+    public T deleteFromIndex(int index) {
+        // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index == 0) return deleteFromStart();
+        Node<T> node = head;
+        for (int i = 0; i < index - 1; i++) {
+            node = node.next;
+        }
+        Node<T> nodeNext = node.next;
+        T nodeNextData = nodeNext.data;
+        node.next = node.next.next;
+        nodeNext.data = null;
+        nodeNext.next = null;
+        size--;
+        return nodeNextData;
+    }
 }
