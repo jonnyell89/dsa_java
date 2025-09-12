@@ -9,12 +9,12 @@ public class LinkedList<T> {
         private T data;
         private Node<T> next;
 
-        public Node(T data) {
+        private Node(T data) {
             this.data = data;
             this.next = null;
         }
 
-        public Node(T data, Node<T> next) {
+        private Node(T data, Node<T> next) {
             this.data = data;
             this.next = next;
         }
@@ -47,9 +47,10 @@ public class LinkedList<T> {
     // READ
     public T read(int index) {
         // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         Node<T> node = head;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) { // Iterate up to index.
             node = node.next;
         }
         return node.data;
@@ -57,6 +58,7 @@ public class LinkedList<T> {
 
     private Node<T> node(int index) {
         // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         Node<T> node = head;
         for (int i = 0; i < index; i++) {
@@ -68,6 +70,7 @@ public class LinkedList<T> {
     // SEARCH
     public int search(T data) {
         // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         Node<T> node = head;
         for (int i = 0; i < size - 1; i++) {
             if (node.data.equals(data)) return i;
@@ -78,6 +81,7 @@ public class LinkedList<T> {
 
     private int indexOf(T data) {
         // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         int index = 0;
         for (Node<T> node = head; node.next != null; node = node.next) {
             if (data.equals(node.data)) return index;
