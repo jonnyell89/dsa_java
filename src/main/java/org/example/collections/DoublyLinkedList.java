@@ -50,13 +50,13 @@ public class DoublyLinkedList<T> {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index < size / 2) {
             Node<T> node = head;
-            for (int i = 0; i < index; i++) {
+            for (int i = 0; i < index; i++) { // Iterate up to index.
                 node = node.next;
             }
             return node.data;
         } else {
             Node<T> node = tail;
-            for (int i = size - 1; i > index; i--) {
+            for (int i = size - 1; i > index; i--) { // Iterate down to index.
                 node = node.prev;
             }
             return node.data;
@@ -68,7 +68,7 @@ public class DoublyLinkedList<T> {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
         Node<T> node = head;
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size - 1; i++) { // Iterate to the end.
             if (node.data.equals(data)) return i;
             node = node.next;
         }
@@ -92,5 +92,45 @@ public class DoublyLinkedList<T> {
         tail = node;
         if (head == null) head = node;
         size++;
+    }
+
+    public void insertAtIndex(int index, T data) {
+        // Time complexity: O(N)
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index == 0) {
+            insertAtStart(data);
+            return;
+        }
+        Node<T> newNode = new Node<>(data);
+        if (index < size / 2) {
+            Node<T> node = head;
+            for (int i = 0; i < index - 1; i++) { // Iterate up to node before index.
+                node = node.next;
+            }
+            Node<T> nodeAtIndex = node.next;
+            newNode.next = nodeAtIndex;
+            nodeAtIndex.prev = newNode;
+            node.next = newNode;
+            newNode.prev = node;
+        } else {
+            Node<T> node = tail;
+            for (int i = size - 1; i > index - 1; i--) { // Iterate down to node before index.
+                node = node.prev;
+            }
+            Node<T> nodeAtIndex = node.next;
+            newNode.next = nodeAtIndex;
+            nodeAtIndex.prev = newNode;
+            node.next = newNode;
+            newNode.prev = node;
+        }
+        size++;
+    }
+
+    private void insertNode(Node<T> newNode, Node<T> nodeAtIndex) {
+        Node<T> prevNode = nodeAtIndex.prev;
+        newNode.next = nodeAtIndex;
+        nodeAtIndex.prev = newNode;
+        prevNode.next = newNode;
+        newNode.prev = prevNode;
     }
 }
