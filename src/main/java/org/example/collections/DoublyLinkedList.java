@@ -84,4 +84,13 @@ public class DoublyLinkedList<T> {
         if (tail == null) tail = node;
         size++;
     }
+
+    public void insertAtEnd(T data) {
+        // Time complexity: O(1)
+        Node<T> node = new Node<>(data);
+        node.prev = tail;
+        tail = node;
+        if (head == null) head = node;
+        size++;
+    }
 }
