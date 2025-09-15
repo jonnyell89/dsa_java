@@ -38,7 +38,7 @@ public class LinkedListDeleteTest {
         int index = 0;
         Integer data = linkedList.read(index);
         Integer result = linkedList.deleteFromStart();
-        assertEquals(data, result, String.format("Data at index %d should be %d.", index, data));
+        assertEquals(data, result, String.format("Data %d should be equal to result %d.", data, result));
     }
 
     @Test

@@ -1,0 +1,65 @@
+package org.example.collections;
+
+import java.util.NoSuchElementException;
+
+public class DoublyLinkedList<T> {
+
+    private static class Node<T> {
+
+        private T data;
+        private Node<T> prev;
+        private Node<T> next;
+
+        private Node(T data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+
+        private Node(T data, Node<T> prev, Node<T> next) {
+            this.data = data;
+            this.prev = prev;
+            this.next = next;
+        }
+    }
+
+    private Node<T> head;
+    private Node<T> tail;
+    private int size;
+
+    private Node<T> getHead() { return head; }
+
+    private void setHead(Node<T> head) { this.head = head; }
+
+    private Node<T> getTail() { return tail; }
+
+    private void setTail(Node<T> tail) { this.tail = tail; }
+
+    public int getSize() { return size; }
+
+    // Tells if the argument is the index of an existing element.
+    // private boolean isElementIndex(int index) { return index >= 0 && index < size; }
+
+    // Tells if the argument is the index of a valid position for an iterator or an add operation.
+    // private boolean isPositionIndex(int index) { return index >= 0 && index <= size; }
+
+    // READ
+    public T read(int index) {
+        // Time complexity: O(N)
+        if (head == null || tail == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index < size / 2) {
+            Node<T> node = head;
+            for (int i = 0; i < index; i++) {
+                node = node.next;
+            }
+            return node.data;
+        } else {
+            Node<T> node = tail;
+            for (int i = size - 1; i > index; i--) {
+                node = node.prev;
+            }
+            return node.data;
+        }
+    }
+}

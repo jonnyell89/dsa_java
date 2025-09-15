@@ -34,10 +34,6 @@ public class LinkedList<T> {
 
     public int getSize() { return size; }
 
-    // private void incrementSize() { size++; }
-
-    // private void decrementSize() { size--; }
-
     // Tells if the argument is the index of an existing element.
     // private boolean isElementIndex(int index) { return index >= 0 && index < size; }
 
@@ -50,7 +46,7 @@ public class LinkedList<T> {
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         Node<T> node = head;
-        for (int i = 0; i < index; i++) { // Iterate up to index.
+        for (int i = 0; i < index; i++) {
             node = node.next;
         }
         return node.data;

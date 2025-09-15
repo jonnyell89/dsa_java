@@ -26,7 +26,7 @@ public class LinkedListInsertTest {
         linkedList.insertAtStart(data);
         int index = 0;
         Integer result = linkedList.read(index);
-        assertEquals(data, result, String.format("Data at index %d should be %d.", index, data));
+        assertEquals(data, result, String.format("Data %d should be equal to result %d.", data, result));
     }
 
     @Test
@@ -36,7 +36,7 @@ public class LinkedListInsertTest {
         linkedList.insertAtEnd(data);
         int index = 0;
         Integer result = linkedList.read(index);
-        assertEquals(data, result, String.format("Data at index %d should be %d.", index, data));
+        assertEquals(data, result, String.format("Data %d should be equal to result %d.", data, result));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class LinkedListInsertTest {
         linkedList.insertAtEnd(data);
         int index = linkedList.getSize() - 1;
         Integer result = linkedList.read(index);
-        assertEquals(data, result, String.format("Data at index %d should be %d.", index, data));
+        assertEquals(data, result, String.format("Data %d should be equal to result %d.", data, result));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class LinkedListInsertTest {
         Integer data = 5;
         linkedList.insertAtIndex(index, data);
         Integer result = linkedList.read(index);
-        assertEquals(data, result, String.format("Data at index %d should be %d.", index, data));
+        assertEquals(data, result, String.format("Data %d should be equal to result %d.", data, result));
     }
 
     @Test
@@ -85,6 +85,6 @@ public class LinkedListInsertTest {
         Integer data = 5;
         linkedList.insertAtIndex(index, data);
         Integer result = linkedList.read(index);
-        assertEquals(data, result, String.format("Data at index %d should be %d.", index, data));
+        assertEquals(data, result, String.format("Data %d should be equal to result %d.", data, result));
     }
 }

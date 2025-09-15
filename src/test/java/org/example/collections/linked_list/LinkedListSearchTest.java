@@ -49,7 +49,7 @@ public class LinkedListSearchTest {
         int size = linkedList.getSize() - 1;
         for (int data = 0; data < size; data++) {
             int result = linkedList.search(data);
-            assertEquals(data, result, String.format("Data at LinkedList[%d] should return index %d.", data, data));
+            assertEquals(data, result, String.format("Data at LinkedList[%d] should return index %d.", data, result));
         }
     }
 }
