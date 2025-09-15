@@ -74,4 +74,14 @@ public class DoublyLinkedList<T> {
         }
         throw new IllegalArgumentException("Node not present in DoublyLinkedList.");
     }
+
+    // INSERT
+    public void insertAtStart(T data) {
+        // Time complexity: O(1)
+        Node<T> node = new Node<>(data);
+        node.next = head;
+        head = node;
+        if (tail == null) tail = node;
+        size++;
+    }
 }
