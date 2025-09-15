@@ -118,6 +118,10 @@ public class LinkedList<T> {
             insertAtStart(data);
             return;
         }
+        if (index == size) {
+            insertAtEnd(data);
+            return;
+        }
         Node<T> newNode = new Node<>(data);
         Node<T> node = head;
         for (int i = 0; i < index - 1; i++) {

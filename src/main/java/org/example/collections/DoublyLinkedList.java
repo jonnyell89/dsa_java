@@ -48,14 +48,15 @@ public class DoublyLinkedList<T> {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        Node<T> node;
         if (index < size / 2) {
-            Node<T> node = head;
+            node = head;
             for (int i = 0; i < index; i++) { // Iterate up to index.
                 node = node.next;
             }
             return node.data;
         } else {
-            Node<T> node = tail;
+            node = tail;
             for (int i = size - 1; i > index; i--) { // Iterate down to index.
                 node = node.prev;
             }
@@ -79,18 +80,28 @@ public class DoublyLinkedList<T> {
     public void insertAtStart(T data) {
         // Time complexity: O(1)
         Node<T> node = new Node<>(data);
-        node.next = head;
-        head = node;
-        if (tail == null) tail = node;
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            node.next = head;
+            head.prev = node;
+            head = node;
+        }
         size++;
     }
 
     public void insertAtEnd(T data) {
         // Time complexity: O(1)
         Node<T> node = new Node<>(data);
-        node.prev = tail;
-        tail = node;
-        if (head == null) head = node;
+        if (head == null) {
+            head = node;
+            tail = node;
+        } else {
+            node.prev = tail;
+            tail.next = node;
+            tail = node;
+        }
         size++;
     }
 
@@ -101,28 +112,24 @@ public class DoublyLinkedList<T> {
             insertAtStart(data);
             return;
         }
-        Node<T> newNode = new Node<>(data);
-        if (index < size / 2) {
-            Node<T> node = head;
-            for (int i = 0; i < index - 1; i++) { // Iterate up to node before index.
-                node = node.next;
-            }
-            Node<T> nodeAtIndex = node.next;
-            newNode.next = nodeAtIndex;
-            nodeAtIndex.prev = newNode;
-            node.next = newNode;
-            newNode.prev = node;
-        } else {
-            Node<T> node = tail;
-            for (int i = size - 1; i > index - 1; i--) { // Iterate down to node before index.
-                node = node.prev;
-            }
-            Node<T> nodeAtIndex = node.next;
-            newNode.next = nodeAtIndex;
-            nodeAtIndex.prev = newNode;
-            node.next = newNode;
-            newNode.prev = node;
+        if (index == size) {
+            insertAtEnd(data);
+            return;
         }
+        Node<T> nodeAtIndex;
+        if (index < size / 2) {
+            nodeAtIndex = head;
+            for (int i = 0; i < index; i++) {
+                nodeAtIndex = nodeAtIndex.next;
+            }
+        } else {
+            nodeAtIndex = tail;
+            for (int i = size - 1; i > index; i--) {
+                nodeAtIndex = nodeAtIndex.prev;
+            }
+        }
+        Node<T> newNode = new Node<>(data);
+        insertNode(newNode, nodeAtIndex);
         size++;
     }
 
