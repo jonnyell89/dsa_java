@@ -46,7 +46,7 @@ public class DoublyLinkedList<T> {
     // READ
     public T read(int index) {
         // Time complexity: O(N)
-        if (head == null || tail == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index < size / 2) {
             Node<T> node = head;
@@ -61,5 +61,17 @@ public class DoublyLinkedList<T> {
             }
             return node.data;
         }
+    }
+
+    // SEARCH
+    public int search(T data) {
+        // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        Node<T> node = head;
+        for (int i = 0; i < size - 1; i++) {
+            if (node.data.equals(data)) return i;
+            node = node.next;
+        }
+        throw new IllegalArgumentException("Node not present in DoublyLinkedList.");
     }
 }
