@@ -128,16 +128,79 @@ public class DoublyLinkedList<T> {
                 nodeAtIndex = nodeAtIndex.prev;
             }
         }
-        Node<T> newNode = new Node<>(data);
-        insertNode(newNode, nodeAtIndex);
+        Node<T> node = new Node<>(data);
+        insertNode(node, nodeAtIndex);
         size++;
     }
 
-    private void insertNode(Node<T> newNode, Node<T> nodeAtIndex) {
+    private void insertNode(Node<T> node, Node<T> nodeAtIndex) {
         Node<T> prevNode = nodeAtIndex.prev;
-        newNode.next = nodeAtIndex;
-        nodeAtIndex.prev = newNode;
-        prevNode.next = newNode;
-        newNode.prev = prevNode;
+        node.next = nodeAtIndex;
+        nodeAtIndex.prev = node;
+        prevNode.next = node;
+        node.prev = prevNode;
+    }
+
+    // DELETE
+    public T deleteFromStart() {
+        // Time complexity: O(1)
+        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        T headData = head.data;
+        Node<T> headNext = head.next;
+        head.data = null;
+        head.next = null;
+        if (headNext == null) {
+            head = null;
+            tail = null;
+        } else {
+            head = headNext;
+            head.prev = null;
+        }
+        size--;
+        return headData;
+    }
+
+    public T deleteFromEnd() {
+        // Time complexity: O(1)
+        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (size == 1) return deleteFromStart();
+        T tailData = tail.data;
+        Node<T> tailPrev = tail.prev;
+        tail.data = null;
+        tail.prev = null;
+        tail = tailPrev;
+        tail.next = null;
+        size--;
+        return tailData;
+    }
+
+    public T deleteFromIndex(int index) {
+        // Time complexity: O(N)
+        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        if (index == 0) return deleteFromStart();
+        if (index == size - 1) return deleteFromEnd();
+        Node<T> node;
+        if (index < size / 2) {
+            node = head;
+            for (int i = 0; i < index; i++) {
+                node = node.next;
+            }
+        } else {
+            node = tail;
+            for (int i = size - 1; i > index; i--) {
+                node = node.next;
+            }
+        }
+        T data = node.data;
+        Node<T> prev = node.prev;
+        Node<T> next = node.next;
+        prev.next = next;
+        next.prev = prev;
+        node.data = null;
+        node.next = null;
+        node.prev = null;
+        size--;
+        return data;
     }
 }

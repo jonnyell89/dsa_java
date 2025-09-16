@@ -167,6 +167,7 @@ public class LinkedList<T> {
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index == 0) return deleteFromStart();
+        if (index == size - 1) return deleteFromEnd();
         Node<T> node = head;
         for (int i = 0; i < index - 1; i++) {
             node = node.next;
