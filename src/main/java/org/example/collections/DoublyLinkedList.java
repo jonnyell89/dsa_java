@@ -15,25 +15,11 @@ public class DoublyLinkedList<T> {
             this.prev = null;
             this.next = null;
         }
-
-        private Node(T data, Node<T> prev, Node<T> next) {
-            this.data = data;
-            this.prev = prev;
-            this.next = next;
-        }
     }
 
     private Node<T> head;
     private Node<T> tail;
     private int size;
-
-    private Node<T> getHead() { return head; }
-
-    private void setHead(Node<T> head) { this.head = head; }
-
-    private Node<T> getTail() { return tail; }
-
-    private void setTail(Node<T> tail) { this.tail = tail; }
 
     public int getSize() { return size; }
 
@@ -48,6 +34,7 @@ public class DoublyLinkedList<T> {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+
         Node<T> node;
         if (index < size / 2) {
             node = head;
@@ -68,8 +55,9 @@ public class DoublyLinkedList<T> {
     public int search(T data) {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+
         Node<T> node = head;
-        for (int i = 0; i < size - 1; i++) { // Iterate to the end.
+        for (int i = 0; i < size; i++) { // Iterate to the end.
             if (node.data.equals(data)) return i;
             node = node.next;
         }
@@ -108,14 +96,9 @@ public class DoublyLinkedList<T> {
     public void insertAtIndex(int index, T data) {
         // Time complexity: O(N)
         if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        if (index == 0) {
-            insertAtStart(data);
-            return;
-        }
-        if (index == size) {
-            insertAtEnd(data);
-            return;
-        }
+        if (index == 0) { insertAtStart(data); return; }
+        if (index == size) { insertAtEnd(data); return; }
+
         Node<T> nodeAtIndex;
         if (index < size / 2) {
             nodeAtIndex = head;
@@ -134,44 +117,46 @@ public class DoublyLinkedList<T> {
     }
 
     private void insertNode(Node<T> node, Node<T> nodeAtIndex) {
-        Node<T> prevNode = nodeAtIndex.prev;
+        Node<T> prev = nodeAtIndex.prev;
         node.next = nodeAtIndex;
         nodeAtIndex.prev = node;
-        prevNode.next = node;
-        node.prev = prevNode;
+        prev.next = node;
+        node.prev = prev;
     }
 
     // DELETE
     public T deleteFromStart() {
         // Time complexity: O(1)
         if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
-        T headData = head.data;
-        Node<T> headNext = head.next;
+
+        T data = head.data;
+        Node<T> next = head.next;
         head.data = null;
         head.next = null;
-        if (headNext == null) {
+        if (next == null) {
             head = null;
             tail = null;
         } else {
-            head = headNext;
+            head = next;
             head.prev = null;
         }
         size--;
-        return headData;
+        return data;
     }
 
     public T deleteFromEnd() {
         // Time complexity: O(1)
         if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
         if (size == 1) return deleteFromStart();
-        T tailData = tail.data;
-        Node<T> tailPrev = tail.prev;
+
+        T data = tail.data;
+        Node<T> prev = tail.prev;
         tail.data = null;
         tail.prev = null;
-        tail = tailPrev;
+        tail = prev;
         tail.next = null;
         size--;
-        return tailData;
+        return data;
     }
 
     public T deleteFromIndex(int index) {
@@ -180,6 +165,7 @@ public class DoublyLinkedList<T> {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index == 0) return deleteFromStart();
         if (index == size - 1) return deleteFromEnd();
+
         Node<T> node;
         if (index < size / 2) {
             node = head;
@@ -189,7 +175,7 @@ public class DoublyLinkedList<T> {
         } else {
             node = tail;
             for (int i = size - 1; i > index; i--) {
-                node = node.next;
+                node = node.prev;
             }
         }
         T data = node.data;

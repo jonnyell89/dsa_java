@@ -13,11 +13,6 @@ public class LinkedList<T> {
             this.data = data;
             this.next = null;
         }
-
-        private Node(T data, Node<T> next) {
-            this.data = data;
-            this.next = next;
-        }
     }
 
     private Node<T> head;
@@ -27,10 +22,6 @@ public class LinkedList<T> {
         this.head = null;
         this.size = 0;
     }
-
-    private Node<T> getHead() { return head; }
-
-    private void setHead(Node<T> head) { this.head = head; }
 
     public int getSize() { return size; }
 
@@ -45,6 +36,7 @@ public class LinkedList<T> {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+
         Node<T> node = head;
         for (int i = 0; i < index; i++) {
             node = node.next;
@@ -56,6 +48,7 @@ public class LinkedList<T> {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+
         Node<T> node = head;
         for (int i = 0; i < index; i++) {
             node = node.next;
@@ -67,6 +60,7 @@ public class LinkedList<T> {
     public int search(T data) {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+
         Node<T> node = head;
         for (int i = 0; i < size - 1; i++) {
             if (node.data.equals(data)) return i;
@@ -78,6 +72,7 @@ public class LinkedList<T> {
     private int indexOf(T data) {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+
         int index = 0;
         for (Node<T> node = head; node.next != null; node = node.next) {
             if (data.equals(node.data)) return index;
@@ -96,12 +91,9 @@ public class LinkedList<T> {
     }
 
     public void insertAtEnd(T data) {
-        // Time complexity: O(1)
-        if (size == 0) {
-            insertAtStart(data);
-            return;
-        }
         // Time complexity: O(N)
+        if (size == 0) { insertAtStart(data); return; }
+
         Node<T> newNode = new Node<>(data);
         Node<T> node = head;
         for (int i = 0; i < size - 1; i++) {
@@ -114,14 +106,9 @@ public class LinkedList<T> {
     public void insertAtIndex(int index, T data) {
         // Time complexity: O(N)
         if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
-        if (index == 0) {
-            insertAtStart(data);
-            return;
-        }
-        if (index == size) {
-            insertAtEnd(data);
-            return;
-        }
+        if (index == 0) { insertAtStart(data); return; }
+        if (index == size) { insertAtEnd(data); return; }
+
         Node<T> newNode = new Node<>(data);
         Node<T> node = head;
         for (int i = 0; i < index - 1; i++) {
@@ -136,30 +123,32 @@ public class LinkedList<T> {
     public T deleteFromStart() {
         // Time complexity: O(1)
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
-        T headData = head.data;
-        Node<T> headNext = head.next;
+
+        T data = head.data;
+        Node<T> next = head.next;
         head.data = null;
         head.next = null;
-        head = headNext;
+        head = next;
         size--;
-        return headData;
+        return data;
     }
 
     public T deleteFromEnd() {
         // Time complexity: O(N)
         if (head == null) throw new NoSuchElementException("LinkedList is empty.");
         if (size == 1) return deleteFromStart();
+
         Node<T> node = head;
         for (int i = 0; i < size - 2; i++) {
             node = node.next;
         }
-        Node<T> nodeNext = node.next;
-        T nodeNextData = nodeNext.data;
+        Node<T> next = node.next;
+        T data = next.data;
         node.next = null;
-        nodeNext.data = null;
-        nodeNext.next = null;
+        next.data = null;
+        next.next = null;
         size--;
-        return nodeNextData;
+        return data;
     }
 
     public T deleteFromIndex(int index) {
@@ -168,16 +157,17 @@ public class LinkedList<T> {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index == 0) return deleteFromStart();
         if (index == size - 1) return deleteFromEnd();
+
         Node<T> node = head;
         for (int i = 0; i < index - 1; i++) {
             node = node.next;
         }
-        Node<T> nodeNext = node.next;
-        T nodeNextData = nodeNext.data;
+        Node<T> next = node.next;
+        T data = next.data;
         node.next = node.next.next;
-        nodeNext.data = null;
-        nodeNext.next = null;
+        next.data = null;
+        next.next = null;
         size--;
-        return nodeNextData;
+        return data;
     }
 }
