@@ -170,4 +170,48 @@ public class LinkedList<T> {
         size--;
         return data;
     }
+
+    // Chapter 14: Node-based Data Structures.
+
+    // Exercise 1:
+    public void print() {
+        Node<T> node = head;
+        for (int i = 0; i < size; i++) {
+            System.out.println(node.data);
+            node = node.next;
+        }
+    }
+
+    // Exercise 3:
+    public T last() {
+        Node<T> node = head;
+        while (node.next != null) {
+            node = node.next;
+        }
+        return node.data;
+    }
+
+    // Exercise 4:
+    public void reverse() {
+        Node<T> prev = null;
+        Node<T> node = head;
+        while (node != null) {
+            Node<T> next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        head = prev;
+    }
+
+    // Exercise 5:
+    private T deleteNode(Node<T> node) {
+        T data = node.data;
+        Node<T> next = node.next;
+        node.data = next.data;
+        node.next = next.next;
+        next.data = null;
+        next.next = null;
+        return data;
+    }
 }

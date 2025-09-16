@@ -189,4 +189,15 @@ public class DoublyLinkedList<T> {
         size--;
         return data;
     }
+
+    // Chapter 14: Node-based Data Structures.
+
+    // Exercise 2:
+    public void printInReverse() {
+        Node<T> node = tail;
+        for (int i = size - 1; i > 0; i--) {
+            System.out.println(node.data);
+            node = node.prev;
+        }
+    }
 }
