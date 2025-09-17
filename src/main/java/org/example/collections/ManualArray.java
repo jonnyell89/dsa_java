@@ -37,7 +37,7 @@ public class ManualArray {
         this.data = new int[capacity];
         for (int i = 0; i < array.length; i++) {
             this.data[i] = array[i];
-            incrementSize();
+            size++;
         }
     }
 
@@ -76,10 +76,6 @@ public class ManualArray {
     }
 
     public int getSize() { return size; }
-
-    protected void incrementSize() { size++; }
-
-    protected void decrementSize() { size--; }
 
     public int[] getData() { return data; } // Only public for testing purposes.
 
@@ -121,7 +117,7 @@ public class ManualArray {
             data[i] = data[i - 1]; // Shifts elements -->
         }
         data[0] = element; // Inserts element at the start.
-        incrementSize();
+        size++;
         return this;
     }
 
@@ -129,7 +125,7 @@ public class ManualArray {
         // Time complexity: O(1)
         ensureCapacity();
         data[size] = element; // Inserts element at the end.
-        incrementSize();
+        size++;
         return this;
     }
 
@@ -141,7 +137,7 @@ public class ManualArray {
             data[i] = data[i - 1]; // Shifts elements -->
         }
         data[index] = element; // Inserts element at index.
-        incrementSize();
+        size++;
         return this;
     }
 
@@ -154,7 +150,7 @@ public class ManualArray {
             data[i] = data[i + 1]; // Shifts elements <--
         }
         data[size - 1] = 0; // Clears the last element which has already been shifted.
-        decrementSize();
+        size--;
         return this;
     }
 
@@ -163,7 +159,7 @@ public class ManualArray {
         if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
         ensureCapacity();
         data[size - 1] = 0; // Deletes element at the end.
-        decrementSize();
+        size--;
         return this;
     }
 
@@ -176,7 +172,7 @@ public class ManualArray {
             data[i] = data[i + 1]; // Shifts elements <--
         }
         data[size - 1] = 0; // Clears the last element which has already been shifted.
-        decrementSize();
+        size--;
         return this;
     }
 
