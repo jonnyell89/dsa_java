@@ -46,6 +46,30 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     // INSERT
+    public boolean insert(T data) {
+        return search(root, data);
+    }
+
+    private boolean insert(Node<T> node, T data) {
+        int compareTo = data.compareTo(node.data);
+        if (compareTo < 0) {
+            if (node.left == null) {
+                node.left = new Node<>(data);
+                return true;
+            } else {
+                return insert(node, data);
+            }
+        }
+        if (compareTo > 0) {
+            if (node.right == null) {
+                node.right = new Node<>(data);
+                return true;
+            } else {
+                return insert(node, data);
+            }
+        }
+        return false;
+    }
 
     // DELETE
 }
