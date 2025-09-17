@@ -31,6 +31,17 @@ public class LinkedList<T> {
     // Tells if the argument is the index of a valid position for an iterator or an add operation.
     // private boolean isPositionIndex(int index) { return index >= 0 && index <= size; }
 
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        T[] array = (T[]) new Object[size];
+        Node<T> node = head;
+        for (int i = 0; i < size; i++) {
+            array[i] = node.data;
+            node = node.next;
+        }
+        return array;
+    }
+
     // READ
     public T read(int index) {
         // Time complexity: O(N)
@@ -205,7 +216,7 @@ public class LinkedList<T> {
     }
 
     // Exercise 5:
-    private T deleteNode(Node<T> node) {
+    private T deleteMiddleNode(Node<T> node) {
         T data = node.data;
         Node<T> next = node.next;
         node.data = next.data;
