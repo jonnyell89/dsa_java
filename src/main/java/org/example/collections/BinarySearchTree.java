@@ -1,27 +1,27 @@
 package org.example.collections;
 
-public class BinarySearchTree {
+public class BinarySearchTree<T extends Comparable<T>> {
 
-    private static class Node {
+    private static class Node<T> {
 
-        private int data;
-        private Node left;
-        private Node right;
+        private T data;
+        private Node<T> left;
+        private Node<T> right;
 
-        private Node(int data) {
+        private Node(T data) {
             this.data = data;
             this.left = null;
             this.right = null;
         }
 
-        private Node(int data, Node left, Node right) {
+        private Node(T data, Node<T> left, Node<T> right) {
             this.data = data;
             this.left = left;
             this.right = right;
         }
     }
 
-    private Node root;
+    private Node<T> root;
     private int size;
 
     public BinarySearchTree() {
@@ -34,14 +34,15 @@ public class BinarySearchTree {
     // READ
 
     // SEARCH
-    public boolean search(int data) {
+    public boolean search(T data) {
         return search(root, data);
     }
 
-    private boolean search(Node node, int data) {
+    private boolean search(Node<T> node, T data) {
         if (node == null) return false; // Base case.
-        if (node.data == data) return true; // Base case.
-        return data < node.data ? search(node.left, data) : search(node.right, data);
+        int compareTo = data.compareTo(node.data);
+        if (compareTo == 0) return true; // Base case.
+        return compareTo < 0 ? search(node.left, data) : search(node.right, data); // Recursive step.
     }
 
     // INSERT
