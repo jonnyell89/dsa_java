@@ -13,6 +13,11 @@ public class LinkedList<T> {
             this.data = data;
             this.next = null;
         }
+
+        private Node(T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+        }
     }
 
     private Node<T> head;
@@ -224,5 +229,35 @@ public class LinkedList<T> {
         next.data = null;
         next.next = null;
         return data;
+    }
+
+    // 92. Reverse Linked List II
+    private Node<T> reverse(Node<T> head, int left, int right) {
+        if (head == null || left == right) return head;
+
+        Node<T> dummy = new Node<>(null, head);
+        Node<T> prev = dummy;
+        Node<T> start = head;
+        Node<T> end = head;
+        Node<T> next = end.next;
+        for (int i = 0; i < left - 1; i++) {
+            prev = prev.next;
+            start = start.next;
+        }
+        for (int i = 0; i < right - 1; i++) {
+            end = end.next;
+            next = next.next;
+        }
+        Node<T> newPrev = start;
+        Node<T> newStart = start.next;
+        while (newStart != next) {
+            Node<T> newNext = newStart.next;
+            newStart.next = newPrev;
+            newPrev = newStart;
+            newStart = newNext;
+        }
+        prev.next = end;
+        start.next = next;
+        return dummy.next;
     }
 }
