@@ -260,4 +260,24 @@ public class LinkedList<T> {
         start.next = next;
         return dummy.next;
     }
+
+    private Node<T> reverseFinal(Node<T> head, int left, int right) {
+        if (head == null || left == right) return head;
+
+        Node<T> dummy = new Node<>(null, head);
+        Node<T> prev = dummy;
+        for (int i = 0; i < left - 1; i++) {
+            prev = prev.next;
+        }
+        Node<T> current = prev.next;
+        // [1, 2, 3, 4, 5], left = 2, right = 4;
+        for (int i = 0; i < right - left; i++) {
+            Node<T> next = current.next; // next = 3; next = 4;
+            current.next = next.next; // 2 -> 4; 2 -> 5;
+            next.next = prev.next; // 3 -> 2; 4 -> 3;
+            prev.next = next; // 1 -> 3; 1 -> 4;
+            // [1, 3, 2, 4, 5]; [1, 4, 3, 2, 5];
+        }
+        return dummy.next;
+    }
 }
