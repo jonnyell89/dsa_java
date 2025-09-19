@@ -280,4 +280,45 @@ public class LinkedList<T> {
         }
         return dummy.next;
     }
+
+    // 82. Remove Duplicates from Sorted List II
+    private Node<T> deleteDuplicates(Node<T> head) {
+        if (head == null) return null;
+        Node<T> dummy = new Node<>(null, head);
+        Node<T> prev = dummy;
+        Node<T> current = prev.next;
+        Node<T> next = null;
+        while (current != null) {
+            next = current.next;
+            if (current.next != null && current.data == next.data) {
+                while (current.next != null && current.data == next.data) {
+                    current = next;
+                    next = next.next;
+                }
+                prev.next = next;
+            } else {
+                prev = current;
+            }
+            current = next;
+        }
+        return dummy.next;
+    }
+
+    private Node<T> deleteDuplicatesFinal(Node<T> head) {
+        Node<T> dummy = new Node<>(null, head);
+        Node<T> prev = dummy.next;
+        Node<T> current = head;
+        while (current != null) {
+            if (current.next != null && current.data == current.next.data) {
+                while (current.next != null && current.data == current.next.data) {
+                    current = current.next;
+                }
+                prev.next = current.next;
+            } else {
+                prev = prev.next;
+            }
+            current = current.next;
+        }
+        return dummy.next;
+    }
 }
