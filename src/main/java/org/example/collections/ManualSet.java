@@ -4,20 +4,20 @@ import java.util.Arrays;
 
 public class ManualSet {
 
-    protected final ManualArray data;
+    protected final MyArray data;
 
     public ManualSet() {
-        this.data = new ManualArray();
+        this.data = new MyArray();
     }
 
     public ManualSet(int initialCapacity) {
         if (initialCapacity < 0) throw new IllegalArgumentException("ManualSet initial capacity cannot be less than zero.");
-        this.data = new ManualArray(initialCapacity);
+        this.data = new MyArray(initialCapacity);
     }
 
     public ManualSet(int[] array) {
         if (array == null) throw new NullPointerException("ManualSet cannot be null.");
-        this.data = new ManualArray();
+        this.data = new MyArray();
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (!contains(element)) data.insertAtEnd(element);

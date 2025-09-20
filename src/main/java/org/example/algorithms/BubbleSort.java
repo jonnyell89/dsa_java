@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 
 public class BubbleSort {
 
@@ -23,7 +23,7 @@ public class BubbleSort {
         return iterable;
     }
 
-    public static ManualArray bubbleSort(ManualArray manualArray) {
+    public static MyArray bubbleSort(MyArray manualArray) {
         // Time complexity: O(N^2)
         int unsortedEndIndex = manualArray.getSize() - 1;
         boolean isSorted = false;

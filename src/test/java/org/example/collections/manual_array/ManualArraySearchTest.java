@@ -1,6 +1,6 @@
 package org.example.collections.manual_array;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ public class ManualArraySearchTest {
     @Test
     void testManualArraySearchWithInvalidElement() {
         int elementNotPresentInArray = 10;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
                 () -> manualArray.search(elementNotPresentInArray),
@@ -25,7 +25,7 @@ public class ManualArraySearchTest {
 
     @Test
     void testManualArraySearchWithValidElement() {
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         for (int i = 0; i < manualArray.getSize(); i++) {
             int element = array[i];
             assertEquals(i, manualArray.search(element), String.format("Element at manualArray[%d] should return the index %d.", i, i));

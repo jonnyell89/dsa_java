@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class ManualStack {
 
-    protected final ManualArray data;
+    protected final MyArray data;
 
     public ManualStack() {
-        this.data = new ManualArray();
+        this.data = new MyArray();
     }
 
     public boolean isEmpty() { return data.getSize() == 0; }

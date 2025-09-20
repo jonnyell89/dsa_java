@@ -1,6 +1,6 @@
 package org.example.collections.manual_array;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ public class ManualArrayReadTest {
     @Test
     void testManualArrayReadWithIndexLessThanZero() {
         int indexLessThanZero = -5;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.read(indexLessThanZero),
@@ -26,7 +26,7 @@ public class ManualArrayReadTest {
     @Test
     void testManualArrayReadWithIndexGreaterThanSize() {
         int indexGreaterThanSize = 15;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.read(indexGreaterThanSize),
@@ -36,7 +36,7 @@ public class ManualArrayReadTest {
 
     @Test
     void testManualArrayReadWithValidIndex() {
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         for (int i = 0; i < manualArray.getSize(); i++) {
             int element = array[i];
             assertEquals(element, manualArray.read(i), String.format("Element at manualArray[%d] should be %d.", i, element));

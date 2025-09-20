@@ -1,6 +1,6 @@
 package org.example.collections.manual_array;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -15,7 +15,7 @@ public class ManualArrayInsertTest {
     @Test
     void testManualArrayInsertAtStart() {
         int elementToInsert = 10;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.insertAtStart(elementToInsert);
         int[] arrayWithElementInserted = new int[]{10, 3, 17, 75, 80, 202};
         assertArrayEquals(arrayWithElementInserted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementInserted.");
@@ -24,7 +24,7 @@ public class ManualArrayInsertTest {
     @Test
     void testManualArrayInsertAtEnd() {
         int elementToInsert = 10;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.insertAtEnd(elementToInsert);
         int[] arrayWithElementInserted = new int[]{3, 17, 75, 80, 202, 10};
         assertArrayEquals(arrayWithElementInserted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementInserted.");
@@ -34,7 +34,7 @@ public class ManualArrayInsertTest {
     void testManualArrayInsertAtIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int elementToInsert = 10;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.insertAtIndex(indexLessThanZero, elementToInsert),
@@ -46,7 +46,7 @@ public class ManualArrayInsertTest {
     void testManualArrayInsertAtIndexWithIndexGreaterThanSize() {
         int indexGreaterThanZero = 15;
         int elementToInsert = 10;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.insertAtIndex(indexGreaterThanZero, elementToInsert),
@@ -58,7 +58,7 @@ public class ManualArrayInsertTest {
     void testManualArrayInsertAtIndex() {
         int index = array.length / 2;
         int elementToInsert = 10;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.insertAtIndex(index, elementToInsert);
         int[] arrayWithElementInserted = new int[]{3, 17, 10, 75, 80, 202};
         assertArrayEquals(arrayWithElementInserted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementInserted.");

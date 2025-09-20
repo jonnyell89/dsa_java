@@ -1,6 +1,6 @@
 package org.example.collections.manual_array;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -15,7 +15,7 @@ public class ManualArrayEditTest {
     void testManualArraySwapByIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int index = 0;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.swapByIndex(indexLessThanZero, index),
@@ -27,7 +27,7 @@ public class ManualArrayEditTest {
     void testManualArraySwapByIndexWithIndexGreaterThanSize() {
         int index = 0;
         int indexGreaterThanSize = 15;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.swapByIndex(index, indexGreaterThanSize),
@@ -39,7 +39,7 @@ public class ManualArrayEditTest {
     void testManualArraySwapByIndex() {
         int i = 0;
         int j = array.length / 2;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.swapByIndex(i, j);
         int[] arrayWithElementsSwapped = new int[]{75, 17, 3, 80, 202};
         assertArrayEquals(arrayWithElementsSwapped, manualArray.toArray(), "ManualArray should be equal to arrayWithElementsSwapped.");
@@ -49,7 +49,7 @@ public class ManualArrayEditTest {
     void testManualArrayReplaceByIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int index = 0;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.replaceByIndex(indexLessThanZero, index),
@@ -61,7 +61,7 @@ public class ManualArrayEditTest {
     void testManualArrayReplaceByIndexWithIndexGreaterThanSize() {
         int index = 0;
         int indexGreaterThanSize = 15;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.replaceByIndex(index, indexGreaterThanSize),
@@ -73,7 +73,7 @@ public class ManualArrayEditTest {
     void testManualArrayReplaceByIndex() {
         int i = 0;
         int j = array.length / 2;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.replaceByIndex(i, j);
         int[] arrayWithElementReplaced = new int[]{75, 17, 75, 80, 202};
         assertArrayEquals(arrayWithElementReplaced, manualArray.toArray(), "ManualArray should be equal to arrayWithElementReplaced.");
@@ -83,7 +83,7 @@ public class ManualArrayEditTest {
     void testManualArraySetByIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int element = 0;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.setByIndex(indexLessThanZero, element),
@@ -95,7 +95,7 @@ public class ManualArrayEditTest {
     void testManualArraySetByIndexWithIndexGreaterThanSize() {
         int indexGreaterThanSize = 15;
         int element = 0;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.setByIndex(indexGreaterThanSize, element),
@@ -107,7 +107,7 @@ public class ManualArrayEditTest {
     void testManualArraySetByIndex() {
         int index = array.length / 2;
         int element = 0;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.setByIndex(index, element);
         int[] arrayWithElementSet = new int[]{3, 17, 0, 80, 202};
         assertArrayEquals(arrayWithElementSet, manualArray.toArray(), "ManualArray should be equal to arrayWithElementSet.");

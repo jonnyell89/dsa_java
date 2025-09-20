@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 
 public class InsertionSort {
 
@@ -19,7 +19,7 @@ public class InsertionSort {
         return iterable;
     }
 
-    public static ManualArray insertionSort(ManualArray manualArray) {
+    public static MyArray insertionSort(MyArray manualArray) {
         int size = manualArray.getSize();
         for (int i = 1; i < size; i++) {
             int temp = manualArray.read(i);

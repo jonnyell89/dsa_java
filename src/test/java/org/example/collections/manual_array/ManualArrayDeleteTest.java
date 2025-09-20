@@ -1,6 +1,6 @@
 package org.example.collections.manual_array;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -14,7 +14,7 @@ public class ManualArrayDeleteTest {
     // DELETE
     @Test
     void testManualArrayDeleteFromStartOfEmptyArray() {
-        ManualArray manualArray = new ManualArray();
+        MyArray manualArray = new MyArray();
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
                 () -> manualArray.deleteFromStart(),
@@ -24,7 +24,7 @@ public class ManualArrayDeleteTest {
 
     @Test
     void testManualArrayDeleteFromStart() {
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.deleteFromStart();
         int[] arrayWithElementDeleted = new int[]{17, 75, 80, 202};
         assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementDeleted.");
@@ -32,7 +32,7 @@ public class ManualArrayDeleteTest {
 
     @Test
     void testManualArrayDeleteFromEndOfEmptyArray() {
-        ManualArray manualArray = new ManualArray();
+        MyArray manualArray = new MyArray();
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
                 () -> manualArray.deleteFromEnd(),
@@ -42,7 +42,7 @@ public class ManualArrayDeleteTest {
 
     @Test
     void testManualArrayDeleteFromEnd() {
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.deleteFromEnd();
         int[] arrayWithElementDeleted = new int[]{3, 17, 75, 80};
         assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementDeleted.");
@@ -51,7 +51,7 @@ public class ManualArrayDeleteTest {
     @Test
     void testManualArrayDeleteFromIndexOfEmptyArray() {
         int index = 0;
-        ManualArray manualArray = new ManualArray();
+        MyArray manualArray = new MyArray();
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
                 () -> manualArray.deleteFromIndex(index),
@@ -62,7 +62,7 @@ public class ManualArrayDeleteTest {
     @Test
     void testManualArrayDeleteFromIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.deleteFromIndex(indexLessThanZero),
@@ -73,7 +73,7 @@ public class ManualArrayDeleteTest {
     @Test
     void testManualArrayDeleteFromIndexWithIndexGreaterThanSize() {
         int indexGreaterThanZero = 15;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> manualArray.deleteFromIndex(indexGreaterThanZero),
@@ -84,7 +84,7 @@ public class ManualArrayDeleteTest {
     @Test
     void testManualArrayDeleteFromIndex() {
         int deleteFromIndex = array.length / 2;
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         manualArray.deleteFromIndex(deleteFromIndex);
         int[] arrayWithElementDeleted = new int[]{3, 17, 80, 202};
         assertArrayEquals(arrayWithElementDeleted, manualArray.toArray(), "ManualArray should be equal to arrayWithElementDeleted.");

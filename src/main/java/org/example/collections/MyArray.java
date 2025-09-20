@@ -7,7 +7,7 @@ import org.example.interfaces.IntUnaryOperator;
 
 import java.util.Arrays;
 
-public class ManualArray {
+public class MyArray {
 
     protected static final int DEFAULT_CAPACITY = 10;
 
@@ -15,26 +15,29 @@ public class ManualArray {
     protected int size;
     protected int[] data;
 
-    public ManualArray() {
+    public MyArray() {
         this.capacity = DEFAULT_CAPACITY;
         this.size = 0;
         this.data = new int[capacity];
     }
 
-    public ManualArray(int initialCapacity) {
-        if (initialCapacity < 0) throw new IllegalArgumentException("ManualArray initial capacity cannot be less than zero.");
+    public MyArray(int initialCapacity) {
+        if (initialCapacity < 0) throw new IllegalArgumentException("MyArray initial capacity cannot be less than zero.");
+
         this.capacity = DEFAULT_CAPACITY;
         ensureCapacity(initialCapacity);
         this.size = 0;
         this.data = new int[capacity];
     }
 
-    public ManualArray(int[] array) {
-        if (array == null) throw new NullPointerException("ManualArray cannot be null.");
+    public MyArray(int[] array) {
+        if (array == null) throw new NullPointerException("MyArray cannot be null.");
+
         this.capacity = DEFAULT_CAPACITY;
         ensureCapacity(array.length);
         this.size = 0;
         this.data = new int[capacity];
+
         for (int i = 0; i < array.length; i++) {
             this.data[i] = array[i];
             size++;
@@ -49,6 +52,7 @@ public class ManualArray {
         if (size == capacity) {
             int newCapacity = (size < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity * 2;
             int[] newArray = new int[newCapacity];
+
             for (int i = 0; i < size; i++) {
                 newArray[i] = data[i];
             }
@@ -59,6 +63,7 @@ public class ManualArray {
         if (size > DEFAULT_CAPACITY && size <= capacity / 4) {
             int newCapacity = (size / 2 < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity / 2;
             int[] newArray = new int[newCapacity];
+
             for (int i = 0; i < size; i++) {
                 newArray[i] = data[i];
             }
@@ -69,6 +74,7 @@ public class ManualArray {
 
     protected void ensureCapacity(int initialCapacity) {
         int newCapacity = DEFAULT_CAPACITY;
+
         while (newCapacity < initialCapacity) {
             newCapacity = newCapacity * 2;
         }
@@ -85,6 +91,7 @@ public class ManualArray {
 
     public int[] toArray() {
         int[] array = new int[size];
+
         for (int i = 0; i < size; i++) {
             array[i] = data[i];
         }
@@ -95,6 +102,7 @@ public class ManualArray {
     public int read(int index) {
         // Time complexity: O(1)
         if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+
         return data[index];
     }
 
@@ -106,80 +114,93 @@ public class ManualArray {
                 return i;
             }
         }
-        throw new IllegalArgumentException("Element not present in ManualArray: " + element);
+        return -1;
     }
 
     // INSERT
-    public ManualArray insertAtStart(int element) {
+    public boolean insertAtStart(int element) {
         // Time complexity: O(N)
         ensureCapacity();
+
         for (int i = size; i > 0; i--) { // Iterates from the end to the start.
             data[i] = data[i - 1]; // Shifts elements -->
         }
         data[0] = element; // Inserts element at the start.
         size++;
-        return this;
+        return true;
     }
 
-    public ManualArray insertAtEnd(int element) {
+    public boolean insertAtEnd(int element) {
         // Time complexity: O(1)
         ensureCapacity();
+
         data[size] = element; // Inserts element at the end.
         size++;
-        return this;
+        return true;
     }
 
-    public ManualArray insertAtIndex(int index, int element) {
+    public boolean insertAtIndex(int index, int element) {
         // Time complexity: O(N)
         if (index < 0 || index > size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         ensureCapacity();
+
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
             data[i] = data[i - 1]; // Shifts elements -->
         }
         data[index] = element; // Inserts element at index.
         size++;
-        return this;
+        return true;
     }
 
     // DELETE
-    public ManualArray deleteFromStart() {
+    public int deleteFromStart() {
         // Time complexity: O(N)
-        if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
+        if (size == 0) throw new IllegalStateException("Cannot delete from empty MyArray.");
         ensureCapacity();
+
+        int element = data[0];
+
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
         }
         data[size - 1] = 0; // Clears the last element which has already been shifted.
         size--;
-        return this;
+        return element;
     }
 
-    public ManualArray deleteFromEnd() {
+    public int deleteFromEnd() {
         // Time complexity: O(1)
-        if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
+        if (size == 0) throw new IllegalStateException("Cannot delete from empty MyArray.");
         ensureCapacity();
+
+        int element = data[size - 1];
+
         data[size - 1] = 0; // Deletes element at the end.
         size--;
-        return this;
+        return element;
     }
 
-    public ManualArray deleteFromIndex(int index) {
+    public int deleteFromIndex(int index) {
         // Time complexity: O(N)
-        if (size == 0) throw new IllegalStateException("Cannot delete from empty ManualArray.");
+        if (size == 0) throw new IllegalStateException("Cannot delete from empty MyArray.");
         if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
         ensureCapacity();
+
+        int element = data[index];
+
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
         }
         data[size - 1] = 0; // Clears the last element which has already been shifted.
         size--;
-        return this;
+        return element;
     }
 
     // TRANSFORM
     public void swapByIndex(int i, int j) {
         if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
         if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
+
         int temp = data[i];
         data[i] = data[j];
         data[j] = temp;
@@ -188,11 +209,13 @@ public class ManualArray {
     public void replaceByIndex(int i, int j) {
         if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
         if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
+
         data[i] = data[j];
     }
 
     public void setByIndex(int index, int element) {
         if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+
         data[index] = element;
     }
 
@@ -203,28 +226,31 @@ public class ManualArray {
         }
     }
 
-    public ManualArray filter(IntPredicate predicate) {
-        ManualArray newManualArray = new ManualArray();
+    public MyArray filter(IntPredicate predicate) {
+        MyArray x = new MyArray();
+
         for (int i = 0; i < size; i++) {
             int element = data[i];
             if (predicate.test(element)) {
-                newManualArray.insertAtEnd(element);
+                x.insertAtEnd(element);
             }
         }
-        return newManualArray;
+        return x;
     }
 
-    public ManualArray map(IntUnaryOperator unaryOperator) {
-        ManualArray newManualArray = new ManualArray();
+    public MyArray map(IntUnaryOperator unaryOperator) {
+        MyArray x = new MyArray();
+
         for (int i = 0; i < size; i++) {
             int element = data[i];
-            newManualArray.insertAtEnd(unaryOperator.apply(element));
+            x.insertAtEnd(unaryOperator.apply(element));
         }
-        return newManualArray;
+        return x;
     }
 
     public int reduce(IntBinaryOperator binaryOperator, int initialValue) {
         int accumulator = initialValue;
+
         for (int i = 0; i < size; i++) {
             int element = data[i];
             accumulator = binaryOperator.apply(accumulator, element);
@@ -254,7 +280,7 @@ public class ManualArray {
 
     @Override
     public String toString() {
-        return "ManualArray{" +
+        return "MyArray{" +
                 "data=" + Arrays.toString(Arrays.copyOf(data, size)) +
                 '}';
     }

@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
@@ -11,7 +11,7 @@ public class SortableArrayTest {
     @Test
     void testPartition() {
         int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int leftPointer = sortableArray.partition(0, manualArray.getSize() - 1);
         int[] result = new int[]{0, 1, 2, 3, 6, 5};
@@ -21,7 +21,7 @@ public class SortableArrayTest {
     @Test
     void testQuicksort() {
         int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         sortableArray.quicksort(0, manualArray.getSize() - 1);
         int[] result = new int[]{0, 1, 2, 3, 5, 6};
@@ -31,7 +31,7 @@ public class SortableArrayTest {
     @Test
     void testQuickselect() {
         int[] array = new int[]{0, 50, 20, 10, 60, 30};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int secondLowestValue = sortableArray.quickselect(1, 0, manualArray.getSize() - 1);
         int result = 10;
@@ -41,7 +41,7 @@ public class SortableArrayTest {
     @Test
     void testMergeSort() {
         int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         sortableArray.mergeSort(0, manualArray.getSize() - 1);
         int[] result = new int[]{0, 1, 2, 3, 5, 6};
@@ -51,7 +51,7 @@ public class SortableArrayTest {
     @Test
     void testHasDuplicate() {
         int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         boolean hasDuplicate = sortableArray.hasDuplicate();
         boolean result = true;
@@ -61,7 +61,7 @@ public class SortableArrayTest {
     @Test
     void testGreatestProduct() {
         int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int greatestProduct = sortableArray.greatestProduct();
         int result = 270;
@@ -71,7 +71,7 @@ public class SortableArrayTest {
     @Test
     void testFindMissingNumber() {
         int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int missingNumber = sortableArray.findMissingNumber();
         int result = 4;
@@ -81,7 +81,7 @@ public class SortableArrayTest {
     @Test
     void testGreatestNumberSlow() {
         int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int greatestNumber = sortableArray.greatestNumberSlow();
         int result = 9;
@@ -91,7 +91,7 @@ public class SortableArrayTest {
     @Test
     void testGreatestNumberMedium() {
         int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int greatestNumber = sortableArray.greatestNumberMedium();
         int result = 9;
@@ -101,7 +101,7 @@ public class SortableArrayTest {
     @Test
     void testGreatestNumberFast() {
         int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        ManualArray manualArray = new ManualArray(array);
+        MyArray manualArray = new MyArray(array);
         SortableArray sortableArray = new SortableArray(manualArray);
         int greatestNumber = sortableArray.greatestNumberFast();
         int result = 9;

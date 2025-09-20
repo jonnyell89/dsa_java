@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class ManualQueue {
 
-    protected final ManualArray data;
+    protected final MyArray data;
 
     public ManualQueue() {
-        this.data = new ManualArray();
+        this.data = new MyArray();
     }
 
     public boolean isEmpty() { return data.getSize() == 0; }

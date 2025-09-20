@@ -1,14 +1,14 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 
 public class SortableArray {
 
     // Chapter 13: Recursive Algorithms for Speed.
 
-    protected ManualArray manualArray;
+    protected MyArray manualArray;
 
-    public SortableArray(ManualArray manualArray) {
+    public SortableArray(MyArray manualArray) {
         this.manualArray = manualArray;
     }
 

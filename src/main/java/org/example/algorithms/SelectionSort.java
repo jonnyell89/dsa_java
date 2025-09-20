@@ -1,6 +1,6 @@
 package org.example.algorithms;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 
 public class SelectionSort {
 
@@ -22,7 +22,7 @@ public class SelectionSort {
         return iterable;
     }
 
-    public static ManualArray selectionSort(ManualArray manualArray) {
+    public static MyArray selectionSort(MyArray manualArray) {
         // Time complexity: O(N^2)
         int size = manualArray.getSize();
         for (int i = 0; i < size - 1; i++) {

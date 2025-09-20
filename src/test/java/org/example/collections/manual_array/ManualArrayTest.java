@@ -1,6 +1,6 @@
 package org.example.collections.manual_array;
 
-import org.example.collections.ManualArray;
+import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +13,7 @@ public class ManualArrayTest {
     // INSTANTIATION
     @Test
     void testManualArrayWithDefaultConstructor() {
-        ManualArray manualArray = new ManualArray();
+        MyArray manualArray = new MyArray();
         assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
@@ -25,7 +25,7 @@ public class ManualArrayTest {
         int capacityLessThanZero = -5;
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new ManualArray(capacityLessThanZero),
+                () -> new MyArray(capacityLessThanZero),
                 "ManualArray capacity should not be negative."
         );
     }
@@ -33,7 +33,7 @@ public class ManualArrayTest {
     @Test
     void testManualArrayWithCapacityZero() {
         int capacityZero = 0;
-        ManualArray manualArray = new ManualArray(capacityZero);
+        MyArray manualArray = new MyArray(capacityZero);
         assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
@@ -43,7 +43,7 @@ public class ManualArrayTest {
     @Test
     void testManualArrayWithCapacityLessThanDefault() {
         int capacityLessThanDefault = 5;
-        ManualArray manualArray = new ManualArray(capacityLessThanDefault);
+        MyArray manualArray = new MyArray(capacityLessThanDefault);
         assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
@@ -53,7 +53,7 @@ public class ManualArrayTest {
     @Test
     void testManualArrayWithCapacityGreaterThanDefault() {
         int capacityGreaterThanDefault = 15;
-        ManualArray manualArray = new ManualArray(capacityGreaterThanDefault);
+        MyArray manualArray = new MyArray(capacityGreaterThanDefault);
         assertEquals(DEFAULT_CAPACITY * 2, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY * 2];
@@ -64,7 +64,7 @@ public class ManualArrayTest {
     void testManualArrayWithNullArray() {
         NullPointerException exception = assertThrows(
                 NullPointerException.class,
-                () -> new ManualArray(null),
+                () -> new MyArray(null),
                 "ManualArray should not be null."
         );
     }
@@ -72,7 +72,7 @@ public class ManualArrayTest {
     @Test
     void testManualArrayWithEmptyArray() {
         int[] emptyArray = new int[]{};
-        ManualArray manualArray = new ManualArray(emptyArray);
+        MyArray manualArray = new MyArray(emptyArray);
         assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, manualArray.getSize(), String.format("ManualArray size should be %d.", 0));
         int[] defaultArray = new int[DEFAULT_CAPACITY];
@@ -83,7 +83,7 @@ public class ManualArrayTest {
     void testManualArrayWithArrayCapacityLessThanDefault() {
         int capacityLessThanDefault = 5;
         int[] inputArray = new int[capacityLessThanDefault];
-        ManualArray manualArray = new ManualArray(inputArray);
+        MyArray manualArray = new MyArray(inputArray);
         assertEquals(DEFAULT_CAPACITY, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(inputArray.length, manualArray.getSize(), String.format("ManualArray size should be %d.", inputArray.length));
         assertArrayEquals(inputArray, manualArray.toArray(), String.format("ManualArray should contain %d zeros.", capacityLessThanDefault));
@@ -93,7 +93,7 @@ public class ManualArrayTest {
     void testManualArrayWithArrayCapacityGreaterThanDefault() {
         int capacityGreaterThanDefault = 15;
         int[] inputArray = new int[capacityGreaterThanDefault];
-        ManualArray manualArray = new ManualArray(inputArray);
+        MyArray manualArray = new MyArray(inputArray);
         assertEquals(DEFAULT_CAPACITY * 2, manualArray.getCapacity(), String.format("ManualArray capacity should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(inputArray.length, manualArray.getSize(), String.format("ManualArray size should be %d.", inputArray.length));
         assertArrayEquals(inputArray, manualArray.toArray(), String.format("ManualArray should contain %d zeros.", capacityGreaterThanDefault));
