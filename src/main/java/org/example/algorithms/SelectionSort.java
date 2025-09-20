@@ -22,20 +22,20 @@ public class SelectionSort {
         return iterable;
     }
 
-    public static MyArray selectionSort(MyArray manualArray) {
+    public static MyArray selectionSort(MyArray myArray) {
         // Time complexity: O(N^2)
-        int size = manualArray.getSize();
+        int size = myArray.getSize();
         for (int i = 0; i < size - 1; i++) {
             int lowestElementIndex = i;
             for (int j = i + 1; j < size; j++) {
-                if (manualArray.read(j) < manualArray.read(lowestElementIndex)) {
+                if (myArray.read(j) < myArray.read(lowestElementIndex)) {
                     lowestElementIndex = j;
                 }
             }
             if (lowestElementIndex != i) {
-                manualArray.swapByIndex(i, lowestElementIndex);
+                myArray.swapByIndex(i, lowestElementIndex);
             }
         }
-        return manualArray;
+        return myArray;
     }
 }

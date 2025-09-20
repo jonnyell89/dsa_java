@@ -2,21 +2,21 @@ package org.example.collections;
 
 import java.util.Arrays;
 
-public class ManualSet {
+public class MySet {
 
     protected final MyArray data;
 
-    public ManualSet() {
+    public MySet() {
         this.data = new MyArray();
     }
 
-    public ManualSet(int initialCapacity) {
-        if (initialCapacity < 0) throw new IllegalArgumentException("ManualSet initial capacity cannot be less than zero.");
+    public MySet(int initialCapacity) {
+        if (initialCapacity < 0) throw new IllegalArgumentException("MySet initial capacity cannot be less than zero.");
         this.data = new MyArray(initialCapacity);
     }
 
-    public ManualSet(int[] array) {
-        if (array == null) throw new NullPointerException("ManualSet cannot be null.");
+    public MySet(int[] array) {
+        if (array == null) throw new NullPointerException("MySet cannot be null.");
         this.data = new MyArray();
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
@@ -95,7 +95,7 @@ public class ManualSet {
 
     @Override
     public String toString() {
-        return "ManualSet{" +
+        return "MySet{" +
                 "data=" + Arrays.toString(Arrays.copyOf(data.toArray(), data.getSize())) +
                 '}';
     }

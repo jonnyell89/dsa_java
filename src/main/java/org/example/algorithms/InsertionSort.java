@@ -19,19 +19,19 @@ public class InsertionSort {
         return iterable;
     }
 
-    public static MyArray insertionSort(MyArray manualArray) {
-        int size = manualArray.getSize();
+    public static MyArray insertionSort(MyArray myArray) {
+        int size = myArray.getSize();
         for (int i = 1; i < size; i++) {
-            int temp = manualArray.read(i);
+            int temp = myArray.read(i);
             int position = i - 1;
             while (position >= 0) {
-                if (manualArray.read(position) > temp) {
-                    manualArray.replaceByIndex(position + 1, position);
+                if (myArray.read(position) > temp) {
+                    myArray.replaceByIndex(position + 1, position);
                     position--;
                 } else break;
             }
-            manualArray.setByIndex(position + 1, temp);
+            myArray.setByIndex(position + 1, temp);
         }
-        return manualArray;
+        return myArray;
     }
 }

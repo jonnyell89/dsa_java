@@ -1,6 +1,6 @@
 package org.example.collections;
 
-public class BinarySearchTree<T extends Comparable<T>> {
+public class MyBinarySearchTree<T extends Comparable<T>> {
 
     private static class Node<T> {
 
@@ -24,7 +24,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> root;
     private int size;
 
-    public BinarySearchTree() {
+    public MyBinarySearchTree() {
         this.root = null;
         this.size = 0;
     }

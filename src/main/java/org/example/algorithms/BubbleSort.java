@@ -23,20 +23,20 @@ public class BubbleSort {
         return iterable;
     }
 
-    public static MyArray bubbleSort(MyArray manualArray) {
+    public static MyArray bubbleSort(MyArray myArray) {
         // Time complexity: O(N^2)
-        int unsortedEndIndex = manualArray.getSize() - 1;
+        int unsortedEndIndex = myArray.getSize() - 1;
         boolean isSorted = false;
         while(!isSorted) {
             isSorted = true;
             for (int i = 0; i < unsortedEndIndex; i++) {
-                if (manualArray.read(i) > manualArray.read(i + 1)) {
-                    manualArray.swapByIndex(i, i + 1);
+                if (myArray.read(i) > myArray.read(i + 1)) {
+                    myArray.swapByIndex(i, i + 1);
                     isSorted = false;
                 }
             }
             unsortedEndIndex--;
         }
-        return manualArray;
+        return myArray;
     }
 }

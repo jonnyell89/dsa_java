@@ -6,32 +6,32 @@ public class SortableArray {
 
     // Chapter 13: Recursive Algorithms for Speed.
 
-    protected MyArray manualArray;
+    protected MyArray myArray;
 
-    public SortableArray(MyArray manualArray) {
-        this.manualArray = manualArray;
+    public SortableArray(MyArray myArray) {
+        this.myArray = myArray;
     }
 
     public int partition(int leftPointer, int rightPointer) {
         int pivotIndex = rightPointer;
-        int pivot = manualArray.read(pivotIndex);
+        int pivot = myArray.read(pivotIndex);
         rightPointer -= 1;
         while (true) {
-            while (manualArray.read(leftPointer) < pivot) {
+            while (myArray.read(leftPointer) < pivot) {
                 leftPointer += 1;
             }
-            while (manualArray.read(rightPointer) > pivot) {
+            while (myArray.read(rightPointer) > pivot) {
                 rightPointer -= 1;
             }
             // If the pointers have met, exit the loop to swap the left pointer and the pivot values by index.
             if (leftPointer >= rightPointer) break;
             // If the pointers have not met, swap the left pointer and right pointer values by index.
             else {
-                manualArray.swapByIndex(leftPointer, rightPointer);
+                myArray.swapByIndex(leftPointer, rightPointer);
                 leftPointer += 1;
             }
         }
-        manualArray.swapByIndex(leftPointer, pivotIndex);
+        myArray.swapByIndex(leftPointer, pivotIndex);
         return leftPointer;
     }
 
@@ -43,14 +43,14 @@ public class SortableArray {
     }
 
     public int quickselect(int kthLowestValue, int leftIndex, int rightIndex) {
-        if (rightIndex - leftIndex <= 0) return manualArray.read(leftIndex);
+        if (rightIndex - leftIndex <= 0) return myArray.read(leftIndex);
         int pivotIndex = partition(leftIndex, rightIndex);
         if (kthLowestValue < pivotIndex) {
             return quickselect(kthLowestValue, leftIndex, pivotIndex - 1);
         } else if (kthLowestValue > pivotIndex) {
             return quickselect(kthLowestValue, pivotIndex + 1, rightIndex);
         } else {
-            return manualArray.read(pivotIndex);
+            return myArray.read(pivotIndex);
         }
     }
 
@@ -62,29 +62,29 @@ public class SortableArray {
         int[] rightArray = new int[rightSize];
         // Insert data into left subarray and right subarray.
         for (int i = 0; i < leftSize; i++) {
-            leftArray[i] = manualArray.read(leftIndex + i);
+            leftArray[i] = myArray.read(leftIndex + i);
         }
         for (int j = 0; j < rightSize; j++) {
-            rightArray[j] = manualArray.read(midIndex + 1 + j);
+            rightArray[j] = myArray.read(midIndex + 1 + j);
         }
         int i = 0, j = 0, k = leftIndex; // Initial indices of left subarray, right subarray and merged array.
         while (i < leftSize && j < rightSize) {
             if (leftArray[i] <= rightArray[j]) {
-                manualArray.setByIndex(k, leftArray[i]);
+                myArray.setByIndex(k, leftArray[i]);
                 i++;
             } else {
-                manualArray.setByIndex(k, rightArray[j]);
+                myArray.setByIndex(k, rightArray[j]);
                 j++;
             }
             k++; // Increment k with each insertion.
         }
         while (i < leftSize) {
-            manualArray.setByIndex(k, leftArray[i]);
+            myArray.setByIndex(k, leftArray[i]);
             i++;
             k++;
         }
         while (j < rightSize) {
-            manualArray.setByIndex(k, rightArray[j]);
+            myArray.setByIndex(k, rightArray[j]);
             j++;
             k++;
         }
@@ -101,27 +101,27 @@ public class SortableArray {
 
     public boolean hasDuplicate() {
         // Time complexity: O(N log N)
-        quicksort(0, manualArray.getSize() - 1);
-        int size = manualArray.getSize();
+        quicksort(0, myArray.getSize() - 1);
+        int size = myArray.getSize();
         for (int i = 0; i < size - 1; i++) {
-            if (manualArray.read(i) == manualArray.read(i + 1)) return true;
+            if (myArray.read(i) == myArray.read(i + 1)) return true;
         }
         return false;
     }
 
     //Exercise 1:
     public int greatestProduct() {
-        int lastIndex = manualArray.getSize() - 1;
+        int lastIndex = myArray.getSize() - 1;
         quicksort(0, lastIndex);
-        return manualArray.read(lastIndex) * manualArray.read(lastIndex - 1) * manualArray.read(lastIndex - 2);
+        return myArray.read(lastIndex) * myArray.read(lastIndex - 1) * myArray.read(lastIndex - 2);
     }
 
     // Exercise 2:
     public int findMissingNumber() {
-        int size = manualArray.getSize();
+        int size = myArray.getSize();
         quicksort(0, size - 1);
         for (int i = 0; i < size; i++) {
-            if (manualArray.read(i) != i) return i;
+            if (myArray.read(i) != i) return i;
         }
         return -1;
     }
@@ -129,33 +129,33 @@ public class SortableArray {
     //Exercise 3:
     public int greatestNumberSlow() {
         // Time complexity: O(N^2)
-        int size = manualArray.getSize();
+        int size = myArray.getSize();
         for (int i = 0; i < size; i++) {
             boolean isGreatestNumber = true;
             for (int j = 0; j < size; j++) {
-                if (manualArray.read(j) > manualArray.read(i)) {
+                if (myArray.read(j) > myArray.read(i)) {
                     isGreatestNumber = false;
                 }
             }
-            if (isGreatestNumber) return manualArray.read(i);
+            if (isGreatestNumber) return myArray.read(i);
         }
         throw new IllegalStateException("Array is either empty, or all values are the same.");
     }
 
     public int greatestNumberMedium() {
         // Time complexity: O(N log N)
-        int lastIndex = manualArray.getSize() - 1;
+        int lastIndex = myArray.getSize() - 1;
         quicksort(0, lastIndex);
-        return manualArray.read(lastIndex);
+        return myArray.read(lastIndex);
     }
 
     public int greatestNumberFast() {
         // Time complexity: O(N)
-        int size = manualArray.getSize();
-        int greatestNumber = manualArray.read(0);
+        int size = myArray.getSize();
+        int greatestNumber = myArray.read(0);
         for (int i = 1; i < size; i++) {
-            if (manualArray.read(i) > greatestNumber) {
-                greatestNumber = manualArray.read(i);
+            if (myArray.read(i) > greatestNumber) {
+                greatestNumber = myArray.read(i);
             }
         }
         return greatestNumber;

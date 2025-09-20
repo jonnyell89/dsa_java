@@ -2,7 +2,7 @@ package org.example.collections;
 
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList<T> {
+public class MyDoublyLinkedList<T> {
 
     private static class Node<T> {
 
@@ -32,7 +32,7 @@ public class DoublyLinkedList<T> {
     // READ
     public T read(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
 
         Node<T> node;
@@ -54,14 +54,14 @@ public class DoublyLinkedList<T> {
     // SEARCH
     public int search(T data) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
 
         Node<T> node = head;
         for (int i = 0; i < size; i++) { // Iterate to the end.
             if (node.data.equals(data)) return i;
             node = node.next;
         }
-        throw new IllegalArgumentException("Node not present in DoublyLinkedList.");
+        throw new IllegalArgumentException("Node not present in MyDoublyLinkedList.");
     }
 
     // INSERT
@@ -127,7 +127,7 @@ public class DoublyLinkedList<T> {
     // DELETE
     public T deleteFromStart() {
         // Time complexity: O(1)
-        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
 
         T data = head.data;
         Node<T> next = head.next;
@@ -146,7 +146,7 @@ public class DoublyLinkedList<T> {
 
     public T deleteFromEnd() {
         // Time complexity: O(1)
-        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
         if (size == 1) return deleteFromStart();
 
         T data = tail.data;
@@ -161,7 +161,7 @@ public class DoublyLinkedList<T> {
 
     public T deleteFromIndex(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("DoublyLinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index == 0) return deleteFromStart();
         if (index == size - 1) return deleteFromEnd();

@@ -2,18 +2,18 @@ package org.example.collections;
 
 import java.util.Arrays;
 
-public class ManualStack {
+public class MyStack {
 
     protected final MyArray data;
 
-    public ManualStack() {
+    public MyStack() {
         this.data = new MyArray();
     }
 
     public boolean isEmpty() { return data.getSize() == 0; }
 
     public int peek() {
-        if (isEmpty()) throw new RuntimeException("ManualStack is empty.");
+        if (isEmpty()) throw new RuntimeException("MyStack is empty.");
         return data.read(data.getSize() - 1);
     }
 
@@ -23,7 +23,7 @@ public class ManualStack {
     }
 
     public int pop() {
-        if (isEmpty()) throw new RuntimeException("ManualStack is empty.");
+        if (isEmpty()) throw new RuntimeException("MyStack is empty.");
         int topElement = data.read(data.getSize() - 1);
         data.deleteFromEnd();
         return topElement;
@@ -41,7 +41,7 @@ public class ManualStack {
 
     @Override
     public String toString() {
-        return "ManualStack{" +
+        return "MyStack{" +
                 "data=" + Arrays.toString(Arrays.copyOf(data.toArray(), data.getSize())) +
                 '}';
     }

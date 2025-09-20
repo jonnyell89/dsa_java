@@ -2,7 +2,7 @@ package org.example.collections;
 
 import java.util.NoSuchElementException;
 
-public class LinkedList<T> {
+public class MyLinkedList<T> {
 
     private static class Node<T> {
 
@@ -23,7 +23,7 @@ public class LinkedList<T> {
     private Node<T> head;
     private int size;
 
-    public LinkedList() {
+    public MyLinkedList() {
         this.head = null;
         this.size = 0;
     }
@@ -50,7 +50,7 @@ public class LinkedList<T> {
     // READ
     public T read(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
 
         Node<T> node = head;
@@ -62,7 +62,7 @@ public class LinkedList<T> {
 
     private Node<T> node(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
 
         Node<T> node = head;
@@ -75,19 +75,19 @@ public class LinkedList<T> {
     // SEARCH
     public int search(T data) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
 
         Node<T> node = head;
         for (int i = 0; i < size - 1; i++) {
             if (node.data.equals(data)) return i;
             node = node.next;
         }
-        throw new IllegalArgumentException("Node not present in LinkedList." + data);
+        throw new IllegalArgumentException("Node not present in MyLinkedList." + data);
     }
 
     private int indexOf(T data) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
 
         int index = 0;
         for (Node<T> node = head; node.next != null; node = node.next) {
@@ -138,7 +138,7 @@ public class LinkedList<T> {
     // DELETE
     public T deleteFromStart() {
         // Time complexity: O(1)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
 
         T data = head.data;
         Node<T> next = head.next;
@@ -151,7 +151,7 @@ public class LinkedList<T> {
 
     public T deleteFromEnd() {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
         if (size == 1) return deleteFromStart();
 
         Node<T> node = head;
@@ -169,7 +169,7 @@ public class LinkedList<T> {
 
     public T deleteFromIndex(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("LinkedList is empty.");
+        if (head == null) throw new NoSuchElementException("MyLinkedList is empty.");
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
         if (index == 0) return deleteFromStart();
         if (index == size - 1) return deleteFromEnd();
