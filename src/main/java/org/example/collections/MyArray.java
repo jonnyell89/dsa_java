@@ -9,11 +9,11 @@ import java.util.Arrays;
 
 public class MyArray {
 
-    protected static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10;
 
-    protected int capacity;
-    protected int size;
-    protected int[] data;
+    private int capacity;
+    private int size;
+    private int[] data;
 
     public MyArray() {
         this.capacity = DEFAULT_CAPACITY;
@@ -46,9 +46,9 @@ public class MyArray {
 
     public int getCapacity() { return capacity; } // Only public for testing purposes.
 
-    protected void setCapacity(int capacity) { this.capacity = capacity; }
+    private void setCapacity(int capacity) { this.capacity = capacity; }
 
-    protected void ensureCapacity() {
+    private void ensureCapacity() {
         if (size == capacity) {
             int newCapacity = (size < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity * 2;
             int[] newArray = new int[newCapacity];
@@ -72,20 +72,20 @@ public class MyArray {
         }
     }
 
-    protected void ensureCapacity(int initialCapacity) {
-        int newCapacity = DEFAULT_CAPACITY;
+    private void ensureCapacity(int initialCapacity) {
+        int capacity = DEFAULT_CAPACITY;
 
-        while (newCapacity < initialCapacity) {
-            newCapacity = newCapacity * 2;
+        while (capacity < initialCapacity) {
+            capacity = capacity * 2;
         }
-        setCapacity(newCapacity);
+        setCapacity(capacity);
     }
 
     public int getSize() { return size; }
 
     public int[] getData() { return data; } // Only public for testing purposes.
 
-    protected void setData(int[] data) { this.data = data; }
+    private void setData(int[] data) { this.data = data; }
 
     public boolean isEmpty() { return size == 0; }
 
@@ -98,10 +98,23 @@ public class MyArray {
         return array;
     }
 
+    // GUARDS
+    private void checkElementIndex(int index) {
+        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index > size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+
+    private void checkIfEmpty() {
+        if (isEmpty()) throw new IllegalStateException("Cannot delete from empty MyArray.");
+    }
+
     // READ
     public int read(int index) {
         // Time complexity: O(1)
-        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+        checkElementIndex(index);
 
         return data[index];
     }
@@ -141,7 +154,7 @@ public class MyArray {
 
     public boolean insertAtIndex(int index, int element) {
         // Time complexity: O(N)
-        if (index < 0 || index > size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+        checkPositionIndex(index);
         ensureCapacity();
 
         for (int i = size; i > index; i--) { // Iterates from the end to the index.
@@ -155,7 +168,7 @@ public class MyArray {
     // DELETE
     public int deleteFromStart() {
         // Time complexity: O(N)
-        if (size == 0) throw new IllegalStateException("Cannot delete from empty MyArray.");
+        checkIfEmpty();
         ensureCapacity();
 
         int element = data[0];
@@ -170,7 +183,7 @@ public class MyArray {
 
     public int deleteFromEnd() {
         // Time complexity: O(1)
-        if (size == 0) throw new IllegalStateException("Cannot delete from empty MyArray.");
+        checkIfEmpty();
         ensureCapacity();
 
         int element = data[size - 1];
@@ -182,8 +195,8 @@ public class MyArray {
 
     public int deleteFromIndex(int index) {
         // Time complexity: O(N)
-        if (size == 0) throw new IllegalStateException("Cannot delete from empty MyArray.");
-        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+        checkIfEmpty();
+        checkElementIndex(index);
         ensureCapacity();
 
         int element = data[index];
@@ -198,8 +211,8 @@ public class MyArray {
 
     // TRANSFORM
     public void swapByIndex(int i, int j) {
-        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
-        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
+        checkElementIndex(i);
+        checkElementIndex(j);
 
         int temp = data[i];
         data[i] = data[j];
@@ -207,14 +220,14 @@ public class MyArray {
     }
 
     public void replaceByIndex(int i, int j) {
-        if (i < 0 || i >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + i);
-        if (j < 0 || j >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + j);
+        checkElementIndex(i);
+        checkElementIndex(j);
 
         data[i] = data[j];
     }
 
     public void setByIndex(int index, int element) {
-        if (index < 0 || index >= size) throw new ArrayIndexOutOfBoundsException("Index out of bounds: " + index);
+        checkElementIndex(index);
 
         data[index] = element;
     }
