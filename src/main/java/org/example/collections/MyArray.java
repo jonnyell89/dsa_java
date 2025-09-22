@@ -1,74 +1,81 @@
 package org.example.collections;
 
-import org.example.interfaces.IntBinaryOperator;
-import org.example.interfaces.IntConsumer;
-import org.example.interfaces.IntPredicate;
-import org.example.interfaces.IntUnaryOperator;
+import org.example.interfaces.BinaryOperator;
+import org.example.interfaces.Consumer;
+import org.example.interfaces.Predicate;
+import org.example.interfaces.UnaryOperator;
 
 import java.util.Arrays;
+import java.util.Collection;
 
-public class MyArray {
+public class MyArray<T> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
     private int capacity;
     private int size;
-    private int[] data;
+    private T[] data;
 
+    @SuppressWarnings("unchecked")
     public MyArray() {
         this.capacity = DEFAULT_CAPACITY;
         this.size = 0;
-        this.data = new int[capacity];
+        this.data = (T[]) new Object[capacity];
     }
 
+    @SuppressWarnings("unchecked")
     public MyArray(int initialCapacity) {
         if (initialCapacity < 0) throw new IllegalArgumentException("MyArray initial capacity cannot be less than zero.");
 
         this.capacity = DEFAULT_CAPACITY;
         ensureCapacity(initialCapacity);
         this.size = 0;
-        this.data = new int[capacity];
+        this.data = (T[]) new Object[capacity];
     }
 
-    public MyArray(int[] array) {
-        if (array == null) throw new NullPointerException("MyArray cannot be null.");
+    @SuppressWarnings("unchecked")
+    public MyArray(Collection<? extends T> collection) {
+        if (collection == null) throw new NullPointerException("MyArray cannot be null.");
 
         this.capacity = DEFAULT_CAPACITY;
-        ensureCapacity(array.length);
+        ensureCapacity(collection.size());
         this.size = 0;
-        this.data = new int[capacity];
+        this.data = (T[]) new Object[this.capacity];
 
-        for (int i = 0; i < array.length; i++) {
-            this.data[i] = array[i];
-            size++;
+        for (T element : collection) {
+            this.data[size++] = element;
         }
+
+//        for (int i = 0; i < collection.size(); i++) {
+//            this.data[i] = collection[i];
+//            size++;
+//        }
     }
 
-    public int getCapacity() { return capacity; } // Only public for testing purposes.
-
-    private void setCapacity(int capacity) { this.capacity = capacity; }
-
+    @SuppressWarnings("unchecked")
     private void ensureCapacity() {
         if (size == capacity) {
             int newCapacity = (size < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity * 2;
-            int[] newArray = new int[newCapacity];
+            T[] newData = (T[]) new Object[newCapacity];
 
             for (int i = 0; i < size; i++) {
-                newArray[i] = data[i];
+                newData[i] = data[i];
             }
-            setCapacity(newCapacity);
-            setData(newArray);
+
+            this.capacity = newCapacity;
+            this.data = newData;
         }
 
         if (size > DEFAULT_CAPACITY && size <= capacity / 4) {
             int newCapacity = (size / 2 < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capacity / 2;
-            int[] newArray = new int[newCapacity];
+            T[] newData = (T[]) new Object[newCapacity];
 
             for (int i = 0; i < size; i++) {
-                newArray[i] = data[i];
+                newData[i] = data[i];
             }
-            setCapacity(newCapacity);
-            setData(newArray);
+
+            this.capacity = newCapacity;
+            this.data = newData;
         }
     }
 
@@ -78,19 +85,17 @@ public class MyArray {
         while (capacity < initialCapacity) {
             capacity = capacity * 2;
         }
-        setCapacity(capacity);
+
+        this.capacity = capacity;
     }
 
-    public int getSize() { return size; }
-
-    public int[] getData() { return data; } // Only public for testing purposes.
-
-    private void setData(int[] data) { this.data = data; }
+    public int size() { return size; }
 
     public boolean isEmpty() { return size == 0; }
 
-    public int[] toArray() {
-        int[] array = new int[size];
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        T[] array = (T[]) new Object[size];
 
         for (int i = 0; i < size; i++) {
             array[i] = data[i];
@@ -112,7 +117,7 @@ public class MyArray {
     }
 
     // READ
-    public int read(int index) {
+    public T read(int index) {
         // Time complexity: O(1)
         checkElementIndex(index);
 
@@ -120,10 +125,10 @@ public class MyArray {
     }
 
     // SEARCH
-    public int search(int element) {
+    public int search(T element) {
         // Time complexity: O(N)
         for (int i = 0; i < size; i++) {
-            if (data[i] == element) {
+            if (element == null ? data[i] == null : element.equals(data[i])) {
                 return i;
             }
         }
@@ -131,7 +136,7 @@ public class MyArray {
     }
 
     // INSERT
-    public boolean insertAtStart(int element) {
+    public void insertAtStart(T element) {
         // Time complexity: O(N)
         ensureCapacity();
 
@@ -140,19 +145,17 @@ public class MyArray {
         }
         data[0] = element; // Inserts element at the start.
         size++;
-        return true;
     }
 
-    public boolean insertAtEnd(int element) {
+    public void insertAtEnd(T element) {
         // Time complexity: O(1)
         ensureCapacity();
 
         data[size] = element; // Inserts element at the end.
         size++;
-        return true;
     }
 
-    public boolean insertAtIndex(int index, int element) {
+    public void insertAtIndex(int index, T element) {
         // Time complexity: O(N)
         checkPositionIndex(index);
         ensureCapacity();
@@ -162,49 +165,48 @@ public class MyArray {
         }
         data[index] = element; // Inserts element at index.
         size++;
-        return true;
     }
 
     // DELETE
-    public int deleteFromStart() {
+    public T deleteFromStart() {
         // Time complexity: O(N)
         checkIfEmpty();
         ensureCapacity();
 
-        int element = data[0];
+        T element = data[0];
 
         for (int i = 0; i < size - 1; i++) { // Iterates from the start to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
         }
-        data[size - 1] = 0; // Clears the last element which has already been shifted.
+        data[size - 1] = null; // Clears the last element which has already been shifted.
         size--;
         return element;
     }
 
-    public int deleteFromEnd() {
+    public T deleteFromEnd() {
         // Time complexity: O(1)
         checkIfEmpty();
         ensureCapacity();
 
-        int element = data[size - 1];
+        T element = data[size - 1];
 
-        data[size - 1] = 0; // Deletes element at the end.
+        data[size - 1] = null; // Deletes element at the end.
         size--;
         return element;
     }
 
-    public int deleteFromIndex(int index) {
+    public T deleteFromIndex(int index) {
         // Time complexity: O(N)
         checkIfEmpty();
         checkElementIndex(index);
         ensureCapacity();
 
-        int element = data[index];
+        T element = data[index];
 
         for (int i = index; i < size - 1; i++) { // Iterates from index to the penultimate element.
             data[i] = data[i + 1]; // Shifts elements <--
         }
-        data[size - 1] = 0; // Clears the last element which has already been shifted.
+        data[size - 1] = null; // Clears the last element which has already been shifted.
         size--;
         return element;
     }
@@ -214,7 +216,7 @@ public class MyArray {
         checkElementIndex(i);
         checkElementIndex(j);
 
-        int temp = data[i];
+        T temp = data[i];
         data[i] = data[j];
         data[j] = temp;
     }
@@ -226,24 +228,24 @@ public class MyArray {
         data[i] = data[j];
     }
 
-    public void setByIndex(int index, int element) {
+    public void setByIndex(int index, T element) {
         checkElementIndex(index);
 
         data[index] = element;
     }
 
     // ITERATORS
-    public void forEach(IntConsumer consumer) {
+    public void forEach(Consumer<T> consumer) {
         for (int i = 0; i < size; i++) {
             consumer.accept(data[i]);
         }
     }
 
-    public MyArray filter(IntPredicate predicate) {
-        MyArray x = new MyArray();
+    public MyArray<T> filter(Predicate<T> predicate) {
+        MyArray<T> x = new MyArray<>();
 
         for (int i = 0; i < size; i++) {
-            int element = data[i];
+            T element = data[i];
             if (predicate.test(element)) {
                 x.insertAtEnd(element);
             }
@@ -251,29 +253,29 @@ public class MyArray {
         return x;
     }
 
-    public MyArray map(IntUnaryOperator unaryOperator) {
-        MyArray x = new MyArray();
+    public MyArray<T> map(UnaryOperator<T> unaryOperator) {
+        MyArray<T> x = new MyArray<>();
 
         for (int i = 0; i < size; i++) {
-            int element = data[i];
+            T element = data[i];
             x.insertAtEnd(unaryOperator.apply(element));
         }
         return x;
     }
 
-    public int reduce(IntBinaryOperator binaryOperator, int initialValue) {
-        int accumulator = initialValue;
+    public T reduce(BinaryOperator<T> binaryOperator, T initialValue) {
+        T accumulator = initialValue;
 
         for (int i = 0; i < size; i++) {
-            int element = data[i];
+            T element = data[i];
             accumulator = binaryOperator.apply(accumulator, element);
         }
         return accumulator;
     }
 
-    public boolean some(IntPredicate predicate) {
+    public boolean some(Predicate<T> predicate) {
         for (int i = 0; i < size; i++) {
-            int element = data[i];
+            T element = data[i];
             if (predicate.test(element)) {
                 return true;
             }
@@ -281,9 +283,9 @@ public class MyArray {
         return false;
     }
 
-    public boolean every(IntPredicate predicate) {
+    public boolean every(Predicate<T> predicate) {
         for (int i = 0; i < size; i++) {
-            int element = data[i];
+            T element = data[i];
             if (!predicate.test(element)) {
                 return false;
             }

@@ -1,10 +1,10 @@
 package org.example.collections.my_array;
 
 import org.example.collections.MyArray;
-import org.example.interfaces.IntBinaryOperator;
-import org.example.interfaces.IntConsumer;
-import org.example.interfaces.IntPredicate;
-import org.example.interfaces.IntUnaryOperator;
+import org.example.interfaces.BinaryOperator;
+import org.example.interfaces.Consumer;
+import org.example.interfaces.Predicate;
+import org.example.interfaces.UnaryOperator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,9 +19,9 @@ public class MyArrayIteratorTest {
     void testMyArrayForEachIterator() {
         MyArray myArrayForInsertion = new MyArray();
         MyArray myArrayForTraversal = new MyArray(array);
-        myArrayForTraversal.forEach(new IntConsumer() {
+        myArrayForTraversal.forEach(new Consumer() {
             @Override
-            public void accept(int element) {
+            public void accept(T element) {
                 myArrayForInsertion.insertAtEnd(element);
             }
         });
@@ -39,7 +39,7 @@ public class MyArrayIteratorTest {
     @Test
     void testMyArrayFilterIterator() {
         MyArray myArray = new MyArray(array);
-        MyArray result = myArray.filter(new IntPredicate() {
+        MyArray result = myArray.filter(new Predicate() {
             @Override
             public boolean test(int element) {
                 return element % 2 == 0;
@@ -60,7 +60,7 @@ public class MyArrayIteratorTest {
     @Test
     void testMyArrayMapIterator() {
         MyArray myArray = new MyArray(array);
-        MyArray result = myArray.map(new IntUnaryOperator() {
+        MyArray result = myArray.map(new UnaryOperator() {
             @Override
             public int apply(int element) {
                 return element * 2;
@@ -81,7 +81,7 @@ public class MyArrayIteratorTest {
     @Test
     void testMyArrayReduceIterator() {
         MyArray myArray = new MyArray(array);
-        int result = myArray.reduce(new IntBinaryOperator() {
+        int result = myArray.reduce(new BinaryOperator() {
             @Override
             public int apply(int left, int right) {
                 return left + right;
@@ -102,7 +102,7 @@ public class MyArrayIteratorTest {
     @Test
     void testMyArraySomeIterator() {
         MyArray myArray = new MyArray(array);
-        boolean result = myArray.some(new IntPredicate() {
+        boolean result = myArray.some(new Predicate() {
             @Override
             public boolean test(int element) {
                 return element % 2 != 0;
@@ -121,7 +121,7 @@ public class MyArrayIteratorTest {
     @Test
     void testMyArrayEveryIterator() {
         MyArray myArray = new MyArray(array);
-        boolean result = myArray.every(new IntPredicate() {
+        boolean result = myArray.every(new Predicate() {
             @Override
             public boolean test(int element) {
                 return element >= 0;
