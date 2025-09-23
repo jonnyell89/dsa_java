@@ -3,19 +3,21 @@ package org.example.collections.my_array;
 import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MyArrayReadTest {
 
-    private static final int DEFAULT_CAPACITY = 10;
-    public final int[] array = new int[]{3, 17, 75, 80, 202};
+    private final List<Integer> inputList = Arrays.asList(3, 17, 75, 80, 202);
 
     // READ
     @Test
     void testMyArrayReadWithIndexLessThanZero() {
         int indexLessThanZero = -5;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.read(indexLessThanZero),
@@ -26,7 +28,7 @@ public class MyArrayReadTest {
     @Test
     void testMyArrayReadWithIndexGreaterThanSize() {
         int indexGreaterThanSize = 15;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.read(indexGreaterThanSize),
@@ -36,10 +38,10 @@ public class MyArrayReadTest {
 
     @Test
     void testMyArrayReadWithValidIndex() {
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         for (int i = 0; i < myArray.getSize(); i++) {
-            int element = array[i];
-            assertEquals(element, myArray.read(i), String.format("Element at myArray[%d] should be %d.", i, element));
+            int element = inputList.get(i);
+            assertEquals(element, myArray.read(i), String.format("Element at index %d should be %d.", i, element));
         }
     }
 }

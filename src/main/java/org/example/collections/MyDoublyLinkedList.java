@@ -23,27 +23,45 @@ public class MyDoublyLinkedList<T> {
 
     public int getSize() { return size; }
 
+    public boolean isEmpty() { return size == 0; }
+
     // Tells if the argument is the index of an existing element.
     // private boolean isElementIndex(int index) { return index >= 0 && index < size; }
 
     // Tells if the argument is the index of a valid position for an iterator or an add operation.
     // private boolean isPositionIndex(int index) { return index >= 0 && index <= size; }
 
+    // GUARDS
+    private void checkElementIndex(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+
+    private void checkPositionIndex(int index) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+
+    private void checkHead() {
+        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
+    }
+
     // READ
     public T read(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        checkHead();
+        checkElementIndex(index);
 
         Node<T> node;
+
         if (index < size / 2) {
             node = head;
+
             for (int i = 0; i < index; i++) { // Iterate up to index.
                 node = node.next;
             }
             return node.data;
         } else {
             node = tail;
+
             for (int i = size - 1; i > index; i--) { // Iterate down to index.
                 node = node.prev;
             }
@@ -54,20 +72,22 @@ public class MyDoublyLinkedList<T> {
     // SEARCH
     public int search(T data) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
+        checkHead();
 
         Node<T> node = head;
+
         for (int i = 0; i < size; i++) { // Iterate to the end.
             if (node.data.equals(data)) return i;
             node = node.next;
         }
-        throw new IllegalArgumentException("Node not present in MyDoublyLinkedList.");
+        return -1;
     }
 
     // INSERT
     public void insertAtStart(T data) {
         // Time complexity: O(1)
         Node<T> node = new Node<>(data);
+
         if (head == null) {
             head = node;
             tail = node;
@@ -82,6 +102,7 @@ public class MyDoublyLinkedList<T> {
     public void insertAtEnd(T data) {
         // Time complexity: O(1)
         Node<T> node = new Node<>(data);
+
         if (head == null) {
             head = node;
             tail = node;
@@ -95,18 +116,21 @@ public class MyDoublyLinkedList<T> {
 
     public void insertAtIndex(int index, T data) {
         // Time complexity: O(N)
-        if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        checkPositionIndex(index);
         if (index == 0) { insertAtStart(data); return; }
         if (index == size) { insertAtEnd(data); return; }
 
         Node<T> nodeAtIndex;
+
         if (index < size / 2) {
             nodeAtIndex = head;
+
             for (int i = 0; i < index; i++) {
                 nodeAtIndex = nodeAtIndex.next;
             }
         } else {
             nodeAtIndex = tail;
+
             for (int i = size - 1; i > index; i--) {
                 nodeAtIndex = nodeAtIndex.prev;
             }
@@ -127,12 +151,13 @@ public class MyDoublyLinkedList<T> {
     // DELETE
     public T deleteFromStart() {
         // Time complexity: O(1)
-        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
+        checkHead();
 
         T data = head.data;
         Node<T> next = head.next;
         head.data = null;
         head.next = null;
+
         if (next == null) {
             head = null;
             tail = null;
@@ -146,7 +171,7 @@ public class MyDoublyLinkedList<T> {
 
     public T deleteFromEnd() {
         // Time complexity: O(1)
-        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
+        checkHead();
         if (size == 1) return deleteFromStart();
 
         T data = tail.data;
@@ -161,19 +186,22 @@ public class MyDoublyLinkedList<T> {
 
     public T deleteFromIndex(int index) {
         // Time complexity: O(N)
-        if (head == null) throw new NoSuchElementException("MyDoublyLinkedList is empty.");
-        if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+        checkHead();
+        checkElementIndex(index);
         if (index == 0) return deleteFromStart();
         if (index == size - 1) return deleteFromEnd();
 
         Node<T> node;
+
         if (index < size / 2) {
             node = head;
+
             for (int i = 0; i < index; i++) {
                 node = node.next;
             }
         } else {
             node = tail;
+
             for (int i = size - 1; i > index; i--) {
                 node = node.prev;
             }
@@ -195,6 +223,7 @@ public class MyDoublyLinkedList<T> {
     // Exercise 2:
     public void printInReverse() {
         Node<T> node = tail;
+
         for (int i = size - 1; i > 0; i--) {
             System.out.println(node.data);
             node = node.prev;

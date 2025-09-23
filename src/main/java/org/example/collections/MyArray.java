@@ -89,7 +89,11 @@ public class MyArray<T> {
         this.capacity = capacity;
     }
 
-    public int size() { return size; }
+    public int getCapacity() { return capacity; } // Public for testing purposes.
+
+    public int getSize() { return size; }
+
+    public T[] getData() { return data; } // Public for testing purposes.
 
     public boolean isEmpty() { return size == 0; }
 

@@ -19,7 +19,7 @@ public class InsertionSort {
         return iterable;
     }
 
-    public static MyArray insertionSort(MyArray myArray) {
+    public static MyArray<Integer> insertionSort(MyArray<Integer> myArray) {
         int size = myArray.getSize();
         for (int i = 1; i < size; i++) {
             int temp = myArray.read(i);

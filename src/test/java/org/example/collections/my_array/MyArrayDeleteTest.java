@@ -3,17 +3,19 @@ package org.example.collections.my_array;
 import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyArrayDeleteTest {
 
-    private static final int DEFAULT_CAPACITY = 10;
-    public final int[] array = new int[]{3, 17, 75, 80, 202};
+    private final List<Integer> inputList = Arrays.asList(3, 17, 75, 80, 202);
 
     // DELETE
     @Test
     void testMyArrayDeleteFromStartOfEmptyArray() {
-        MyArray myArray = new MyArray();
+        MyArray<Integer> myArray = new MyArray<>();
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
                 () -> myArray.deleteFromStart(),
@@ -23,16 +25,16 @@ public class MyArrayDeleteTest {
 
     @Test
     void testMyArrayDeleteFromStart() {
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         int result = myArray.deleteFromStart();
-        assertEquals(array[0], result);
-        int[] arrayWithElementDeleted = new int[]{17, 75, 80, 202};
+        assertEquals(inputList.get(0), result);
+        Integer[] arrayWithElementDeleted = new Integer[]{17, 75, 80, 202};
         assertArrayEquals(arrayWithElementDeleted, myArray.toArray(), "MyArray should be equal to arrayWithElementDeleted.");
     }
 
     @Test
     void testMyArrayDeleteFromEndOfEmptyArray() {
-        MyArray myArray = new MyArray();
+        MyArray<Integer> myArray = new MyArray<>();
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
                 () -> myArray.deleteFromEnd(),
@@ -42,17 +44,17 @@ public class MyArrayDeleteTest {
 
     @Test
     void testMyArrayDeleteFromEnd() {
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         int result = myArray.deleteFromEnd();
-        assertEquals(array[array.length - 1], result);
-        int[] arrayWithElementDeleted = new int[]{3, 17, 75, 80};
+        assertEquals(inputList.get(inputList.size() - 1), result);
+        Integer[] arrayWithElementDeleted = new Integer[]{3, 17, 75, 80};
         assertArrayEquals(arrayWithElementDeleted, myArray.toArray(), "MyArray should be equal to arrayWithElementDeleted.");
     }
 
     @Test
     void testMyArrayDeleteFromIndexOfEmptyArray() {
         int index = 0;
-        MyArray myArray = new MyArray();
+        MyArray<Integer> myArray = new MyArray<>();
         IllegalStateException exception = assertThrows(
                 IllegalStateException.class,
                 () -> myArray.deleteFromIndex(index),
@@ -63,7 +65,7 @@ public class MyArrayDeleteTest {
     @Test
     void testMyArrayDeleteFromIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.deleteFromIndex(indexLessThanZero),
@@ -74,7 +76,7 @@ public class MyArrayDeleteTest {
     @Test
     void testMyArrayDeleteFromIndexWithIndexGreaterThanSize() {
         int indexGreaterThanZero = 15;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.deleteFromIndex(indexGreaterThanZero),
@@ -84,11 +86,11 @@ public class MyArrayDeleteTest {
 
     @Test
     void testMyArrayDeleteFromIndex() {
-        int deleteFromIndex = array.length / 2;
-        MyArray myArray = new MyArray(array);
+        int deleteFromIndex = inputList.size() / 2;
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         int result = myArray.deleteFromIndex(deleteFromIndex);
-        assertEquals(array[deleteFromIndex], result);
-        int[] arrayWithElementDeleted = new int[]{3, 17, 80, 202};
+        assertEquals(inputList.get(deleteFromIndex), result);
+        Integer[] arrayWithElementDeleted = new Integer[]{3, 17, 80, 202};
         assertArrayEquals(arrayWithElementDeleted, myArray.toArray(), "MyArray should be equal to arrayWithElementDeleted.");
     }
 }

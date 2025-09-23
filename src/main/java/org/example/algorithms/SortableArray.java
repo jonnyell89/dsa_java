@@ -6,9 +6,9 @@ public class SortableArray {
 
     // Chapter 13: Recursive Algorithms for Speed.
 
-    protected MyArray myArray;
+    protected MyArray<Integer> myArray;
 
-    public SortableArray(MyArray myArray) {
+    public SortableArray(MyArray<Integer> myArray) {
         this.myArray = myArray;
     }
 

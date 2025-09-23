@@ -4,16 +4,17 @@ import java.util.Arrays;
 
 public class MyQueue {
 
-    protected final MyArray data;
+    protected final MyArray<Integer> data;
 
     public MyQueue() {
-        this.data = new MyArray();
+        this.data = new MyArray<>();
     }
 
     public boolean isEmpty() { return data.getSize() == 0; }
 
     public int peek() {
         if (isEmpty()) throw new RuntimeException("MyQueue is empty.");
+
         return data.read(0);
     }
 
@@ -24,6 +25,7 @@ public class MyQueue {
 
     public int remove() {
         if (isEmpty()) throw new RuntimeException("MyQueue is empty.");
+
         int frontElement = data.read(0);
         data.deleteFromStart();
         return frontElement;

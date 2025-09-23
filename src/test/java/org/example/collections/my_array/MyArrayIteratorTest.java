@@ -7,21 +7,23 @@ import org.example.interfaces.Predicate;
 import org.example.interfaces.UnaryOperator;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MyArrayIteratorTest {
 
-    private static final int DEFAULT_CAPACITY = 10;
-    public final int[] array = new int[]{3, 17, 75, 80, 202};
+    private final List<Integer> inputList = Arrays.asList(3, 17, 75, 80, 202);
 
     @Test
     void testMyArrayForEachIterator() {
-        MyArray myArrayForInsertion = new MyArray();
-        MyArray myArrayForTraversal = new MyArray(array);
-        myArrayForTraversal.forEach(new Consumer() {
+        MyArray<Integer> myArrayForInsertion = new MyArray<>();
+        MyArray<Integer> myArrayForTraversal = new MyArray<>(inputList);
+        myArrayForTraversal.forEach(new Consumer<Integer>() {
             @Override
-            public void accept(T element) {
+            public void accept(Integer element) {
                 myArrayForInsertion.insertAtEnd(element);
             }
         });
@@ -30,60 +32,60 @@ public class MyArrayIteratorTest {
 
     @Test
     void testMyArrayForEachIteratorLambda() {
-        MyArray myArrayForInsertion = new MyArray();
-        MyArray myArrayForTraversal = new MyArray(array);
+        MyArray<Integer> myArrayForInsertion = new MyArray<>();
+        MyArray<Integer> myArrayForTraversal = new MyArray<>(inputList);
         myArrayForTraversal.forEach(element -> myArrayForInsertion.insertAtEnd(element));
         assertArrayEquals(myArrayForTraversal.toArray(), myArrayForInsertion.toArray());
     }
 
     @Test
     void testMyArrayFilterIterator() {
-        MyArray myArray = new MyArray(array);
-        MyArray result = myArray.filter(new Predicate() {
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        MyArray<Integer> result = myArray.filter(new Predicate<Integer>() {
             @Override
-            public boolean test(int element) {
+            public boolean test(Integer element) {
                 return element % 2 == 0;
             }
         });
-        int[] arrayWithEvenElements = new int[]{80, 202};
+        Integer[] arrayWithEvenElements = new Integer[]{80, 202};
         assertArrayEquals(arrayWithEvenElements, result.toArray(), "MyArray result should be equal to arrayWithEvenElements.");
     }
 
     @Test
     void testMyArrayFilterIteratorLambda() {
-        MyArray myArray = new MyArray(array);
-        MyArray result = myArray.filter(element -> element % 2 == 0);
-        int[] arrayWithEvenElements = new int[]{80, 202};
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        MyArray<Integer> result = myArray.filter(element -> element % 2 == 0);
+        Integer[] arrayWithEvenElements = new Integer[]{80, 202};
         assertArrayEquals(arrayWithEvenElements, result.toArray());
     }
 
     @Test
     void testMyArrayMapIterator() {
-        MyArray myArray = new MyArray(array);
-        MyArray result = myArray.map(new UnaryOperator() {
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        MyArray<Integer> result = myArray.map(new UnaryOperator<Integer>() {
             @Override
-            public int apply(int element) {
+            public Integer apply(Integer element) {
                 return element * 2;
             }
         });
-        int[] arrayWithDoubledElements = new int[]{6, 34, 150, 160, 404};
+        Integer[] arrayWithDoubledElements = new Integer[]{6, 34, 150, 160, 404};
         assertArrayEquals(arrayWithDoubledElements, result.toArray(), "MyArray result should be equal to arrayWithDoubledElements.");
     }
 
     @Test
     void testMyArrayMapIteratorLambda() {
-        MyArray myArray = new MyArray(array);
-        MyArray result = myArray.map(element -> element * 2);
-        int[] arrayWithDoubledElements = new int[]{6, 34, 150, 160, 404};
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        MyArray<Integer> result = myArray.map(element -> element * 2);
+        Integer[] arrayWithDoubledElements = new Integer[]{6, 34, 150, 160, 404};
         assertArrayEquals(arrayWithDoubledElements, result.toArray(), "MyArray result should be equal to arrayWithDoubledElements.");
     }
 
     @Test
     void testMyArrayReduceIterator() {
-        MyArray myArray = new MyArray(array);
-        int result = myArray.reduce(new BinaryOperator() {
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        int result = myArray.reduce(new BinaryOperator<Integer>() {
             @Override
-            public int apply(int left, int right) {
+            public Integer apply(Integer left, Integer right) {
                 return left + right;
             }
         }, 0);
@@ -93,7 +95,7 @@ public class MyArrayIteratorTest {
 
     @Test
     void testMyArrayReduceIteratorLambda() {
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         int result = myArray.reduce((accumulator, element) -> accumulator + element, 0);
         int sumOfArrayElements = 377;
         assertEquals(sumOfArrayElements, result, "MyArray result should be equal to sumOfArrayElements.");
@@ -101,10 +103,10 @@ public class MyArrayIteratorTest {
 
     @Test
     void testMyArraySomeIterator() {
-        MyArray myArray = new MyArray(array);
-        boolean result = myArray.some(new Predicate() {
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        boolean result = myArray.some(new Predicate<Integer>() {
             @Override
-            public boolean test(int element) {
+            public boolean test(Integer element) {
                 return element % 2 != 0;
             }
         });
@@ -113,17 +115,17 @@ public class MyArrayIteratorTest {
 
     @Test
     void testMyArraySomeIteratorLambda() {
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         boolean result = myArray.some(element -> element % 2 != 0);
         assertTrue(result, "MyArray should contain one or more odd numbers.");
     }
 
     @Test
     void testMyArrayEveryIterator() {
-        MyArray myArray = new MyArray(array);
-        boolean result = myArray.every(new Predicate() {
+        MyArray<Integer> myArray = new MyArray<>(inputList);
+        boolean result = myArray.every(new Predicate<Integer>() {
             @Override
-            public boolean test(int element) {
+            public boolean test(Integer element) {
                 return element >= 0;
             }
         });
@@ -132,7 +134,7 @@ public class MyArrayIteratorTest {
 
     @Test
     void testMyArrayEveryIteratorLambda() {
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         boolean result = myArray.every(element -> element >= 0);
         assertTrue(result, "MyArray should contain all non-negative numbers.");
     }

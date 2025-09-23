@@ -3,19 +3,21 @@ package org.example.collections.my_array;
 import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MyArrayEditTest {
 
-    private static final int DEFAULT_CAPACITY = 10;
-    public final int[] array = new int[]{3, 17, 75, 80, 202};
+    private final List<Integer> inputList = Arrays.asList(3, 17, 75, 80, 202);
 
     @Test
     void testMyArraySwapByIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int index = 0;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.swapByIndex(indexLessThanZero, index),
@@ -27,7 +29,7 @@ public class MyArrayEditTest {
     void testMyArraySwapByIndexWithIndexGreaterThanSize() {
         int index = 0;
         int indexGreaterThanSize = 15;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.swapByIndex(index, indexGreaterThanSize),
@@ -38,10 +40,10 @@ public class MyArrayEditTest {
     @Test
     void testMyArraySwapByIndex() {
         int i = 0;
-        int j = array.length / 2;
-        MyArray myArray = new MyArray(array);
+        int j = inputList.size() / 2;
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         myArray.swapByIndex(i, j);
-        int[] arrayWithElementsSwapped = new int[]{75, 17, 3, 80, 202};
+        Integer[] arrayWithElementsSwapped = new Integer[]{75, 17, 3, 80, 202};
         assertArrayEquals(arrayWithElementsSwapped, myArray.toArray(), "MyArray should be equal to arrayWithElementsSwapped.");
     }
 
@@ -49,7 +51,7 @@ public class MyArrayEditTest {
     void testMyArrayReplaceByIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int index = 0;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.replaceByIndex(indexLessThanZero, index),
@@ -61,7 +63,7 @@ public class MyArrayEditTest {
     void testMyArrayReplaceByIndexWithIndexGreaterThanSize() {
         int index = 0;
         int indexGreaterThanSize = 15;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.replaceByIndex(index, indexGreaterThanSize),
@@ -72,10 +74,10 @@ public class MyArrayEditTest {
     @Test
     void testMyArrayReplaceByIndex() {
         int i = 0;
-        int j = array.length / 2;
-        MyArray myArray = new MyArray(array);
+        int j = inputList.size() / 2;
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         myArray.replaceByIndex(i, j);
-        int[] arrayWithElementReplaced = new int[]{75, 17, 75, 80, 202};
+        Integer[] arrayWithElementReplaced = new Integer[]{75, 17, 75, 80, 202};
         assertArrayEquals(arrayWithElementReplaced, myArray.toArray(), "MyArray should be equal to arrayWithElementReplaced.");
     }
 
@@ -83,7 +85,7 @@ public class MyArrayEditTest {
     void testMyArraySetByIndexWithIndexLessThanZero() {
         int indexLessThanZero = -5;
         int element = 0;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.setByIndex(indexLessThanZero, element),
@@ -95,7 +97,7 @@ public class MyArrayEditTest {
     void testMyArraySetByIndexWithIndexGreaterThanSize() {
         int indexGreaterThanSize = 15;
         int element = 0;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         ArrayIndexOutOfBoundsException exception = assertThrows(
                 ArrayIndexOutOfBoundsException.class,
                 () -> myArray.setByIndex(indexGreaterThanSize, element),
@@ -105,11 +107,11 @@ public class MyArrayEditTest {
 
     @Test
     void testMyArraySetByIndex() {
-        int index = array.length / 2;
+        int index = inputList.size() / 2;
         int element = 0;
-        MyArray myArray = new MyArray(array);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         myArray.setByIndex(index, element);
-        int[] arrayWithElementSet = new int[]{3, 17, 0, 80, 202};
+        Integer[] arrayWithElementSet = new Integer[]{3, 17, 0, 80, 202};
         assertArrayEquals(arrayWithElementSet, myArray.toArray(), "MyArray should be equal to arrayWithElementSet.");
     }
 }

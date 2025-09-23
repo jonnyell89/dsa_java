@@ -23,7 +23,7 @@ public class BubbleSort {
         return iterable;
     }
 
-    public static MyArray bubbleSort(MyArray myArray) {
+    public static MyArray<Integer> bubbleSort(MyArray<Integer> myArray) {
         // Time complexity: O(N^2)
         int unsortedEndIndex = myArray.getSize() - 1;
         boolean isSorted = false;

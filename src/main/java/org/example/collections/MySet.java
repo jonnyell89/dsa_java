@@ -4,39 +4,43 @@ import java.util.Arrays;
 
 public class MySet {
 
-    protected final MyArray data;
+    protected final MyArray<Integer> data;
 
     public MySet() {
-        this.data = new MyArray();
+        this.data = new MyArray<>();
     }
 
     public MySet(int initialCapacity) {
         if (initialCapacity < 0) throw new IllegalArgumentException("MySet initial capacity cannot be less than zero.");
-        this.data = new MyArray(initialCapacity);
+
+        this.data = new MyArray<>(initialCapacity);
     }
 
     public MySet(int[] array) {
         if (array == null) throw new NullPointerException("MySet cannot be null.");
-        this.data = new MyArray();
+
+        this.data = new MyArray<>();
+
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (!contains(element)) data.insertAtEnd(element);
         }
     }
 
-    public  int getCapacity() { return data.getCapacity(); } // Only public for testing purposes.
+    public int getCapacity() { return data.getCapacity(); } // Only public for testing purposes.
 
     public int getSize() { return data.getSize(); }
 
-    public int[] getData() { return data.getData(); } // Only public for testing purposes.
+    public Integer[] getData() { return data.getData(); } // Only public for testing purposes.
 
     public boolean isEmpty() { return data.getSize() == 0; }
 
-    public int[] toArray() { return data.toArray(); }
+    public Integer[] toArray() { return data.toArray(); }
 
     public boolean contains(int element) {
         // Time complexity: O(N)
         int size = getSize();
+
         for (int i = 0; i < size; i++) {
             if (data.read(i) == element) return true;
         }
@@ -53,6 +57,7 @@ public class MySet {
 
     public boolean addAll(int[] array) {
         boolean modified = false;
+
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (!contains(element)) {
@@ -74,6 +79,7 @@ public class MySet {
 
     public boolean removeAll(int[] array) {
         boolean modified = false;
+
         for (int i = 0; i < array.length; i++) {
             int element = array[i];
             if (contains(element)) {
@@ -87,6 +93,7 @@ public class MySet {
 
     public void clear() {
         int size = getSize();
+
         while (size > 0) {
             data.deleteFromEnd();
             size--;

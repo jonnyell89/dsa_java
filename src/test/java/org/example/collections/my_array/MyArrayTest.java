@@ -3,20 +3,23 @@ package org.example.collections.my_array;
 import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MyArrayTest {
 
     private static final int DEFAULT_CAPACITY = 10;
-    public final int[] array = new int[]{3, 17, 75, 80, 202};
 
     // INSTANTIATION
     @Test
     void testMyArrayWithDefaultConstructor() {
-        MyArray myArray = new MyArray();
+        MyArray<Integer> myArray = new MyArray<>();
         assertEquals(DEFAULT_CAPACITY, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, myArray.getSize(), String.format("MyArray size should be %d", 0));
-        int[] defaultArray = new int[DEFAULT_CAPACITY];
+        Integer[] defaultArray = new Integer[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, myArray.getData(), String.format("MyArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
@@ -25,7 +28,7 @@ public class MyArrayTest {
         int capacityLessThanZero = -5;
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> new MyArray(capacityLessThanZero),
+                () -> new MyArray<Integer>(capacityLessThanZero),
                 "MyArray capacity should not be negative."
         );
     }
@@ -33,69 +36,71 @@ public class MyArrayTest {
     @Test
     void testMyArrayWithCapacityZero() {
         int capacityZero = 0;
-        MyArray myArray = new MyArray(capacityZero);
+        MyArray<Integer> myArray = new MyArray<>(capacityZero);
         assertEquals(DEFAULT_CAPACITY, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, myArray.getSize(), String.format("MyArray size should be %d.", 0));
-        int[] defaultArray = new int[DEFAULT_CAPACITY];
+        Integer[] defaultArray = new Integer[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, myArray.getData(), String.format("MyArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
     void testMyArrayWithCapacityLessThanDefault() {
         int capacityLessThanDefault = 5;
-        MyArray myArray = new MyArray(capacityLessThanDefault);
+        MyArray<Integer> myArray = new MyArray<>(capacityLessThanDefault);
         assertEquals(DEFAULT_CAPACITY, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, myArray.getSize(), String.format("MyArray size should be %d.", 0));
-        int[] defaultArray = new int[DEFAULT_CAPACITY];
+        Integer[] defaultArray = new Integer[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, myArray.getData(), String.format("MyArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
     void testMyArrayWithCapacityGreaterThanDefault() {
         int capacityGreaterThanDefault = 15;
-        MyArray myArray = new MyArray(capacityGreaterThanDefault);
+        MyArray<Integer> myArray = new MyArray<>(capacityGreaterThanDefault);
         assertEquals(DEFAULT_CAPACITY * 2, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(0, myArray.getSize(), String.format("MyArray size should be %d.", 0));
-        int[] defaultArray = new int[DEFAULT_CAPACITY * 2];
+        Integer[] defaultArray = new Integer[DEFAULT_CAPACITY * 2];
         assertArrayEquals(defaultArray, myArray.getData(), String.format("MyArray should contain %d zeros.", DEFAULT_CAPACITY * 2));
     }
 
     @Test
-    void testMyArrayWithNullArray() {
+    void testMyArrayWithNullCollection() {
         NullPointerException exception = assertThrows(
                 NullPointerException.class,
-                () -> new MyArray(null),
+                () -> new MyArray<Integer>((List<Integer>) null),
                 "MyArray should not be null."
         );
     }
 
     @Test
-    void testMyArrayWithEmptyArray() {
-        int[] emptyArray = new int[]{};
-        MyArray myArray = new MyArray(emptyArray);
+    void testMyArrayWithEmptyCollection() {
+        List<Integer> emptyList = Collections.emptyList();
+        MyArray<Integer> myArray = new MyArray<>(emptyList);
         assertEquals(DEFAULT_CAPACITY, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(0, myArray.getSize(), String.format("MyArray size should be %d.", 0));
-        int[] defaultArray = new int[DEFAULT_CAPACITY];
+        Integer[] defaultArray = new Integer[DEFAULT_CAPACITY];
         assertArrayEquals(defaultArray, myArray.getData(), String.format("MyArray should contain %d zeros.", DEFAULT_CAPACITY));
     }
 
     @Test
-    void testMyArrayWithArrayCapacityLessThanDefault() {
-        int capacityLessThanDefault = 5;
-        int[] inputArray = new int[capacityLessThanDefault];
-        MyArray myArray = new MyArray(inputArray);
+    void testMyArrayWithCollectionCapacityLessThanDefault() {
+        List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         assertEquals(DEFAULT_CAPACITY, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY));
-        assertEquals(inputArray.length, myArray.getSize(), String.format("MyArray size should be %d.", inputArray.length));
-        assertArrayEquals(inputArray, myArray.toArray(), String.format("MyArray should contain %d zeros.", capacityLessThanDefault));
+        assertEquals(inputList.size(), myArray.getSize(), String.format("MyArray size should be %d.", inputList.size()));
+        Integer[] result = new Integer[]{1, 2, 3, 4, 5};
+        assertArrayEquals(result, myArray.toArray());
+        // assertArrayEquals(inputList.toArray(new Integer[0]), myArray.toArray());
     }
 
     @Test
-    void testMyArrayWithArrayCapacityGreaterThanDefault() {
-        int capacityGreaterThanDefault = 15;
-        int[] inputArray = new int[capacityGreaterThanDefault];
-        MyArray myArray = new MyArray(inputArray);
+    void testMyArrayWithCollectionCapacityGreaterThanDefault() {
+        List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         assertEquals(DEFAULT_CAPACITY * 2, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY * 2));
-        assertEquals(inputArray.length, myArray.getSize(), String.format("MyArray size should be %d.", inputArray.length));
-        assertArrayEquals(inputArray, myArray.toArray(), String.format("MyArray should contain %d zeros.", capacityGreaterThanDefault));
+        assertEquals(inputList.size(), myArray.getSize(), String.format("MyArray size should be %d.", inputList.size()));
+        Integer[] result = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        assertArrayEquals(result, myArray.toArray());
+        // assertArrayEquals(inputList.toArray(new Integer[0]), myArray.toArray());
     }
 }

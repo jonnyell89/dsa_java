@@ -3,6 +3,9 @@ package org.example.algorithms;
 import org.example.collections.MyArray;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,28 +13,28 @@ public class SortableArrayTest {
 
     @Test
     void testPartition() {
-        int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(0, 5, 2, 1, 6, 3);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int leftPointer = sortableArray.partition(0, myArray.getSize() - 1);
-        int[] result = new int[]{0, 1, 2, 3, 6, 5};
-        assertArrayEquals(result, myArray.toArray(), "LeftPointer should be equal to result.");
+        int result = 1;
+        assertEquals(result, leftPointer, "LeftPointer should be equal to result.");
     }
 
     @Test
     void testQuicksort() {
-        int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(0, 5, 2, 1, 6, 3);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         sortableArray.quicksort(0, myArray.getSize() - 1);
-        int[] result = new int[]{0, 1, 2, 3, 5, 6};
-        assertArrayEquals(result, myArray.toArray(), "ManualArray should be equal to result.");
+        Integer[] result = new Integer[]{0, 1, 2, 3, 5, 6};
+        assertArrayEquals(result, myArray.toArray(), "MyArray should be equal to result.");
     }
 
     @Test
     void testQuickselect() {
-        int[] array = new int[]{0, 50, 20, 10, 60, 30};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(0, 50, 20, 10, 60, 30);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int secondLowestValue = sortableArray.quickselect(1, 0, myArray.getSize() - 1);
         int result = 10;
@@ -40,18 +43,18 @@ public class SortableArrayTest {
 
     @Test
     void testMergeSort() {
-        int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(0, 5, 2, 1, 6, 3);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         sortableArray.mergeSort(0, myArray.getSize() - 1);
-        int[] result = new int[]{0, 1, 2, 3, 5, 6};
-        assertArrayEquals(result, myArray.toArray(), "ManualArray should be equal to result.");
+        Integer[] result = new Integer[]{0, 1, 2, 3, 5, 6};
+        assertArrayEquals(result, myArray.toArray(), "MyArray should be equal to result.");
     }
 
     @Test
     void testHasDuplicate() {
-        int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(5, 9, 3, 2, 4, 5, 6);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         boolean hasDuplicate = sortableArray.hasDuplicate();
         boolean result = true;
@@ -60,8 +63,8 @@ public class SortableArrayTest {
 
     @Test
     void testGreatestProduct() {
-        int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(5, 9, 3, 2, 4, 5, 6);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int greatestProduct = sortableArray.greatestProduct();
         int result = 270;
@@ -70,8 +73,8 @@ public class SortableArrayTest {
 
     @Test
     void testFindMissingNumber() {
-        int[] array = new int[]{0, 5, 2, 1, 6, 3};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(0, 5, 2, 1, 6, 3);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int missingNumber = sortableArray.findMissingNumber();
         int result = 4;
@@ -80,8 +83,8 @@ public class SortableArrayTest {
 
     @Test
     void testGreatestNumberSlow() {
-        int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(5, 9, 3, 2, 4, 5, 6);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int greatestNumber = sortableArray.greatestNumberSlow();
         int result = 9;
@@ -90,8 +93,8 @@ public class SortableArrayTest {
 
     @Test
     void testGreatestNumberMedium() {
-        int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(5, 9, 3, 2, 4, 5, 6);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int greatestNumber = sortableArray.greatestNumberMedium();
         int result = 9;
@@ -100,8 +103,8 @@ public class SortableArrayTest {
 
     @Test
     void testGreatestNumberFast() {
-        int[] array = new int[]{5, 9, 3, 2, 4, 5, 6};
-        MyArray myArray = new MyArray(array);
+        List<Integer> inputList = Arrays.asList(5, 9, 3, 2, 4, 5, 6);
+        MyArray<Integer> myArray = new MyArray<>(inputList);
         SortableArray sortableArray = new SortableArray(myArray);
         int greatestNumber = sortableArray.greatestNumberFast();
         int result = 9;

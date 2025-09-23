@@ -22,7 +22,7 @@ public class SelectionSort {
         return iterable;
     }
 
-    public static MyArray selectionSort(MyArray myArray) {
+    public static MyArray<Integer> selectionSort(MyArray<Integer> myArray) {
         // Time complexity: O(N^2)
         int size = myArray.getSize();
         for (int i = 0; i < size - 1; i++) {
