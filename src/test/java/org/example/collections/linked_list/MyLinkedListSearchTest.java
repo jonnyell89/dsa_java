@@ -37,11 +37,8 @@ public class MyLinkedListSearchTest {
     @Test
     void testMyLinkedListSearchWithInvalidData() {
         Integer data = 5;
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class,
-                () -> myLinkedList.search(data),
-                "Data is not present in MyLinkedList."
-        );
+        Integer result = myLinkedList.search(data);
+        assertEquals(-1, result, "Data should not be present in MyLinkedList.");
     }
 
     @Test
@@ -49,7 +46,7 @@ public class MyLinkedListSearchTest {
         int size = myLinkedList.getSize() - 1;
         for (int data = 0; data < size; data++) {
             int result = myLinkedList.search(data);
-            assertEquals(data, result, String.format("Data at MyLinkedList[%d] should return index %d.", data, result));
+            assertEquals(data, result, String.format("Data %d should return index %d.", data, result));
         }
     }
 }

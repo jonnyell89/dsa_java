@@ -3,62 +3,69 @@ package org.example.collections.my_set;
 import org.example.collections.MySet;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MySetRemoveTest {
 
-    private static final int DEFAULT_CAPACITY = 10;
+    private final List<Integer> inputList = Arrays.asList(1, 2, 3, 4, 5);
 
     // REMOVE
     @Test
-    void testMySetRemoveElementFromEmptyArray() {
+    void testMySetRemoveElementFromEmptySet() {
         int elementToRemove = 0;
-        MySet mySet = new MySet();
-        assertFalse(mySet.remove(elementToRemove), "MySet does not contain elementToRemove.");
+        MySet<Integer> mySet = new MySet<>();
+        boolean remove = mySet.remove(elementToRemove);
+        assertFalse(remove, "MySet does not contain elementToRemove.");
     }
 
     @Test
-    void testMySetRemoveElementNotPresentInArray() {
-        int elementNotPresentInArray = 0;
-        int[] array = new int[]{1, 2, 3, 4, 5};
-        MySet mySet = new MySet(array);
-        assertFalse(mySet.remove(elementNotPresentInArray), "MySet does not contain elementNotPresentInSet.");
-        assertArrayEquals(array, mySet.toArray(), "MySet should be equal to array.");
+    void testMySetRemoveElementNotPresentInSet() {
+        int elementNotPresentInSet = 0;
+        MySet<Integer> mySet = new MySet<>(inputList);
+        boolean remove = mySet.remove(elementNotPresentInSet);
+        assertFalse(remove, "MySet does not contain elementNotPresentInSet.");
+        Integer[] result = new Integer[]{1, 2, 3, 4, 5};
+        assertArrayEquals(result, mySet.toArray(), "MySet should be equal to result.");
     }
 
     @Test
     void testMySetRemoveElement() {
         int elementToRemove = 5;
-        int[] array = new int[]{1, 2, 3, 4, 5};
-        MySet mySet = new MySet(array);
-        assertTrue(mySet.remove(elementToRemove), "MySet should remove elementToRemove.");
-        int[] arrayWithElementRemoved = new int[]{1, 2, 3, 4};
-        assertArrayEquals(arrayWithElementRemoved, mySet.toArray(), "MySet should be equal to arrayWithElementRemoved.");
+        MySet<Integer> mySet = new MySet<>(inputList);
+        boolean remove = mySet.remove(elementToRemove);
+        assertTrue(remove, "MySet should remove elementToRemove.");
+        Integer[] result = new Integer[]{1, 2, 3, 4};
+        assertArrayEquals(result, mySet.toArray(), "MySet should be equal to result.");
     }
 
     @Test
-    void testMySetRemoveAllElementsFromEmptyArray() {
-        int[] elementsToRemove = new int[]{1, 2, 3, 4, 5};
-        MySet mySet = new MySet();
-        assertFalse(mySet.removeAll(elementsToRemove), "MySet does not contain elementsToRemove.");
+    void testMySetRemoveAllElementsFromEmptySet() {
+        List<Integer> elementsToRemove = Arrays.asList(1, 2, 3, 4, 5);
+        MySet<Integer> mySet = new MySet<>();
+        boolean removeAll = mySet.removeAll(elementsToRemove);
+        assertFalse(removeAll, "MySet does not contain elementsToRemove.");
     }
 
     @Test
-    void testMySetRemoveAllElementsNotPresentInArray() {
-        int[] elementsNotPresentInArray = new int[]{6, 7, 8, 9, 10};
-        int[] array = new int[]{1, 2, 3, 4, 5};
-        MySet mySet = new MySet(array);
-        assertFalse(mySet.removeAll(elementsNotPresentInArray), "MySet does not contain elementsNotPresentInSet.");
-        assertArrayEquals(array, mySet.toArray(), "MySet should be equal to array.");
+    void testMySetRemoveAllElementsNotPresentInSet() {
+        List<Integer> elementsNotPresentInSet = Arrays.asList(6, 7, 8, 9, 10);
+        MySet<Integer> mySet = new MySet<>(inputList);
+        boolean removeAll = mySet.removeAll(elementsNotPresentInSet);
+        assertFalse(removeAll, "MySet does not contain elementsNotPresentInSet.");
+        Integer[] result = new Integer[]{1, 2, 3, 4, 5};
+        assertArrayEquals(result, mySet.toArray(), "MySet should be equal to result.");
     }
 
     @Test
     void testMySetRemoveAllElements() {
-        int[] elementsToRemove = new int[]{1, 2, 3, 4, 5};
-        int[] array = new int[]{1, 2, 3, 4, 5};
-        MySet mySet = new MySet(array);
-        assertTrue(mySet.removeAll(elementsToRemove), "MySet should remove elementsToRemove.");
-        int[] arrayWithElementsRemoved = new int[]{};
-        assertArrayEquals(arrayWithElementsRemoved, mySet.toArray(), "MySet should be equal to arrayWithElementsRemoved.");
+        List<Integer> elementsToRemove = Arrays.asList(1, 2, 3, 4, 5);
+        MySet<Integer> mySet = new MySet<>(inputList);
+        boolean removeAll = mySet.removeAll(elementsToRemove);
+        assertTrue(removeAll, "MySet should remove elementsToRemove.");
+        Integer[] result = new Integer[]{};
+        assertArrayEquals(result, mySet.toArray(), "MySet should be equal to result.");
     }
 }

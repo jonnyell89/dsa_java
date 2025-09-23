@@ -89,8 +89,7 @@ public class MyArrayTest {
         assertEquals(DEFAULT_CAPACITY, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY));
         assertEquals(inputList.size(), myArray.getSize(), String.format("MyArray size should be %d.", inputList.size()));
         Integer[] result = new Integer[]{1, 2, 3, 4, 5};
-        assertArrayEquals(result, myArray.toArray());
-        // assertArrayEquals(inputList.toArray(new Integer[0]), myArray.toArray());
+        assertArrayEquals(result, myArray.toArray(), "MyArray should be equal to result.");
     }
 
     @Test
@@ -100,7 +99,6 @@ public class MyArrayTest {
         assertEquals(DEFAULT_CAPACITY * 2, myArray.getCapacity(), String.format("MyArray capacity should be %d.", DEFAULT_CAPACITY * 2));
         assertEquals(inputList.size(), myArray.getSize(), String.format("MyArray size should be %d.", inputList.size()));
         Integer[] result = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
-        assertArrayEquals(result, myArray.toArray());
-        // assertArrayEquals(inputList.toArray(new Integer[0]), myArray.toArray());
+        assertArrayEquals(result, myArray.toArray(), "MyArray should be equal to result.");
     }
 }

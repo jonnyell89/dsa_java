@@ -1,10 +1,11 @@
 package org.example.collections;
 
 import java.util.Arrays;
+import java.util.Collection;
 
-public class MySet {
+public class MySet<T> {
 
-    protected final MyArray<Integer> data;
+    private MyArray<T> data;
 
     public MySet() {
         this.data = new MyArray<>();
@@ -16,13 +17,12 @@ public class MySet {
         this.data = new MyArray<>(initialCapacity);
     }
 
-    public MySet(int[] array) {
-        if (array == null) throw new NullPointerException("MySet cannot be null.");
+    public MySet(Collection<? extends T> collection) {
+        if (collection == null) throw new NullPointerException("MySet cannot be null.");
 
-        this.data = new MyArray<>();
+        this.data = new MyArray<>(collection.size());
 
-        for (int i = 0; i < array.length; i++) {
-            int element = array[i];
+        for (T element : collection) {
             if (!contains(element)) data.insertAtEnd(element);
         }
     }
@@ -31,23 +31,27 @@ public class MySet {
 
     public int getSize() { return data.getSize(); }
 
-    public Integer[] getData() { return data.getData(); } // Only public for testing purposes.
+    public T[] getData() { return data.getData(); } // Only public for testing purposes.
 
     public boolean isEmpty() { return data.getSize() == 0; }
 
-    public Integer[] toArray() { return data.toArray(); }
+    public T[] toArray() { return data.toArray(); }
 
-    public boolean contains(int element) {
+    public boolean contains(T element) {
         // Time complexity: O(N)
         int size = getSize();
 
         for (int i = 0; i < size; i++) {
-            if (data.read(i) == element) return true;
+            T current = data.read(i);
+            if (element == null ? current == null : element.equals(current)) {
+                return true;
+            }
         }
         return false;
     }
 
-    public boolean add(int element) {
+    public boolean add(T element) {
+        // Time complexity: O(N)
         if (!contains(element)) {
             data.insertAtEnd(element);
             return true;
@@ -55,11 +59,11 @@ public class MySet {
         return false;
     }
 
-    public boolean addAll(int[] array) {
+    public boolean addAll(Collection<? extends T> collection) {
+        // Time complexity: O(N)
         boolean modified = false;
 
-        for (int i = 0; i < array.length; i++) {
-            int element = array[i];
+        for (T element : collection) {
             if (!contains(element)) {
                 data.insertAtEnd(element);
                 modified = true;
@@ -68,7 +72,8 @@ public class MySet {
         return modified;
     }
 
-    public boolean remove(int element) {
+    public boolean remove(T element) {
+        // Time complexity: O(N)
         if (contains(element)) {
             int index = data.search(element);
             data.deleteFromIndex(index);
@@ -77,11 +82,11 @@ public class MySet {
         return false;
     }
 
-    public boolean removeAll(int[] array) {
+    public boolean removeAll(Collection<? extends T> collection) {
+        // Time complexity: O(N)
         boolean modified = false;
 
-        for (int i = 0; i < array.length; i++) {
-            int element = array[i];
+        for (T element : collection) {
             if (contains(element)) {
                 int index = data.search(element);
                 data.deleteFromIndex(index);
@@ -92,12 +97,7 @@ public class MySet {
     }
 
     public void clear() {
-        int size = getSize();
-
-        while (size > 0) {
-            data.deleteFromEnd();
-            size--;
-        }
+        this.data = new MyArray<>();
     }
 
     @Override
