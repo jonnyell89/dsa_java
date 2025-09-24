@@ -1,4 +1,4 @@
 package org.example.collections;
 
-public class ManualStackTest {
+public class MyStackTest {
 }

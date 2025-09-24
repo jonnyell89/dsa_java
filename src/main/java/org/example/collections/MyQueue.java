@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MyQueue {
 
-    protected final MyArray<Integer> data;
+    private final MyArray<Integer> data;
 
     public MyQueue() {
         this.data = new MyArray<>();

@@ -1,4 +1,4 @@
 package org.example.collections;
 
-public class ManualQueueTest {
+public class MyQueueTest {
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class MyStack {
 
-    protected final MyArray<Integer> data;
+    private final MyArray<Integer> data;
 
     public MyStack() {
         this.data = new MyArray<>();
